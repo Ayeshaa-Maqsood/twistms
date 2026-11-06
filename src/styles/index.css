@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom utilities matching the portfolio’s look */
+@layer utilities {
+  .bg-quantum-dark {
+    background-color: #040711;
+  }
+  .text-quantum-cyan {
+    color: #00f2fe;
+  }
+  .border-quantum-violet {
+    border-color: #8a2be2;
+  }
+}
