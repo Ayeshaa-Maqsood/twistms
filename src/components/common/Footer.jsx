@@ -11,9 +11,9 @@ export default function Footer() {
           <div className="space-y-4 md:col-span-1">
             <Link to="/" className="flex items-center gap-2.5">
               <img
-                src="/logos/TwistMs-Main-Logo.jfif"
+                src="/logos/TwistMs-Main-Logo-removebg-preview.png"
                 alt="TwistMS Properties"
-                className="h-10 w-auto object-contain rounded-md"
+                className="h-9 w-auto object-contain"
               />
               <span className="text-lg font-bold text-[#1A202C] font-editorial">TwistMS Properties</span>
             </Link>

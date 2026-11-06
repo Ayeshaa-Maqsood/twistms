@@ -109,9 +109,9 @@ export default function AIAssistantWidget() {
           <div className="p-4 bg-[#1A202C] text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
-                src="/logos/TwistMs-White-Logo.jfif"
+                src="/logos/TwistMs-White-Logo-removebg-preview.png"
                 alt="TwistMS AI"
-                className="w-8 h-8 rounded-lg object-contain bg-white/10 p-0.5"
+                className="h-8 w-auto object-contain"
               />
               <div>
                 <h3 className="text-sm font-bold font-editorial">TwistMS Real Estate Assistant</h3>

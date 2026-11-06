@@ -20,9 +20,9 @@ export default function Header() {
           {/* Logo & Brand Identity */}
           <Link to="/" className="flex items-center gap-3 group">
             <img
-              src="/logos/TwistMs-Main-Logo.jfif"
+              src="/logos/TwistMs-Main-Logo-removebg-preview.png"
               alt="TwistMS Properties Logo"
-              className="h-11 w-auto object-contain rounded-lg shadow-sm"
+              className="h-10 w-auto object-contain drop-shadow-sm"
             />
             <div className="hidden sm:block">
               <span className="text-xl font-bold tracking-tight text-[#1A202C] flex items-center gap-1.5 font-editorial">
