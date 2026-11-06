@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
+import AIAssistantWidget from './components/common/AIAssistantWidget';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Contact from './pages/Contact';
 import Pricing from './pages/Pricing';
 import PropertyDetail from './pages/PropertyDetail';
+import SubmitProperty from './pages/SubmitProperty';
 
 function App() {
   return (
@@ -18,9 +20,14 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/submit" element={<SubmitProperty />} />
             <Route path="/property/:id" element={<PropertyDetail />} />
           </Routes>
         </main>
+        
+        {/* 24/7 AI Real Estate Assistant Floating Hub */}
+        <AIAssistantWidget />
+
         <Footer />
       </div>
     </Router>

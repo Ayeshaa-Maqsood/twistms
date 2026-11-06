@@ -61,7 +61,7 @@ export default function Header() {
               Sign In
             </Link>
             <Link
-              to="/contact"
+              to="/submit"
               className="btn-luxury px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5"
             >
               <span>+ List Property</span>
@@ -103,7 +103,7 @@ export default function Header() {
           ))}
           <div className="pt-4 border-t border-[#2C3539]/10 flex flex-col gap-2">
             <Link
-              to="/contact"
+              to="/submit"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center py-2.5 rounded-xl text-xs font-semibold btn-luxury"
             >

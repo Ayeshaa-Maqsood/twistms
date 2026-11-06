@@ -67,7 +67,7 @@ export default function Home() {
           </h1>
 
           <p className="mt-6 text-base sm:text-lg text-[#64748B] max-w-2xl mx-auto font-light leading-relaxed">
-            Move mouse across the field to part the champagne particle wave. Curating prime residential estates, high-value commercial assets, and timberland across America.
+            Curating premier residential sanctuaries, high-yield commercial assets, and sprawling timberland with verified ownership deeds across America.
           </p>
 
           {/* Frosted Alabaster Glass Search Console */}
