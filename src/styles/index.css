@@ -1,16 +1,65 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Base styling matching QuantaXore high-end cyberpunk & glassmorphic aesthetic */
+:root {
+  --void-bg: #040711;
+  --glow-cyan: rgba(0, 242, 254, 0.4);
+}
 
-/* Custom utilities matching the portfolio’s look */
-@layer utilities {
-  .bg-quantum-dark {
-    background-color: #040711;
-  }
-  .text-quantum-cyan {
-    color: #00f2fe;
-  }
-  .border-quantum-violet {
-    border-color: #8a2be2;
-  }
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--void-bg);
+  color: #e2e8f0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Background Cyber Grid */
+.cyber-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+.cyber-dots {
+  background-image: radial-gradient(rgba(0, 242, 254, 0.15) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Glassmorphic Panel System */
+.glass-panel {
+  background: rgba(13, 20, 36, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-interactive {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-interactive:hover {
+  border-color: rgba(0, 242, 254, 0.4);
+  box-shadow: 0 12px 35px -10px rgba(0, 242, 254, 0.18);
+  transform: translateY(-4px);
+}
+
+/* Gradient text helpers */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-violet {
+  background: linear-gradient(135deg, #c084fc 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
