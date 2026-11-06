@@ -108,9 +108,11 @@ export default function AIAssistantWidget() {
           {/* Header */}
           <div className="p-4 bg-[#1A202C] text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#C5A880] text-[#1A202C] flex items-center justify-center font-editorial font-bold text-base">
-                AI
-              </div>
+              <img
+                src="/logos/TwistMs-White-Logo.jfif"
+                alt="TwistMS AI"
+                className="w-8 h-8 rounded-lg object-contain bg-white/10 p-0.5"
+              />
               <div>
                 <h3 className="text-sm font-bold font-editorial">TwistMS Real Estate Assistant</h3>
                 <p className="text-[10px] text-[#D8C29D] font-mono flex items-center gap-1">
@@ -198,3 +200,4 @@ export default function AIAssistantWidget() {
     </div>
   );
 }
+

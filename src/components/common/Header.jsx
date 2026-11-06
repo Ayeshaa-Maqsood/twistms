@@ -18,11 +18,13 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           
           {/* Logo & Brand Identity */}
-          <Link to="/" className="flex items-center gap-3.5 group">
-            <div className="w-10 h-10 rounded-xl bg-[#1A202C] text-[#FBF8F2] flex items-center justify-center shadow-md group-hover:bg-[#C5A880] group-hover:text-[#1A202C] transition-all duration-300">
-              <span className="font-editorial text-xl font-bold italic tracking-wider">T</span>
-            </div>
-            <div>
+          <Link to="/" className="flex items-center gap-3 group">
+            <img
+              src="/logos/TwistMs-Main-Logo.jfif"
+              alt="TwistMS Properties Logo"
+              className="h-11 w-auto object-contain rounded-lg shadow-sm"
+            />
+            <div className="hidden sm:block">
               <span className="text-xl font-bold tracking-tight text-[#1A202C] flex items-center gap-1.5 font-editorial">
                 TwistMS <span className="text-[#C5A880] font-sans text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-[#F4ECE1] border border-[#C5A880]/30">USA</span>
               </span>
