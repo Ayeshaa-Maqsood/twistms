@@ -21,11 +21,10 @@ export default function InteractiveWaveCanvas() {
 
     window.addEventListener('resize', handleResize);
 
-    // Mouse coordinates & interaction radius
     const mouse = {
       x: null,
       y: null,
-      radius: 140, // Repulsion boundary
+      radius: 150,
     };
 
     const handleMouseMove = (e) => {
@@ -43,46 +42,45 @@ export default function InteractiveWaveCanvas() {
     parent.addEventListener('mousemove', handleMouseMove);
     parent.addEventListener('mouseleave', handleMouseLeave);
 
-    // Particles Definition
-    let particles = [];
-    const particleCount = Math.min(Math.floor((width * height) / 8000), 140);
-
-    const colors = [
-      { r: 0, g: 242, b: 254 },   // Neon Cyan
-      { r: 79, g: 172, b: 254 },  // Electric Sky Blue
-      { r: 139, g: 92, b: 246 },  // Ultra Violet
-      { r: 192, g: 132, b: 252 }, // Soft Lilac
-      { r: 16, g: 185, b: 129 },  // Emerald Mint
+    // Architectural Luxury Particle Palette (Champagne Gold, Warm Greige, Soft Slate, Off-White)
+    const luxuryColors = [
+      { r: 197, g: 168, b: 128 }, // Champagne Gold (#C5A880)
+      { r: 166, g: 136, b: 94 },  // Deep Sand Bronze (#A6885E)
+      { r: 100, g: 116, b: 139 }, // Muted Slate Grey (#64748B)
+      { r: 160, g: 174, b: 192 }, // Soft Cool Silver Grey
+      { r: 216, g: 194, b: 157 }, // Pale Linen Beige
     ];
+
+    let particles = [];
+    const particleCount = Math.min(Math.floor((width * height) / 9000), 120);
 
     class Particle {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.size = Math.random() * 2.5 + 1.2;
+        this.size = Math.random() * 2.2 + 1.2;
         this.baseX = this.x;
         this.baseY = this.y;
-        this.speed = Math.random() * 0.8 + 0.4;
+        this.speed = Math.random() * 0.6 + 0.3;
         this.angle = Math.random() * Math.PI * 2;
-        this.waveFrequency = Math.random() * 0.008 + 0.003;
-        this.waveAmplitude = Math.random() * 25 + 15;
-        this.colorObj = colors[Math.floor(Math.random() * colors.length)];
-        this.alpha = Math.random() * 0.5 + 0.3;
+        this.waveFreq = Math.random() * 0.007 + 0.002;
+        this.colorObj = luxuryColors[Math.floor(Math.random() * luxuryColors.length)];
+        this.alpha = Math.random() * 0.45 + 0.25;
         this.hovered = false;
       }
 
       update(time) {
-        // Natural sine-wave drift across the screen
-        this.baseX += Math.cos(this.angle) * this.speed * 0.4;
-        this.baseY += Math.sin(time * this.waveFrequency + this.x * 0.005) * 0.6;
+        // Serene, slow organic drift
+        this.baseX += Math.cos(this.angle) * this.speed * 0.35;
+        this.baseY += Math.sin(time * this.waveFreq + this.x * 0.004) * 0.55;
 
-        // Wrap around canvas edges
+        // Wrap around boundaries
         if (this.baseX < -20) this.baseX = width + 20;
         if (this.baseX > width + 20) this.baseX = -20;
         if (this.baseY < -20) this.baseY = height + 20;
         if (this.baseY > height + 20) this.baseY = -20;
 
-        // Mouse repulsion physics
+        // Mouse displacement & repulsion physics
         if (mouse.x !== null && mouse.y !== null) {
           const dx = mouse.x - this.baseX;
           const dy = mouse.y - this.baseY;
@@ -92,18 +90,17 @@ export default function InteractiveWaveCanvas() {
             const forceDirectionX = dx / distance;
             const forceDirectionY = dy / distance;
             const force = (mouse.radius - distance) / mouse.radius;
-            // Push away smoothly
-            this.x = this.baseX - forceDirectionX * force * 70;
-            this.y = this.baseY - forceDirectionY * force * 70;
+            this.x = this.baseX - forceDirectionX * force * 75;
+            this.y = this.baseY - forceDirectionY * force * 75;
             this.hovered = true;
           } else {
-            this.x += (this.baseX - this.x) * 0.08;
-            this.y += (this.baseY - this.y) * 0.08;
+            this.x += (this.baseX - this.x) * 0.07;
+            this.y += (this.baseY - this.y) * 0.07;
             this.hovered = false;
           }
         } else {
-          this.x += (this.baseX - this.x) * 0.08;
-          this.y += (this.baseY - this.y) * 0.08;
+          this.x += (this.baseX - this.x) * 0.07;
+          this.y += (this.baseY - this.y) * 0.07;
           this.hovered = false;
         }
       }
@@ -111,19 +108,18 @@ export default function InteractiveWaveCanvas() {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.hovered ? this.size * 1.8 : this.size, 0, Math.PI * 2);
-        
-        // Gradient glow color shift on hover
+
         if (this.hovered) {
-          ctx.fillStyle = `rgba(255, 255, 255, 0.9)`;
-          ctx.shadowColor = `rgba(${this.colorObj.r}, ${this.colorObj.g}, ${this.colorObj.b}, 1)`;
-          ctx.shadowBlur = 12;
+          // Warm champagne glow highlight
+          ctx.fillStyle = `rgba(197, 168, 128, 0.9)`;
+          ctx.shadowColor = `rgba(197, 168, 128, 0.6)`;
+          ctx.shadowBlur = 10;
         } else {
           ctx.fillStyle = `rgba(${this.colorObj.r}, ${this.colorObj.g}, ${this.colorObj.b}, ${this.alpha})`;
-          ctx.shadowColor = `rgba(${this.colorObj.r}, ${this.colorObj.g}, ${this.colorObj.b}, 0.5)`;
-          ctx.shadowBlur = 6;
+          ctx.shadowBlur = 0;
         }
         ctx.fill();
-        ctx.shadowBlur = 0; // reset
+        ctx.shadowBlur = 0;
       }
     }
 
@@ -136,7 +132,7 @@ export default function InteractiveWaveCanvas() {
 
     initParticles();
 
-    // Subtle connecting constellation lines between nearby particles
+    // Subtle champagne constellation webbing
     const connectParticles = () => {
       for (let a = 0; a < particles.length; a++) {
         for (let b = a + 1; b < particles.length; b++) {
@@ -144,11 +140,11 @@ export default function InteractiveWaveCanvas() {
           const dy = particles[a].y - particles[b].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 90) {
-            const lineAlpha = (1 - dist / 90) * 0.15;
+          if (dist < 85) {
+            const lineAlpha = (1 - dist / 85) * 0.12;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 242, 254, ${lineAlpha})`;
-            ctx.lineWidth = 0.7;
+            ctx.strokeStyle = `rgba(197, 168, 128, ${lineAlpha})`;
+            ctx.lineWidth = 0.6;
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
             ctx.stroke();

@@ -1,8 +1,19 @@
-/* QuantaXore Extreme Glassmorphic & Cyber-Obsidian Styling */
+/* =========================================================================
+   TWISTMS LUXURY REAL ESTATE PALETTE
+   Primary Linen Canvas:       #FBF8F2
+   Pure Alabaster Glass:       #FFFFFF
+   Warm Greige Surface:        #F4ECE1 / #EAE5DE
+   Muted Slate Charcoal:       #1A202C & #2C3539
+   Champagne Bronze Accent:    #C5A880 (Hover: #A6885E)
+   Soft Border Mist:           rgba(44, 53, 57, 0.08)
+========================================================================= */
+
 :root {
-  --void-bg: #030712;
-  --glow-cyan: rgba(0, 242, 254, 0.4);
-  --glow-violet: rgba(139, 92, 246, 0.35);
+  --canvas-bg: #FBF8F2;
+  --card-bg: rgba(255, 255, 255, 0.82);
+  --border-light: rgba(44, 53, 57, 0.08);
+  --accent-gold: #C5A880;
+  --text-primary: #1A202C;
 }
 
 html {
@@ -10,105 +21,82 @@ html {
 }
 
 body {
-  background-color: var(--void-bg);
-  color: #f1f5f9;
+  background-color: var(--canvas-bg);
+  color: var(--text-primary);
   font-family: 'Plus Jakarta Sans', sans-serif;
   overflow-x: hidden;
 }
 
-/* Ambient Deep Cyber Mesh Background */
-.cyber-grid {
-  background-size: 50px 50px;
+/* Luxury Architectural Typography Class */
+.font-editorial {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Subtle Architectural Grid Pattern (Warm & Understated) */
+.architect-grid {
+  background-size: 60px 60px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(to right, rgba(44, 53, 57, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(44, 53, 57, 0.025) 1px, transparent 1px);
 }
 
-.cyber-dots {
-  background-image: radial-gradient(rgba(0, 242, 254, 0.12) 1px, transparent 1px);
-  background-size: 32px 32px;
+/* Frosted Alabaster Glassmorphism */
+.glass-panel-luxury {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 4px 6px -1px rgba(28, 25, 23, 0.03),
+    0 20px 40px -15px rgba(28, 25, 23, 0.06);
 }
 
-/* --- High-End Glassmorphism System --- */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+.glass-panel-warm {
+  background: rgba(244, 236, 225, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(197, 168, 128, 0.2);
 }
 
-.glass-panel-subtle {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.glass-panel-interactive {
+.glass-card-interactive {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
 }
 
-.glass-panel-interactive:hover {
-  border-color: rgba(0, 242, 254, 0.45);
-  box-shadow: 
-    0 15px 35px -5px rgba(0, 242, 254, 0.15),
-    0 0 20px 2px rgba(139, 92, 246, 0.15);
+.glass-card-interactive:hover {
   transform: translateY(-5px);
+  border-color: rgba(197, 168, 128, 0.5);
+  box-shadow: 
+    0 25px 50px -12px rgba(44, 53, 57, 0.12),
+    0 0 0 1px rgba(197, 168, 128, 0.35);
 }
 
-/* Glowing Neon Shimmer borders */
-.glow-border {
-  position: relative;
+/* High-End Architectural Button */
+.btn-luxury {
+  background-color: #1A202C;
+  color: #FBF8F2;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px 0 rgba(26, 32, 44, 0.2);
 }
 
-.glow-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(90deg, #00f2fe, #8b5cf6, #00f2fe);
-  border-radius: inherit;
-  z-index: -1;
-  opacity: 0.35;
-  filter: blur(8px);
-  transition: opacity 0.4s ease;
+.btn-luxury:hover {
+  background-color: #C5A880;
+  color: #1A202C;
+  box-shadow: 0 6px 20px rgba(197, 168, 128, 0.4);
+  transform: translateY(-1px);
 }
 
-.glow-border:hover::before {
-  opacity: 0.8;
+.btn-luxury-outline {
+  background: transparent;
+  color: #1A202C;
+  border: 1px solid rgba(44, 53, 57, 0.18);
+  transition: all 0.3s ease;
 }
 
-/* Gradient typography */
-.text-gradient {
-  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-cyan {
-  background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 50%, #818cf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-violet {
-  background: linear-gradient(135deg, #e879f9 0%, #c084fc 50%, #8b5cf6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Glowing Button Styles */
-.glow-btn {
-  background: linear-gradient(135deg, #00f2fe 0%, #2563eb 100%);
-  color: #030712;
-  font-weight: 700;
-  box-shadow: 0 0 25px -4px rgba(0, 242, 254, 0.45);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glow-btn:hover {
-  box-shadow: 0 0 35px 2px rgba(0, 242, 254, 0.7);
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+.btn-luxury-outline:hover {
+  border-color: #C5A880;
+  background-color: rgba(244, 236, 225, 0.5);
+  color: #1A202C;
 }

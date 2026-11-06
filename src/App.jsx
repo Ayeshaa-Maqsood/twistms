@@ -10,7 +10,7 @@ import PropertyDetail from './pages/PropertyDetail';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-[#040711] text-slate-100 flex flex-col cyber-grid relative selection:bg-cyan-500/20 selection:text-cyan-300">
+      <div className="min-h-screen bg-[#FBF8F2] text-[#1A202C] flex flex-col architect-grid relative selection:bg-[#C5A880]/30 selection:text-[#1A202C]">
         <Header />
         <main className="flex-1">
           <Routes>
