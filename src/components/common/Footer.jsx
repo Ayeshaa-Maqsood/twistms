@@ -9,13 +9,13 @@ export default function Footer() {
           
           {/* Brand Info */}
           <div className="space-y-4 md:col-span-1">
-            <Link to="/" className="flex items-center gap-2.5">
+            <Link to="/" className="flex flex-col items-start gap-3">
               <img
                 src="/logos/TwistMs-Main-Logo-removebg-preview.png"
                 alt="TwistMS Properties"
-                className="h-9 w-auto object-contain"
+                className="h-20 w-auto object-contain"
               />
-              <span className="text-lg font-bold text-[#1A202C] font-editorial">TwistMS Properties</span>
+              <span className="text-xl font-bold text-[#1A202C] font-editorial">TwistMS Properties</span>
             </Link>
             <p className="text-[#64748B] leading-relaxed text-xs font-light">
               USA-wide luxury and commercial real estate platform connecting discerning buyers, verified property sellers, and licensed brokerage agents.

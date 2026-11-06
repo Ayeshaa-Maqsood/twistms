@@ -111,7 +111,7 @@ export default function AIAssistantWidget() {
               <img
                 src="/logos/TwistMs-White-Logo-removebg-preview.png"
                 alt="TwistMS AI"
-                className="h-8 w-auto object-contain"
+                className="h-14 w-auto object-contain"
               />
               <div>
                 <h3 className="text-sm font-bold font-editorial">TwistMS Real Estate Assistant</h3>

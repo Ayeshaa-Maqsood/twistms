@@ -15,20 +15,20 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-2xl bg-[#FBF8F2]/85 border-b border-[#2C3539]/10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-28 py-3">
           
           {/* Logo & Brand Identity */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-4 group">
             <img
               src="/logos/TwistMs-Main-Logo-removebg-preview.png"
               alt="TwistMS Properties Logo"
-              className="h-10 w-auto object-contain drop-shadow-sm"
+              className="h-20 sm:h-24 w-auto object-contain drop-shadow-md transition-transform duration-300 group-hover:scale-105"
             />
             <div className="hidden sm:block">
-              <span className="text-xl font-bold tracking-tight text-[#1A202C] flex items-center gap-1.5 font-editorial">
-                TwistMS <span className="text-[#C5A880] font-sans text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-[#F4ECE1] border border-[#C5A880]/30">USA</span>
+              <span className="text-2xl font-bold tracking-tight text-[#1A202C] flex items-center gap-1.5 font-editorial">
+                TwistMS <span className="text-[#C5A880] font-sans text-xs uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-[#F4ECE1] border border-[#C5A880]/30">USA</span>
               </span>
-              <span className="block text-[9px] tracking-widest text-[#64748B] uppercase font-mono">
+              <span className="block text-[10px] tracking-widest text-[#64748B] uppercase font-mono">
                 Architectural Real Estate
               </span>
             </div>
