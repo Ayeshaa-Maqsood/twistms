@@ -1,7 +1,8 @@
-/* Base styling matching QuantaXore high-end cyberpunk & glassmorphic aesthetic */
+/* QuantaXore Extreme Glassmorphic & Cyber-Obsidian Styling */
 :root {
-  --void-bg: #040711;
+  --void-bg: #030712;
   --glow-cyan: rgba(0, 242, 254, 0.4);
+  --glow-violet: rgba(139, 92, 246, 0.35);
 }
 
 html {
@@ -10,42 +11,75 @@ html {
 
 body {
   background-color: var(--void-bg);
-  color: #e2e8f0;
+  color: #f1f5f9;
   font-family: 'Plus Jakarta Sans', sans-serif;
+  overflow-x: hidden;
 }
 
-/* Background Cyber Grid */
+/* Ambient Deep Cyber Mesh Background */
 .cyber-grid {
-  background-size: 40px 40px;
+  background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
 }
 
 .cyber-dots {
-  background-image: radial-gradient(rgba(0, 242, 254, 0.15) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(rgba(0, 242, 254, 0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
-/* Glassmorphic Panel System */
+/* --- High-End Glassmorphism System --- */
 .glass-panel {
-  background: rgba(13, 20, 36, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-panel-subtle {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .glass-panel-interactive {
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
 }
 
 .glass-panel-interactive:hover {
-  border-color: rgba(0, 242, 254, 0.4);
-  box-shadow: 0 12px 35px -10px rgba(0, 242, 254, 0.18);
-  transform: translateY(-4px);
+  border-color: rgba(0, 242, 254, 0.45);
+  box-shadow: 
+    0 15px 35px -5px rgba(0, 242, 254, 0.15),
+    0 0 20px 2px rgba(139, 92, 246, 0.15);
+  transform: translateY(-5px);
 }
 
-/* Gradient text helpers */
+/* Glowing Neon Shimmer borders */
+.glow-border {
+  position: relative;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, #00f2fe, #8b5cf6, #00f2fe);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.35;
+  filter: blur(8px);
+  transition: opacity 0.4s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 0.8;
+}
+
+/* Gradient typography */
 .text-gradient {
   background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
   -webkit-background-clip: text;
@@ -53,13 +87,28 @@ body {
 }
 
 .text-gradient-cyan {
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  background: linear-gradient(135deg, #00f2fe 0%, #38bdf8 50%, #818cf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-violet {
-  background: linear-gradient(135deg, #c084fc 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #e879f9 0%, #c084fc 50%, #8b5cf6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Glowing Button Styles */
+.glow-btn {
+  background: linear-gradient(135deg, #00f2fe 0%, #2563eb 100%);
+  color: #030712;
+  font-weight: 700;
+  box-shadow: 0 0 25px -4px rgba(0, 242, 254, 0.45);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glow-btn:hover {
+  box-shadow: 0 0 35px 2px rgba(0, 242, 254, 0.7);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
 }

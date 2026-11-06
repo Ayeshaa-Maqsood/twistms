@@ -98,3 +98,4 @@ export default function PropertyCard({ property }) {
     </div>
   );
 }
+
