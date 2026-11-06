@@ -8,10 +8,14 @@ export default function Pricing() {
       
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto">
-        <div className="text-cyan-400 text-xs font-mono uppercase tracking-widest mb-2">Monetization & Syndication</div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Listing Packages & Advertising</h1>
-        <p className="text-sm text-slate-300 mt-3 font-light leading-relaxed">
-          Transparent pricing tiers aligned with our PRD specifications. Free entry for owners, high-impact social promotion for premium assets.
+        <div className="text-[#C5A880] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
+          Transparent Syndication
+        </div>
+        <h1 className="text-4xl sm:text-5xl font-normal text-[#1A202C] tracking-tight font-editorial">
+          Listing Packages & Advertising Tiers
+        </h1>
+        <p className="text-sm text-[#64748B] mt-3 font-light leading-relaxed">
+          Transparent pricing tiers aligned with PRD specifications. Free entry for individual homeowners, high-impact social promotion for premium assets.
         </p>
       </div>
 
@@ -22,47 +26,47 @@ export default function Pricing() {
             key={idx}
             className={`rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 relative ${
               plan.highlight
-                ? 'glass-panel border-2 border-cyan-400 shadow-2xl shadow-cyan-500/20 scale-105'
-                : 'glass-panel border border-white/10 hover:border-white/20'
+                ? 'glass-panel-luxury border-2 border-[#C5A880] shadow-xl scale-105 bg-[#FFFFFF]'
+                : 'glass-panel-luxury border border-[#2C3539]/10 hover:border-[#C5A880]/50 bg-[#FFFFFF]/90'
             }`}
           >
             {plan.highlight && (
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-cyan-400 text-[#040711] text-xs font-bold uppercase tracking-wider font-mono">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#1A202C] text-[#FBF8F2] text-[10px] font-bold uppercase tracking-widest font-mono shadow-md">
                 {plan.badge}
               </div>
             )}
 
             <div>
-              <h3 className="text-lg font-bold text-white">{plan.name}</h3>
-              <p className="text-xs text-slate-400 mt-1">{plan.description}</p>
+              <h3 className="text-xl font-bold text-[#1A202C] font-editorial">{plan.name}</h3>
+              <p className="text-xs text-[#64748B] mt-1">{plan.description}</p>
 
               <div className="mt-6 flex items-baseline gap-1">
-                <span className="text-4xl font-extrabold text-white font-mono">{plan.price}</span>
-                <span className="text-xs text-slate-400 font-mono">/ {plan.period}</span>
+                <span className="text-4xl font-bold text-[#1A202C] font-editorial">{plan.price}</span>
+                <span className="text-xs text-[#64748B] font-mono">/ {plan.period}</span>
               </div>
 
               <div className="mt-8 space-y-3">
                 {plan.features.map((feat, fIdx) => (
-                  <div key={fIdx} className="flex items-center gap-2.5 text-xs text-slate-300">
-                    <svg className="w-4 h-4 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div key={fIdx} className="flex items-center gap-2.5 text-xs text-[#2C3539]">
+                    <svg className="w-4 h-4 text-[#C5A880] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>{feat}</span>
+                    <span className="font-medium text-[#1A202C]">{feat}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/5">
+            <div className="mt-8 pt-6 border-t border-[#2C3539]/10">
               <Link
-                to="/contact"
-                className={`block text-center py-3 px-4 rounded-xl text-xs font-bold transition-all ${
+                to="/submit"
+                className={`block text-center py-3 px-4 rounded-xl text-xs font-semibold transition-all ${
                   plan.highlight
-                    ? 'bg-cyan-400 text-[#040711] hover:bg-cyan-300 shadow-lg shadow-cyan-500/25'
-                    : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'
+                    ? 'btn-luxury'
+                    : 'btn-luxury-outline'
                 }`}
               >
-                Get Started with {plan.name}
+                Choose {plan.name}
               </Link>
             </div>
           </div>
@@ -70,54 +74,54 @@ export default function Pricing() {
       </div>
 
       {/* Comparison Matrix Table */}
-      <div className="glass-panel p-6 sm:p-10 rounded-3xl border border-white/10">
-        <h3 className="text-xl font-bold text-white mb-6">Detailed Plan Comparison Matrix</h3>
+      <div className="glass-panel-luxury p-6 sm:p-10 rounded-3xl border border-[#2C3539]/10 bg-white">
+        <h3 className="text-2xl font-normal text-[#1A202C] font-editorial mb-6">Detailed Plan Comparison Matrix</h3>
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-slate-300 border-collapse">
+          <table className="w-full text-left text-xs text-[#2C3539] border-collapse">
             <thead>
-              <tr className="border-b border-white/10 text-slate-400 font-mono uppercase">
+              <tr className="border-b border-[#2C3539]/15 text-[#64748B] font-mono uppercase tracking-wider text-[11px]">
                 <th className="py-3 px-4">Feature</th>
-                <th className="py-3 px-4">Free Plan</th>
-                <th className="py-3 px-4 text-cyan-400">Paid Verified</th>
-                <th className="py-3 px-4 text-violet-400">Premium Elite</th>
+                <th className="py-3 px-4 font-semibold text-[#1A202C]">Free Plan</th>
+                <th className="py-3 px-4 text-[#A6885E] font-bold">Paid Verified</th>
+                <th className="py-3 px-4 text-[#1A202C] font-bold">Premium Elite</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 font-mono">
+            <tbody className="divide-y divide-[#2C3539]/10 font-sans">
               <tr>
-                <td className="py-3 px-4 font-sans text-white">Listing Duration</td>
-                <td className="py-3 px-4">90 Days</td>
-                <td className="py-3 px-4 text-cyan-300">150 Days</td>
-                <td className="py-3 px-4 text-violet-300">365 Days (1 Year)</td>
+                <td className="py-3.5 px-4 font-semibold text-[#1A202C]">Listing Duration</td>
+                <td className="py-3.5 px-4 text-[#64748B]">90 Days</td>
+                <td className="py-3.5 px-4 text-[#A6885E] font-semibold">150 Days</td>
+                <td className="py-3.5 px-4 text-[#1A202C] font-bold">365 Days (1 Year)</td>
               </tr>
               <tr>
-                <td className="py-3 px-4 font-sans text-white">Maximum Photos</td>
-                <td className="py-3 px-4">50 Photos</td>
-                <td className="py-3 px-4 text-cyan-300">50 Photos</td>
-                <td className="py-3 px-4 text-violet-300">50 Photos</td>
+                <td className="py-3.5 px-4 font-semibold text-[#1A202C]">Maximum Photos</td>
+                <td className="py-3.5 px-4 text-[#64748B]">50 Photos</td>
+                <td className="py-3.5 px-4 text-[#A6885E] font-semibold">50 Photos</td>
+                <td className="py-3.5 px-4 text-[#1A202C] font-bold">50 Photos</td>
               </tr>
               <tr>
-                <td className="py-3 px-4 font-sans text-white">Maximum Videos</td>
-                <td className="py-3 px-4">5 HD Videos</td>
-                <td className="py-3 px-4 text-cyan-300">5 HD Videos</td>
-                <td className="py-3 px-4 text-violet-300">5 HD Videos</td>
+                <td className="py-3.5 px-4 font-semibold text-[#1A202C]">Maximum Videos</td>
+                <td className="py-3.5 px-4 text-[#64748B]">5 HD Videos</td>
+                <td className="py-3.5 px-4 text-[#A6885E] font-semibold">5 HD Videos</td>
+                <td className="py-3.5 px-4 text-[#1A202C] font-bold">5 HD Videos</td>
               </tr>
               <tr>
-                <td className="py-3 px-4 font-sans text-white">Social Media Promotion</td>
-                <td className="py-3 px-4 text-slate-500">Not Included</td>
-                <td className="py-3 px-4 text-cyan-300">FB & IG Included</td>
-                <td className="py-3 px-4 text-violet-300">FB, IG & TikTok Viral Push</td>
+                <td className="py-3.5 px-4 font-semibold text-[#1A202C]">Social Media Promotion</td>
+                <td className="py-3.5 px-4 text-[#9CA3AF]">Not Guaranteed</td>
+                <td className="py-3.5 px-4 text-[#A6885E] font-semibold">FB & IG Included</td>
+                <td className="py-3.5 px-4 text-[#1A202C] font-bold">FB, IG & TikTok Push</td>
               </tr>
               <tr>
-                <td className="py-3 px-4 font-sans text-white">Verified Deed Badge</td>
-                <td className="py-3 px-4 text-slate-500">Optional Add-on</td>
-                <td className="py-3 px-4 text-cyan-300">Included ✓</td>
-                <td className="py-3 px-4 text-violet-300">Included ✓</td>
+                <td className="py-3.5 px-4 font-semibold text-[#1A202C]">Verified Deed Badge</td>
+                <td className="py-3.5 px-4 text-[#9CA3AF]">Optional Add-on</td>
+                <td className="py-3.5 px-4 text-[#A6885E] font-semibold">Included ✓</td>
+                <td className="py-3.5 px-4 text-[#1A202C] font-bold">Included ✓</td>
               </tr>
               <tr>
-                <td className="py-3 px-4 font-sans text-white">Sold Property Record</td>
-                <td className="py-3 px-4">Permanent</td>
-                <td className="py-3 px-4 text-cyan-300">Permanent</td>
-                <td className="py-3 px-4 text-violet-300">Permanent</td>
+                <td className="py-3.5 px-4 font-semibold text-[#1A202C]">Sold Property Record</td>
+                <td className="py-3.5 px-4 text-[#64748B]">Permanent</td>
+                <td className="py-3.5 px-4 text-[#64748B]">Permanent</td>
+                <td className="py-3.5 px-4 text-[#1A202C] font-bold">Permanent</td>
               </tr>
             </tbody>
           </table>
@@ -127,4 +131,3 @@ export default function Pricing() {
     </div>
   );
 }
-
