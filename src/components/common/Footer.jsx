@@ -35,8 +35,8 @@ export default function Footer() {
               <li><Link to="/search" className="hover:text-[#A6885E] transition-colors">Residential Homes & Estates</Link></li>
               <li><Link to="/search" className="hover:text-[#A6885E] transition-colors">Timberland & Agricultural Land</Link></li>
               <li><Link to="/search" className="hover:text-[#A6885E] transition-colors">Commercial & Industrial Parks</Link></li>
-              <li><Link to="/search" className="hover:text-[#A6885E] transition-colors">Luxury Apartments & Rentals</Link></li>
-              <li><Link to="/search" className="hover:text-[#A6885E] transition-colors">Waterfront & Coastal Properties</Link></li>
+              <li><Link to="/agents" className="hover:text-[#A6885E] transition-colors font-medium text-[#1A202C]">Find an Agent Directory →</Link></li>
+              <li><Link to="/submit" className="hover:text-[#A6885E] transition-colors font-medium text-[#1A202C]">Submit Property Deed →</Link></li>
             </ul>
           </div>
 

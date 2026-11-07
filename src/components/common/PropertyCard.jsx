@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useFavorites } from '../../context/FavoritesContext';
 
 export default function PropertyCard({ property }) {
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const favorited = isFavorite(property.id);
+
   return (
     <div className="glass-panel-luxury glass-card-interactive rounded-2xl overflow-hidden flex flex-col group border border-[#2C3539]/10 hover:border-[#C5A880]/60 transition-all duration-300">
       
@@ -25,12 +29,33 @@ export default function PropertyCard({ property }) {
           </span>
         </div>
 
-        {property.verified && (
-          <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5 px-3 py-1 text-[11px] font-medium rounded-full bg-[#FFFFFF]/90 text-[#2C3539] shadow-sm backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#C5A880]"></span>
-            <span className="font-semibold text-[10px] uppercase tracking-wider">Verified Deed</span>
-          </div>
-        )}
+        {/* Favorite Heart Button & Verified Badge */}
+        <div className="absolute top-3.5 right-3.5 flex items-center gap-2">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleFavorite(property);
+            }}
+            aria-label="Save Property"
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all backdrop-blur-md shadow-sm ${
+              favorited
+                ? 'bg-red-500 text-white shadow-red-500/30'
+                : 'bg-white/90 text-[#1A202C] hover:text-red-500 hover:scale-110'
+            }`}
+          >
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </button>
+
+          {property.verified && (
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 text-[11px] font-medium rounded-full bg-[#FFFFFF]/90 text-[#2C3539] shadow-sm backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-[#C5A880]"></span>
+              <span className="font-semibold text-[10px] uppercase tracking-wider">Verified</span>
+            </div>
+          )}
+        </div>
 
         {/* Price Tag Overlay */}
         <div className="absolute bottom-3.5 left-3.5">

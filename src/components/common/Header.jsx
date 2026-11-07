@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useFavorites } from '../../context/FavoritesContext';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { favorites, setIsDrawerOpen } = useFavorites();
 
   const navLinks = [
     { name: 'Marketplace', path: '/' },
     { name: 'Browse Properties', path: '/search' },
+    { name: 'Find an Agent', path: '/agents' },
     { name: 'Pricing Tiers', path: '/pricing' },
     { name: 'Direct Escrow & Contact', path: '/contact' }
   ];
@@ -56,12 +59,17 @@ export default function Header() {
 
           {/* Action CTAs */}
           <div className="hidden md:flex items-center gap-3">
-            <Link
-              to="/search"
-              className="text-xs font-semibold text-[#64748B] hover:text-[#1A202C] px-3 py-2 transition-colors"
+            {/* Saved Properties Pill */}
+            <button
+              onClick={() => setIsDrawerOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-full glass-panel-warm text-xs font-semibold text-[#1A202C] hover:border-[#C5A880] transition-colors cursor-pointer"
             >
-              Sign In
-            </Link>
+              <svg className={`w-3.5 h-3.5 ${favorites.length > 0 ? 'text-red-500 fill-current' : 'text-[#64748B]'}`} viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              <span>Saved ({favorites.length})</span>
+            </button>
+
             <Link
               to="/submit"
               className="btn-luxury px-4 py-2.5 rounded-xl text-xs font-semibold flex items-center gap-1.5"
