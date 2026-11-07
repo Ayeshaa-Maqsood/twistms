@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { propertiesData, platformStats, listingPlans } from '../data/properties';
 import PropertyCard from '../components/common/PropertyCard';
 import InteractiveWaveCanvas from '../components/common/InteractiveWaveCanvas';
+import MortgageCalculator from '../components/common/MortgageCalculator';
+import TestimonialsSection from '../components/sections/TestimonialsSection';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -304,7 +306,16 @@ export default function Home() {
       </section>
 
       {/* =========================================================================
-          5. LISTING PLANS & PRICING
+          5. FINANCIAL CALCULATOR & CLIENT TESTIMONIALS
+      ========================================================================= */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <MortgageCalculator defaultPrice={1850000} />
+      </section>
+
+      <TestimonialsSection />
+
+      {/* =========================================================================
+          6. LISTING PLANS & PRICING
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-14">

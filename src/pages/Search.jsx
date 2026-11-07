@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { propertiesData } from '../data/properties';
 import PropertyCard from '../components/common/PropertyCard';
+import InteractiveMapView from '../components/common/InteractiveMapView';
 
 export default function Search() {
   const [searchParams] = useSearchParams();
@@ -14,6 +15,7 @@ export default function Search() {
   const [stateCode, setStateCode] = useState(initialState);
   const [typeFilter, setTypeFilter] = useState('All');
   const [priceSort, setPriceSort] = useState('default');
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'map'
 
   const categories = ['All', 'Residential', 'Land', 'Commercial', 'Rental'];
 
@@ -109,44 +111,77 @@ export default function Search() {
 
         </div>
 
-        {/* Count & Sorting Bar */}
+        {/* Count, View Toggle & Sorting Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between pt-3.5 border-t border-[#2C3539]/10 text-xs text-[#64748B]">
           <div>
             Showing <span className="text-[#1A202C] font-bold">{filteredProperties.length}</span> curated properties
           </div>
-          <div className="flex items-center gap-2 mt-2 sm:mt-0">
-            <span className="text-[11px] font-mono">Sort Order:</span>
-            <select
-              value={priceSort}
-              onChange={(e) => setPriceSort(e.target.value)}
-              className="bg-[#FBF8F2] text-[#1A202C] border border-[#2C3539]/10 rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-[#C5A880]"
-            >
-              <option value="default">Featured Selection</option>
-              <option value="low">Price: Low to High</option>
-              <option value="high">Price: High to Low</option>
-            </select>
+          
+          <div className="flex items-center gap-4 mt-2 sm:mt-0">
+            {/* View Mode Toggle */}
+            <div className="flex bg-[#FBF8F2] p-1 rounded-xl border border-[#2C3539]/10">
+              <button
+                type="button"
+                onClick={() => setViewMode('grid')}
+                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                  viewMode === 'grid'
+                    ? 'bg-[#1A202C] text-[#FBF8F2] shadow-sm'
+                    : 'text-[#64748B] hover:text-[#1A202C]'
+                }`}
+              >
+                ⊞ Grid View
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('map')}
+                className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
+                  viewMode === 'map'
+                    ? 'bg-[#1A202C] text-[#FBF8F2] shadow-sm'
+                    : 'text-[#64748B] hover:text-[#1A202C]'
+                }`}
+              >
+                📍 Satellite Map
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-[11px] font-mono">Sort:</span>
+              <select
+                value={priceSort}
+                onChange={(e) => setPriceSort(e.target.value)}
+                className="bg-[#FBF8F2] text-[#1A202C] border border-[#2C3539]/10 rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-[#C5A880]"
+              >
+                <option value="default">Featured</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredProperties.length > 0 ? (
-          filteredProperties.map((prop) => (
-            <PropertyCard key={prop.id} property={prop} />
-          ))
-        ) : (
-          <div className="col-span-full py-20 text-center glass-panel-luxury rounded-3xl">
-            <p className="text-[#64748B] text-sm">No properties match your exact filters.</p>
-            <button
-              onClick={() => { setQuery(''); setCategory('All'); setStateCode(''); setTypeFilter('All'); }}
-              className="mt-4 px-4 py-2 rounded-xl text-xs font-semibold btn-luxury"
-            >
-              Clear Filter Query
-            </button>
-          </div>
-        )}
-      </div>
+      {/* Grid or Map View Container */}
+      {viewMode === 'map' ? (
+        <InteractiveMapView properties={filteredProperties} />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredProperties.length > 0 ? (
+            filteredProperties.map((prop) => (
+              <PropertyCard key={prop.id} property={prop} />
+            ))
+          ) : (
+            <div className="col-span-full py-20 text-center glass-panel-luxury rounded-3xl">
+              <p className="text-[#64748B] text-sm">No properties match your exact filters.</p>
+              <button
+                onClick={() => { setQuery(''); setCategory('All'); setStateCode(''); setTypeFilter('All'); }}
+                className="mt-4 px-4 py-2 rounded-xl text-xs font-semibold btn-luxury"
+              >
+                Clear Filter Query
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
     </div>
   );
