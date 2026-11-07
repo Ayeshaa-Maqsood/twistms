@@ -41,3 +41,4 @@ export default function AnimatedCounter({ target, suffix = '', duration = 1800 }
     </span>
   );
 }
+
