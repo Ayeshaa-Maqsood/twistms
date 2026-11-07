@@ -5,6 +5,7 @@ import PropertyCard from '../components/common/PropertyCard';
 import InteractiveWaveCanvas from '../components/common/InteractiveWaveCanvas';
 import MortgageCalculator from '../components/common/MortgageCalculator';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
+import AnimatedCounter from '../components/common/AnimatedCounter';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -136,11 +137,13 @@ export default function Home() {
             </form>
           </div>
 
-          {/* Telemetry Stats Strip */}
+          {/* Telemetry Stats Strip with Animated Number Counters */}
           <div className="mt-14 max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
             {platformStats.map((stat, i) => (
-              <div key={i} className="glass-panel-luxury p-5 rounded-2xl border border-[#2C3539]/10 text-center">
-                <p className="text-2xl font-bold font-editorial text-[#1A202C]">{stat.value}</p>
+              <div key={i} className="glass-panel-luxury p-5 rounded-2xl border border-[#2C3539]/10 text-center hover:border-[#C5A880]/50 transition-colors">
+                <p className="text-2xl font-bold font-editorial text-[#1A202C]">
+                  <AnimatedCounter target={stat.value} />
+                </p>
                 <p className="text-[10px] text-[#64748B] mt-1 uppercase tracking-widest font-mono">{stat.label}</p>
               </div>
             ))}

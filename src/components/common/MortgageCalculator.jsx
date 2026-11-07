@@ -210,3 +210,4 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
     </div>
   );
 }
+

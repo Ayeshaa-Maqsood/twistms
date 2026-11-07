@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useFavorites } from '../../context/FavoritesContext';
 
@@ -6,21 +6,68 @@ export default function PropertyCard({ property }) {
   const { toggleFavorite, isFavorite } = useFavorites();
   const favorited = isFavorite(property.id);
 
+  const cardRef = useRef(null);
+  const [transformStyle, setTransformStyle] = useState('');
+  const [glarePosition, setGlarePosition] = useState({ x: 50, y: 50, opacity: 0 });
+
+  // 3D Magnetic Tilt Physics Calculation
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -6; // Max 6deg
+    const rotateY = ((x - centerX) / centerX) * 6;  // Max 6deg
+
+    setTransformStyle(`perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.02, 1.02, 1.02)`);
+    setGlarePosition({
+      x: (x / rect.width) * 100,
+      y: (y / rect.height) * 100,
+      opacity: 0.18,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setTransformStyle('perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)');
+    setGlarePosition((prev) => ({ ...prev, opacity: 0 }));
+  };
+
   return (
-    <div className="glass-panel-luxury glass-card-interactive rounded-2xl overflow-hidden flex flex-col group border border-[#2C3539]/10 hover:border-[#C5A880]/60 transition-all duration-300">
-      
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: transformStyle,
+        transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease',
+      }}
+      className="glass-panel-luxury rounded-2xl overflow-hidden flex flex-col group border border-[#2C3539]/10 hover:border-[#C5A880]/60 relative will-change-transform shadow-md hover:shadow-2xl"
+    >
+      {/* Dynamic Champagne Glare Overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 z-30 transition-opacity duration-300 rounded-2xl"
+        style={{
+          opacity: glarePosition.opacity,
+          background: `radial-gradient(circle at ${glarePosition.x}% ${glarePosition.y}%, rgba(197, 168, 128, 0.45) 0%, transparent 60%)`,
+        }}
+      />
+
       {/* Property Image Container */}
       <div className="relative h-60 w-full overflow-hidden bg-[#E2E3E5]">
         <img
           src={property.image}
           alt={property.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1A202C]/80 via-transparent to-transparent opacity-60" />
 
         {/* Badges Overlay */}
-        <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-2">
+        <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-2 z-10">
           <span className="px-3 py-1 text-[11px] font-semibold tracking-wider uppercase rounded-full bg-[#FFFFFF]/90 text-[#1A202C] shadow-sm backdrop-blur-md">
             {property.category}
           </span>
@@ -30,7 +77,7 @@ export default function PropertyCard({ property }) {
         </div>
 
         {/* Favorite Heart Button & Verified Badge */}
-        <div className="absolute top-3.5 right-3.5 flex items-center gap-2">
+        <div className="absolute top-3.5 right-3.5 flex items-center gap-2 z-20">
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -38,9 +85,9 @@ export default function PropertyCard({ property }) {
               toggleFavorite(property);
             }}
             aria-label="Save Property"
-            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all backdrop-blur-md shadow-sm ${
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all backdrop-blur-md shadow-sm cursor-pointer ${
               favorited
-                ? 'bg-red-500 text-white shadow-red-500/30'
+                ? 'bg-red-500 text-white shadow-red-500/30 scale-110'
                 : 'bg-white/90 text-[#1A202C] hover:text-red-500 hover:scale-110'
             }`}
           >
@@ -58,7 +105,7 @@ export default function PropertyCard({ property }) {
         </div>
 
         {/* Price Tag Overlay */}
-        <div className="absolute bottom-3.5 left-3.5">
+        <div className="absolute bottom-3.5 left-3.5 z-10">
           <p className="text-2xl font-bold text-white tracking-tight drop-shadow-sm font-editorial">
             ${property.price.toLocaleString()}
             {property.pricePeriod && (
@@ -69,7 +116,7 @@ export default function PropertyCard({ property }) {
       </div>
 
       {/* Property Details Body */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-4 relative z-10">
         <div>
           <p className="text-[11px] font-mono uppercase tracking-wider text-[#C5A880] flex items-center gap-1 mb-1 font-semibold">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,7 +128,7 @@ export default function PropertyCard({ property }) {
           <h3 className="text-lg font-bold text-[#1A202C] group-hover:text-[#A6885E] transition-colors line-clamp-1 font-editorial">
             {property.title}
           </h3>
-          <p className="text-xs text-[#64748B] mt-1.5 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-[#64748B] mt-1.5 line-clamp-2 leading-relaxed font-light">
             {property.description}
           </p>
         </div>
