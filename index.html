@@ -12,35 +12,41 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
 
-    <!-- Tailwind CSS CDN with Custom Architectural Luxury Palette -->
+    <!-- Tailwind CSS CDN with Official Logo Brand Palette: Forest Green (#3E4E31), Gold/Tan (#BFA668), Olive Green (#596638), Light Olive (#838961) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
+              forest: {
+                DEFAULT: '#3E4E31',
+                dark: '#26321D',
+                light: '#526642',
+              },
+              gold: {
+                DEFAULT: '#BFA668',
+                light: '#D4C28E',
+                dark: '#9E8547',
+              },
+              olive: {
+                DEFAULT: '#596638',
+                light: '#6E7D46',
+                dark: '#414C27',
+              },
+              lightolive: {
+                DEFAULT: '#838961',
+                light: '#9DA37B',
+                dark: '#686E4A',
+              },
+              linen: '#FBF8F2',
               cream: {
                 50: '#FDFBF7',
                 100: '#FBF8F2',
                 200: '#F4ECE1',
                 300: '#E8DCB8',
               },
-              warmgrey: {
-                50: '#F8F9FA',
-                100: '#EFEFEF',
-                200: '#E2E3E5',
-                400: '#9CA3AF',
-                600: '#64748B',
-                800: '#2C3539',
-                900: '#1A202C',
-                950: '#0F141C',
-              },
-              champagne: {
-                DEFAULT: '#C5A880',
-                light: '#D8C29D',
-                dark: '#A6885E',
-              },
-              stonecharcoal: '#1E242B'
+              brandcharcoal: '#1A2315'
             },
             fontFamily: {
               serif: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
@@ -51,7 +57,7 @@
       }
     </script>
   </head>
-  <body class="bg-[#FBF8F2] text-[#0F172A] min-h-screen antialiased selection:bg-[#0284C7]/20 selection:text-[#0F172A]">
+  <body class="bg-[#FBF8F2] text-[#1A2315] min-h-screen antialiased selection:bg-[#BFA668]/30 selection:text-[#1A2315]">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

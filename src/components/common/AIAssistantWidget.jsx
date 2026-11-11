@@ -94,19 +94,19 @@ export default function AIAssistantWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-[#1A202C] text-[#FBF8F2] hover:bg-[#C5A880] hover:text-[#1A202C] transition-all duration-300 shadow-2xl border border-white/20 group cursor-pointer"
+          className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-[#3E4E31] text-[#FBF8F2] hover:bg-[#BFA668] hover:text-[#1A2315] transition-all duration-300 shadow-2xl border border-white/20 group cursor-pointer"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-[#C5A880] group-hover:bg-[#1A202C] animate-pulse" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[#BFA668] group-hover:bg-[#1A2315] animate-pulse" />
           <span className="text-xs font-semibold tracking-wide">TwistMS AI Assistant</span>
         </button>
       )}
 
       {/* Chat Window Drawer */}
       {isOpen && (
-        <div className="w-[360px] sm:w-[400px] h-[520px] rounded-3xl glass-panel-luxury border border-[#2C3539]/15 shadow-2xl flex flex-col overflow-hidden bg-[#FFFFFF]/95">
+        <div className="w-[360px] sm:w-[400px] h-[520px] rounded-3xl glass-panel-luxury border border-[#3E4E31]/15 shadow-2xl flex flex-col overflow-hidden bg-[#FFFFFF]/95">
           
           {/* Header */}
-          <div className="p-4 bg-[#1A202C] text-white flex items-center justify-between">
+          <div className="p-4 bg-[#3E4E31] text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
                 src="/logos/new-logo-white-removebg-preview.png"
@@ -115,7 +115,7 @@ export default function AIAssistantWidget() {
               />
               <div>
                 <h3 className="text-sm font-bold font-editorial">TwistMS Real Estate Assistant</h3>
-                <p className="text-[10px] text-[#D8C29D] font-mono flex items-center gap-1">
+                <p className="text-[10px] text-[#D4C28E] font-mono flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                   Active PRD Knowledge Base
                 </p>
@@ -123,7 +123,7 @@ export default function AIAssistantWidget() {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-slate-400 hover:text-white p-1"
+              className="text-[#BFA668]/70 hover:text-white p-1"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -141,33 +141,33 @@ export default function AIAssistantWidget() {
                 <div
                   className={`max-w-[85%] p-3.5 rounded-2xl ${
                     m.sender === 'user'
-                      ? 'bg-[#1A202C] text-[#FBF8F2] rounded-br-none'
-                      : 'bg-white border border-[#2C3539]/10 text-[#1A202C] shadow-sm rounded-bl-none'
+                      ? 'bg-[#3E4E31] text-[#FBF8F2] rounded-br-none'
+                      : 'bg-white border border-[#3E4E31]/10 text-[#1A2315] shadow-sm rounded-bl-none'
                   }`}
                 >
                   <p className="leading-relaxed">{m.text}</p>
                 </div>
-                <span className="text-[10px] text-[#475569] mt-1 font-mono px-1 font-semibold">{m.time}</span>
+                <span className="text-[10px] text-[#596638] mt-1 font-mono px-1 font-semibold">{m.time}</span>
               </div>
             ))}
 
             {isTyping && (
-              <div className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-2 rounded-2xl w-fit shadow-sm">
-                <span className="w-1.5 h-1.5 bg-sky-600 rounded-full animate-bounce"></span>
-                <span className="w-1.5 h-1.5 bg-sky-600 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                <span className="w-1.5 h-1.5 bg-sky-600 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+              <div className="flex items-center gap-1.5 bg-white border border-[#3E4E31]/15 px-3 py-2 rounded-2xl w-fit shadow-sm">
+                <span className="w-1.5 h-1.5 bg-[#BFA668] rounded-full animate-bounce"></span>
+                <span className="w-1.5 h-1.5 bg-[#BFA668] rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                <span className="w-1.5 h-1.5 bg-[#BFA668] rounded-full animate-bounce [animation-delay:0.4s]"></span>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
           {/* Quick Prompts */}
-          <div className="p-2.5 bg-white border-t border-slate-200 flex gap-1.5 overflow-x-auto no-scrollbar">
+          <div className="p-2.5 bg-white border-t border-[#3E4E31]/10 flex gap-1.5 overflow-x-auto no-scrollbar">
             {predefinedPrompts.map((p, i) => (
               <button
                 key={i}
                 onClick={() => handleSend(p)}
-                className="whitespace-nowrap px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-[11px] font-bold text-[#0F172A] hover:bg-sky-50 hover:border-sky-400 transition-colors shrink-0"
+                className="whitespace-nowrap px-3 py-1 rounded-full bg-[#F4EDDA] border border-[#BFA668]/30 text-[11px] font-bold text-[#1A2315] hover:bg-[#EAE0CA] hover:border-[#BFA668] transition-colors shrink-0"
               >
                 {p}
               </button>
@@ -175,18 +175,18 @@ export default function AIAssistantWidget() {
           </div>
 
           {/* Input Footer */}
-          <div className="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+          <div className="p-3 bg-white border-t border-[#3E4E31]/10 flex items-center gap-2">
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Ask about properties, deeds, plans..."
-              className="flex-1 bg-white text-xs text-[#0F172A] font-medium border border-slate-300 rounded-xl px-3 py-2.5 placeholder:text-[#64748B] focus:outline-none focus:border-sky-600 shadow-sm"
+              className="flex-1 bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-xl px-3 py-2.5 placeholder:text-[#838961] focus:outline-none focus:border-[#BFA668] shadow-sm"
             />
             <button
               onClick={() => handleSend()}
-              className="p-2.5 rounded-xl bg-[#0F172A] text-white hover:bg-sky-700 transition-colors shadow-sm"
+              className="p-2.5 rounded-xl bg-[#3E4E31] text-white hover:bg-[#596638] transition-colors shadow-sm"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -200,4 +200,3 @@ export default function AIAssistantWidget() {
     </div>
   );
 }
-

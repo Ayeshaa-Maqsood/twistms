@@ -44,93 +44,93 @@ export default function Search() {
       {/* Header Banner */}
       <ScrollReveal direction="down">
         <div>
-          <div className="text-blue-700 text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">USA Nationwide Database</div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0F172A] tracking-tight font-editorial">Browse & Filter Acquisitions</h1>
-          <p className="text-sm text-[#334155] mt-1.5 font-medium">Search verified residential estates, commercial facilities, timberland, and luxury rentals across all 50 states.</p>
+          <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">USA Nationwide Database</div>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1A2315] tracking-tight font-editorial">Browse & Filter Acquisitions</h1>
+          <p className="text-sm text-[#596638] mt-1.5 font-medium">Search verified residential estates, commercial facilities, timberland, and luxury rentals across all 50 states.</p>
         </div>
       </ScrollReveal>
 
       {/* Control Bar & Filter System */}
       <ScrollReveal direction="up" delay={100}>
-        <div className="glass-panel-luxury p-6 rounded-3xl border border-slate-200 bg-white shadow-md space-y-5">
+        <div className="glass-panel-luxury p-6 rounded-3xl border border-[#3E4E31]/15 bg-white shadow-md space-y-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
             
             {/* Keyword Input */}
             <div className="lg:col-span-2">
-              <label className="block text-[11px] font-mono text-[#0F172A] uppercase tracking-wider mb-1.5 font-bold">Search City / ZIP / Landmark</label>
+              <label className="block text-[11px] font-mono text-[#1A2315] uppercase tracking-wider mb-1.5 font-bold">Search City / ZIP / Landmark</label>
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="e.g. Austin, Aspen, 78701..."
-                className="w-full bg-[#FFFFFF] text-xs text-[#0F172A] font-medium border border-slate-300 rounded-xl px-3.5 py-2.5 placeholder:text-[#64748B] focus:outline-none focus:border-sky-600 shadow-sm"
+                className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-xl px-3.5 py-2.5 placeholder:text-[#838961] focus:outline-none focus:border-[#BFA668] shadow-sm"
               />
             </div>
 
             {/* Category */}
             <div>
-              <label className="block text-[11px] font-mono text-[#0F172A] uppercase tracking-wider mb-1.5 font-bold">Category</label>
+              <label className="block text-[11px] font-mono text-[#1A2315] uppercase tracking-wider mb-1.5 font-bold">Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-[#FFFFFF] text-xs text-[#0F172A] font-semibold border border-slate-300 rounded-xl px-3 py-2.5 focus:outline-none focus:border-sky-600 cursor-pointer shadow-sm"
+                className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/20 rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
               >
                 {categories.map((c) => (
-                  <option key={c} value={c} className="bg-white text-[#0F172A]">{c}</option>
+                  <option key={c} value={c} className="bg-white text-[#1A2315]">{c}</option>
                 ))}
               </select>
             </div>
 
             {/* Type Filter */}
             <div>
-              <label className="block text-[11px] font-mono text-[#0F172A] uppercase tracking-wider mb-1.5 font-bold">Listing Type</label>
+              <label className="block text-[11px] font-mono text-[#1A2315] uppercase tracking-wider mb-1.5 font-bold">Listing Type</label>
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="w-full bg-[#FFFFFF] text-xs text-[#0F172A] font-semibold border border-slate-300 rounded-xl px-3 py-2.5 focus:outline-none focus:border-sky-600 cursor-pointer shadow-sm"
+                className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/20 rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
               >
-                <option value="All" className="bg-white text-[#0F172A]">All (Sale & Rent)</option>
-                <option value="Sale" className="bg-white text-[#0F172A]">For Sale Only</option>
-                <option value="Rent" className="bg-white text-[#0F172A]">For Rent Only</option>
+                <option value="All" className="bg-white text-[#1A2315]">All (Sale & Rent)</option>
+                <option value="Sale" className="bg-white text-[#1A2315]">For Sale Only</option>
+                <option value="Rent" className="bg-white text-[#1A2315]">For Rent Only</option>
               </select>
             </div>
 
             {/* State */}
             <div>
-              <label className="block text-[11px] font-mono text-[#0F172A] uppercase tracking-wider mb-1.5 font-bold">State</label>
+              <label className="block text-[11px] font-mono text-[#1A2315] uppercase tracking-wider mb-1.5 font-bold">State</label>
               <select
                 value={stateCode}
                 onChange={(e) => setStateCode(e.target.value)}
-                className="w-full bg-[#FFFFFF] text-xs text-[#0F172A] font-semibold border border-slate-300 rounded-xl px-3 py-2.5 focus:outline-none focus:border-sky-600 cursor-pointer shadow-sm"
+                className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/20 rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
               >
-                <option value="" className="bg-white text-[#0F172A]">All 50 US States</option>
-                <option value="TX" className="bg-white text-[#0F172A]">Texas (TX)</option>
-                <option value="CO" className="bg-white text-[#0F172A]">Colorado (CO)</option>
-                <option value="FL" className="bg-white text-[#0F172A]">Florida (FL)</option>
-                <option value="CA" className="bg-white text-[#0F172A]">California (CA)</option>
-                <option value="MT" className="bg-white text-[#0F172A]">Montana (MT)</option>
-                <option value="NY" className="bg-white text-[#0F172A]">New York (NY)</option>
+                <option value="" className="bg-white text-[#1A2315]">All 50 US States</option>
+                <option value="TX" className="bg-white text-[#1A2315]">Texas (TX)</option>
+                <option value="CO" className="bg-white text-[#1A2315]">Colorado (CO)</option>
+                <option value="FL" className="bg-white text-[#1A2315]">Florida (FL)</option>
+                <option value="CA" className="bg-white text-[#1A2315]">California (CA)</option>
+                <option value="MT" className="bg-white text-[#1A2315]">Montana (MT)</option>
+                <option value="NY" className="bg-white text-[#1A2315]">New York (NY)</option>
               </select>
             </div>
 
           </div>
 
           {/* Count, View Toggle & Sorting Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between pt-3.5 border-t border-slate-200 text-xs text-[#334155] font-medium">
+          <div className="flex flex-col sm:flex-row items-center justify-between pt-3.5 border-t border-[#3E4E31]/10 text-xs text-[#596638] font-medium">
             <div>
-              Showing <span className="text-[#0F172A] font-extrabold">{filteredProperties.length}</span> curated properties
+              Showing <span className="text-[#1A2315] font-extrabold">{filteredProperties.length}</span> curated properties
             </div>
             
             <div className="flex items-center gap-4 mt-2 sm:mt-0">
               {/* View Mode Toggle */}
-              <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-300">
+              <div className="flex bg-[#F4EDDA]/50 p-1 rounded-xl border border-[#BFA668]/20">
                 <button
                   type="button"
                   onClick={() => setViewMode('grid')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                     viewMode === 'grid'
-                      ? 'bg-[#0F172A] text-white shadow-sm'
-                      : 'text-[#334155] hover:text-[#0F172A]'
+                      ? 'bg-[#3E4E31] text-white shadow-sm'
+                      : 'text-[#596638] hover:text-[#3E4E31]'
                   }`}
                 >
                   ⊞ Grid View
@@ -140,8 +140,8 @@ export default function Search() {
                   onClick={() => setViewMode('map')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                     viewMode === 'map'
-                      ? 'bg-[#0F172A] text-white shadow-sm'
-                      : 'text-[#334155] hover:text-[#0F172A]'
+                      ? 'bg-[#3E4E31] text-white shadow-sm'
+                      : 'text-[#596638] hover:text-[#3E4E31]'
                   }`}
                 >
                   📍 Satellite Map
@@ -149,11 +149,11 @@ export default function Search() {
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-[11px] font-mono font-bold text-[#0F172A]">Sort:</span>
+                <span className="text-[11px] font-mono font-bold text-[#1A2315]">Sort:</span>
                 <select
                   value={priceSort}
                   onChange={(e) => setPriceSort(e.target.value)}
-                  className="bg-[#FFFFFF] text-[#0F172A] font-semibold border border-slate-300 rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-sky-600 shadow-sm"
+                  className="bg-[#FFFFFF] text-[#1A2315] font-semibold border border-[#3E4E31]/20 rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-[#BFA668] shadow-sm"
                 >
                   <option value="default">Featured</option>
                   <option value="low">Price: Low to High</option>
@@ -177,8 +177,8 @@ export default function Search() {
               </ScrollReveal>
             ))
           ) : (
-            <div className="col-span-full py-20 text-center glass-panel-luxury rounded-3xl border border-slate-200 bg-white">
-              <p className="text-[#334155] text-sm font-semibold">No properties match your exact filters.</p>
+            <div className="col-span-full py-20 text-center glass-panel-luxury rounded-3xl border border-[#3E4E31]/15 bg-white">
+              <p className="text-[#596638] text-sm font-semibold">No properties match your exact filters.</p>
               <button
                 onClick={() => { setQuery(''); setCategory('All'); setStateCode(''); setTypeFilter('All'); }}
                 className="mt-4 px-5 py-2.5 rounded-xl text-xs font-bold btn-luxury"

@@ -45,14 +45,14 @@ export default function PropertyCard({ property }) {
         transform: transformStyle,
         transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease',
       }}
-      className="glass-panel-luxury rounded-2xl overflow-hidden flex flex-col group border border-[#2C3539]/10 hover:border-[#C5A880]/60 relative will-change-transform shadow-md hover:shadow-2xl"
+      className="glass-panel-luxury rounded-2xl overflow-hidden flex flex-col group border border-[#3E4E31]/10 hover:border-[#BFA668]/60 relative will-change-transform shadow-md hover:shadow-2xl"
     >
       {/* Dynamic Champagne Glare Overlay */}
       <div
         className="pointer-events-none absolute inset-0 z-30 transition-opacity duration-300 rounded-2xl"
         style={{
           opacity: glarePosition.opacity,
-          background: `radial-gradient(circle at ${glarePosition.x}% ${glarePosition.y}%, rgba(197, 168, 128, 0.45) 0%, transparent 60%)`,
+          background: `radial-gradient(circle at ${glarePosition.x}% ${glarePosition.y}%, rgba(191, 166, 104, 0.45) 0%, transparent 60%)`,
         }}
       />
 
@@ -68,10 +68,10 @@ export default function PropertyCard({ property }) {
 
         {/* Badges Overlay */}
         <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-2 z-10">
-          <span className="px-3 py-1 text-[11px] font-bold tracking-wider uppercase rounded-full bg-white text-[#0F172A] shadow-md backdrop-blur-md border border-slate-200">
+          <span className="px-3 py-1 text-[11px] font-bold tracking-wider uppercase rounded-full bg-white text-[#1A2315] shadow-md backdrop-blur-md border border-[#3E4E31]/20">
             {property.category}
           </span>
-          <span className="px-3 py-1 text-[11px] font-bold tracking-wider uppercase rounded-full bg-slate-900/80 text-white shadow-md backdrop-blur-md">
+          <span className="px-3 py-1 text-[11px] font-bold tracking-wider uppercase rounded-full bg-[#3E4E31]/90 text-white shadow-md backdrop-blur-md">
             For {property.type}
           </span>
         </div>
@@ -88,7 +88,7 @@ export default function PropertyCard({ property }) {
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all backdrop-blur-md shadow-md cursor-pointer ${
               favorited
                 ? 'bg-red-500 text-white shadow-red-500/30 scale-110'
-                : 'bg-white/95 text-[#0F172A] hover:text-red-500 hover:scale-110'
+                : 'bg-white/95 text-[#1A2315] hover:text-red-500 hover:scale-110'
             }`}
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -97,8 +97,8 @@ export default function PropertyCard({ property }) {
           </button>
 
           {property.verified && (
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold rounded-full bg-white text-[#0F172A] shadow-md backdrop-blur-md border border-slate-200">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold rounded-full bg-white text-[#1A2315] shadow-md backdrop-blur-md border border-[#3E4E31]/20">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#BFA668]"></span>
               <span className="font-bold text-[10px] uppercase tracking-wider">Verified</span>
             </div>
           )}
@@ -118,40 +118,40 @@ export default function PropertyCard({ property }) {
       {/* Property Details Body */}
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4 relative z-10 bg-white">
         <div>
-          <p className="text-[11px] font-mono uppercase tracking-wider text-blue-700 flex items-center gap-1 mb-1 font-bold">
+          <p className="text-[11px] font-mono uppercase tracking-wider text-[#BFA668] flex items-center gap-1 mb-1 font-bold">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
             {property.city}, {property.stateCode} {property.zip}
           </p>
-          <h3 className="text-lg font-bold text-[#0F172A] group-hover:text-blue-700 transition-colors line-clamp-1 font-editorial">
+          <h3 className="text-lg font-bold text-[#1A2315] group-hover:text-[#BFA668] transition-colors line-clamp-1 font-editorial">
             {property.title}
           </h3>
-          <p className="text-xs text-[#334155] mt-1.5 line-clamp-2 leading-relaxed font-normal">
+          <p className="text-xs text-[#596638] mt-1.5 line-clamp-2 leading-relaxed font-normal">
             {property.description}
           </p>
         </div>
 
         {/* Specs Row */}
-        <div className="pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-[#334155] font-medium">
+        <div className="pt-3 border-t border-[#3E4E31]/10 flex items-center justify-between text-xs text-[#596638] font-medium">
           {property.bedrooms > 0 && (
             <div>
-              <span className="text-[#0F172A] font-bold">{property.bedrooms}</span> Beds
+              <span className="text-[#1A2315] font-bold">{property.bedrooms}</span> Beds
             </div>
           )}
           {property.bathrooms > 0 && (
             <div>
-              <span className="text-[#0F172A] font-bold">{property.bathrooms}</span> Baths
+              <span className="text-[#1A2315] font-bold">{property.bathrooms}</span> Baths
             </div>
           )}
           {property.acreage > 0 ? (
             <div>
-              <span className="text-blue-700 font-bold">{property.acreage}</span> Acres
+              <span className="text-[#BFA668] font-bold">{property.acreage}</span> Acres
             </div>
           ) : property.sqft > 0 ? (
             <div>
-              <span className="text-[#0F172A] font-bold">{property.sqft.toLocaleString()}</span> SqFt
+              <span className="text-[#1A2315] font-bold">{property.sqft.toLocaleString()}</span> SqFt
             </div>
           ) : null}
         </div>

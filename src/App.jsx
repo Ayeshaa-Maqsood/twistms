@@ -17,7 +17,7 @@ function App() {
   return (
     <FavoritesProvider>
       <Router>
-        <div className="min-h-screen bg-[#FBF8F2] text-[#0F172A] flex flex-col architect-grid relative selection:bg-[#0284C7]/20 selection:text-[#0F172A]">
+        <div className="min-h-screen bg-[#FBF8F2] text-[#1A2315] flex flex-col architect-grid relative selection:bg-[#BFA668]/20 selection:text-[#1A2315]">
           <ScrollProgressBar />
           <Header />
           <main className="flex-1">

@@ -51,34 +51,34 @@ export default function Home() {
         <InteractiveWaveCanvas />
 
         {/* Soft Radial Lighting */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-sky-100/40 blur-[130px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-80 h-80 bg-blue-100/30 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#BFA668]/15 blur-[130px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#3E4E31]/10 blur-[100px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           
           {/* High-Contrast Nationwide Pill */}
           <ScrollReveal direction="down" duration={600}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel-warm text-[#0F172A] text-xs font-semibold mb-8 shadow-sm border border-stone-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="tracking-widest uppercase font-mono text-[11px] text-[#0F172A] font-bold">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel-warm text-[#1A2315] text-xs font-semibold mb-8 shadow-sm border border-[#BFA668]/50">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#BFA668] animate-pulse" />
+              <span className="tracking-widest uppercase font-mono text-[11px] text-[#1A2315] font-bold">
                 USA Nationwide Marketplace • All 50 States
               </span>
             </div>
           </ScrollReveal>
 
-          {/* Hero Headline: Redesigned modern, high-contrast, bold, distinct (No Beige!) */}
+          {/* Hero Headline: Brand gradient — forest green → gold */}
           <ScrollReveal direction="up" delay={100} duration={750}>
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#0F172A] max-w-5xl mx-auto leading-[1.08] font-editorial">
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1A2315] max-w-5xl mx-auto leading-[1.08] font-editorial">
               Architectural Living, <br />
               <span className="relative inline-block mt-2">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0F172A] via-[#1E3A8A] to-[#0284C7] font-black">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3E4E31] via-[#596638] to-[#BFA668] font-black">
                   Verified & Engineered Across America.
                 </span>
-                <span className="absolute -bottom-1 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-600 via-sky-500 to-indigo-600 rounded-full opacity-80" />
+                <span className="absolute -bottom-1 left-0 right-0 h-1.5 bg-gradient-to-r from-[#3E4E31] via-[#BFA668] to-[#596638] rounded-full opacity-80" />
               </span>
             </h1>
 
-            <p className="mt-7 text-base sm:text-lg text-[#334155] max-w-2xl mx-auto font-medium leading-relaxed">
+            <p className="mt-7 text-base sm:text-lg text-[#596638] max-w-2xl mx-auto font-medium leading-relaxed">
               Curating premier residential sanctuaries, high-yield commercial assets, and sprawling timberland with verified ownership deeds across America.
             </p>
           </ScrollReveal>
@@ -88,17 +88,17 @@ export default function Home() {
             <div className="mt-12 max-w-4xl mx-auto">
               <form
                 onSubmit={handleSearchSubmit}
-                className="glass-panel-luxury p-3 sm:p-4 rounded-3xl shadow-xl shadow-stone-900/5 grid grid-cols-1 sm:grid-cols-12 gap-3 items-center relative z-20 border border-slate-300"
+                className="glass-panel-luxury p-3 sm:p-4 rounded-3xl shadow-xl shadow-stone-900/5 grid grid-cols-1 sm:grid-cols-12 gap-3 items-center relative z-20 border border-[#3E4E31]/20"
               >
                 {/* Category Dropdown */}
                 <div className="sm:col-span-3">
                   <select
                     value={activeCategory}
                     onChange={(e) => setActiveCategory(e.target.value)}
-                    className="w-full bg-[#FFFFFF] text-xs text-[#0F172A] font-semibold border border-slate-300 rounded-2xl px-3.5 py-3.5 focus:outline-none focus:border-[#0284C7] cursor-pointer shadow-sm"
+                    className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/20 rounded-2xl px-3.5 py-3.5 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
                   >
                     {categories.map((c) => (
-                      <option key={c} value={c} className="bg-white text-[#0F172A]">
+                      <option key={c} value={c} className="bg-white text-[#1A2315]">
                         {c === 'All' ? 'All Categories' : c}
                       </option>
                     ))}
@@ -112,7 +112,7 @@ export default function Home() {
                     placeholder="City, ZIP, or landmark (e.g. Austin, Aspen)..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full bg-[#FFFFFF] text-xs text-[#0F172A] font-medium border border-slate-300 rounded-2xl px-4 py-3.5 placeholder:text-[#64748B] focus:outline-none focus:border-[#0284C7] shadow-sm"
+                    className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-2xl px-4 py-3.5 placeholder:text-[#838961] focus:outline-none focus:border-[#BFA668] shadow-sm"
                   />
                 </div>
 
@@ -121,15 +121,15 @@ export default function Home() {
                   <select
                     value={selectedState}
                     onChange={(e) => setSelectedState(e.target.value)}
-                    className="w-full bg-[#FFFFFF] text-xs text-[#0F172A] font-semibold border border-slate-300 rounded-2xl px-3.5 py-3.5 focus:outline-none focus:border-[#0284C7] cursor-pointer shadow-sm"
+                    className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/20 rounded-2xl px-3.5 py-3.5 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
                   >
-                    <option value="" className="bg-white text-[#0F172A]">All 50 US States</option>
-                    <option value="TX" className="bg-white text-[#0F172A]">Texas (TX)</option>
-                    <option value="CO" className="bg-white text-[#0F172A]">Colorado (CO)</option>
-                    <option value="FL" className="bg-white text-[#0F172A]">Florida (FL)</option>
-                    <option value="CA" className="bg-white text-[#0F172A]">California (CA)</option>
-                    <option value="MT" className="bg-white text-[#0F172A]">Montana (MT)</option>
-                    <option value="NY" className="bg-white text-[#0F172A]">New York (NY)</option>
+                    <option value="" className="bg-white text-[#1A2315]">All 50 US States</option>
+                    <option value="TX" className="bg-white text-[#1A2315]">Texas (TX)</option>
+                    <option value="CO" className="bg-white text-[#1A2315]">Colorado (CO)</option>
+                    <option value="FL" className="bg-white text-[#1A2315]">Florida (FL)</option>
+                    <option value="CA" className="bg-white text-[#1A2315]">California (CA)</option>
+                    <option value="MT" className="bg-white text-[#1A2315]">Montana (MT)</option>
+                    <option value="NY" className="bg-white text-[#1A2315]">New York (NY)</option>
                   </select>
                 </div>
 
@@ -155,12 +155,12 @@ export default function Home() {
               {platformStats.map((stat, i) => (
                 <div
                   key={i}
-                  className="glass-panel-luxury p-5 rounded-2xl border border-slate-200 text-center hover:border-sky-500 hover:shadow-lg transition-all duration-300 group"
+                  className="glass-panel-luxury p-5 rounded-2xl border border-[#3E4E31]/15 text-center hover:border-[#BFA668] hover:shadow-lg transition-all duration-300 group"
                 >
-                  <p className="text-3xl font-extrabold font-editorial text-[#0F172A] tracking-tight group-hover:text-[#0284C7] transition-colors">
+                  <p className="text-3xl font-extrabold font-editorial text-[#1A2315] tracking-tight group-hover:text-[#BFA668] transition-colors">
                     <AnimatedCounter target={stat.value} />
                   </p>
-                  <p className="text-[11px] text-[#334155] mt-1.5 uppercase tracking-wider font-mono font-bold">
+                  <p className="text-[11px] text-[#596638] mt-1.5 uppercase tracking-wider font-mono font-bold">
                     {stat.label}
                   </p>
                 </div>
@@ -178,19 +178,19 @@ export default function Home() {
         <ScrollReveal direction="up">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
-              <div className="text-blue-700 text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
+              <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
                 Regional Portfolios
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight font-editorial">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight font-editorial">
                 Explore Prime US Territories
               </h2>
-              <p className="text-xs text-[#334155] mt-1 font-medium">
+              <p className="text-xs text-[#596638] mt-1 font-medium">
                 Direct access to state-regulated deeds and regional MLS syndications.
               </p>
             </div>
             <Link
               to="/search"
-              className="text-xs font-bold text-[#0F172A] hover:text-[#0284C7] flex items-center gap-1.5 transition-colors"
+              className="text-xs font-bold text-[#1A2315] hover:text-[#BFA668] flex items-center gap-1.5 transition-colors"
             >
               <span>Explore All 50 States</span>
               <span>→</span>
@@ -203,24 +203,24 @@ export default function Home() {
             <ScrollReveal key={st.code} direction="up" delay={idx * 75} duration={600}>
               <div
                 onClick={() => navigate(`/search?st=${st.code}`)}
-                className="glass-panel-luxury glass-card-interactive rounded-2xl overflow-hidden cursor-pointer group flex flex-col h-44 relative shadow-sm hover:shadow-xl border border-slate-200"
+                className="glass-panel-luxury glass-card-interactive rounded-2xl overflow-hidden cursor-pointer group flex flex-col h-44 relative shadow-sm hover:shadow-xl border border-[#3E4E31]/15"
               >
                 <img
                   src={st.img}
                   alt={st.name}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-65 group-hover:opacity-85"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/95 via-[#0F172A]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2315]/95 via-[#1A2315]/40 to-transparent" />
                 
                 <div className="relative z-10 p-4 h-full flex flex-col justify-between">
-                  <span className="self-start px-2 py-0.5 rounded-md text-[10px] font-mono font-extrabold bg-[#FFFFFF] text-[#0F172A] shadow-md border border-slate-200">
+                  <span className="self-start px-2 py-0.5 rounded-md text-[10px] font-mono font-extrabold bg-[#FFFFFF] text-[#1A2315] shadow-md border border-[#3E4E31]/10">
                     {st.code}
                   </span>
                   <div>
                     <h3 className="text-base font-bold text-white font-editorial tracking-wide">
                       {st.name}
                     </h3>
-                    <p className="text-[11px] text-sky-200 font-mono mt-0.5 font-semibold">{st.count}</p>
+                    <p className="text-[11px] text-[#D4C28E] font-mono mt-0.5 font-semibold">{st.count}</p>
                   </div>
                 </div>
               </div>
@@ -236,13 +236,13 @@ export default function Home() {
         <ScrollReveal direction="up">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
-              <div className="text-blue-700 text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
+              <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
                 Vetted Acquisitions
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight font-editorial">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight font-editorial">
                 Featured Marketplace Portfolio
               </h2>
-              <p className="text-xs text-[#334155] mt-1 font-medium">
+              <p className="text-xs text-[#596638] mt-1 font-medium">
                 Directly vetted titles, tax receipts, and ownership deeds.
               </p>
             </div>
@@ -255,8 +255,8 @@ export default function Home() {
                   onClick={() => setActiveCategory(c)}
                   className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
                     activeCategory === c
-                      ? 'bg-[#0F172A] text-white shadow-md'
-                      : 'bg-white text-[#334155] border border-slate-300 hover:text-[#0F172A] hover:border-[#0284C7]'
+                      ? 'bg-[#3E4E31] text-white shadow-md'
+                      : 'bg-white text-[#596638] border border-[#3E4E31]/20 hover:text-[#1A2315] hover:border-[#BFA668]'
                   }`}
                 >
                   {c}
@@ -275,8 +275,8 @@ export default function Home() {
               </ScrollReveal>
             ))
           ) : (
-            <div className="col-span-full py-16 text-center glass-panel-luxury rounded-3xl border border-slate-200">
-              <p className="text-[#334155] text-sm font-medium">No properties match your current filters.</p>
+            <div className="col-span-full py-16 text-center glass-panel-luxury rounded-3xl border border-[#3E4E31]/15">
+              <p className="text-[#596638] text-sm font-medium">No properties match your current filters.</p>
               <button
                 onClick={() => { setActiveCategory('All'); setSearchTerm(''); setSelectedState(''); }}
                 className="mt-4 px-4 py-2 rounded-xl text-xs font-bold btn-luxury"
@@ -304,46 +304,46 @@ export default function Home() {
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="up">
-          <div className="glass-panel-luxury p-8 sm:p-14 rounded-3xl border border-slate-200 relative overflow-hidden bg-[#FFFFFF]">
+          <div className="glass-panel-luxury p-8 sm:p-14 rounded-3xl border border-[#3E4E31]/15 relative overflow-hidden bg-[#FFFFFF]">
             <div className="max-w-2xl mb-10">
-              <span className="text-xs font-mono text-blue-700 uppercase tracking-widest font-bold">
+              <span className="text-xs font-mono text-[#BFA668] uppercase tracking-widest font-bold">
                 Trust & Escrow Protocol
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mt-2 font-editorial">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight mt-2 font-editorial">
                 Administrative Verification for American Real Estate
               </h2>
-              <p className="text-sm text-[#334155] mt-2 font-normal leading-relaxed">
+              <p className="text-sm text-[#596638] mt-2 font-normal leading-relaxed">
                 Every listing undergoes rigorous administrative document verification before entering public marketplace syndication.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200 hover:border-sky-500 hover:shadow-md transition-all">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-800 flex items-center justify-center font-bold text-sm mb-4 font-mono border border-blue-200">
+              <div className="p-6 rounded-2xl bg-[#F4EDDA]/40 border border-[#BFA668]/20 hover:border-[#BFA668] hover:shadow-md transition-all">
+                <div className="w-10 h-10 rounded-xl bg-[#F4EDDA] text-[#3E4E31] flex items-center justify-center font-bold text-sm mb-4 font-mono border border-[#BFA668]/30">
                   01
                 </div>
-                <h3 className="text-lg font-bold text-[#0F172A] font-editorial">Title & Deed Review</h3>
-                <p className="text-xs text-[#334155] mt-2 leading-relaxed font-medium">
+                <h3 className="text-lg font-bold text-[#1A2315] font-editorial">Title & Deed Review</h3>
+                <p className="text-xs text-[#596638] mt-2 leading-relaxed font-medium">
                   Mandatory check of ownership deeds, tax records, and boundary surveys prior to granting the Verified Property badge.
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200 hover:border-sky-500 hover:shadow-md transition-all">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-800 flex items-center justify-center font-bold text-sm mb-4 font-mono border border-blue-200">
+              <div className="p-6 rounded-2xl bg-[#F4EDDA]/40 border border-[#BFA668]/20 hover:border-[#BFA668] hover:shadow-md transition-all">
+                <div className="w-10 h-10 rounded-xl bg-[#F4EDDA] text-[#3E4E31] flex items-center justify-center font-bold text-sm mb-4 font-mono border border-[#BFA668]/30">
                   02
                 </div>
-                <h3 className="text-lg font-bold text-[#0F172A] font-editorial">Multi-Channel Promotion</h3>
-                <p className="text-xs text-[#334155] mt-2 leading-relaxed font-medium">
+                <h3 className="text-lg font-bold text-[#1A2315] font-editorial">Multi-Channel Promotion</h3>
+                <p className="text-xs text-[#596638] mt-2 leading-relaxed font-medium">
                   Paid and premium listings automatically syndicate to official social media pipelines for targeted nationwide buyer reach.
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200 hover:border-sky-500 hover:shadow-md transition-all">
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-800 flex items-center justify-center font-bold text-sm mb-4 font-mono border border-blue-200">
+              <div className="p-6 rounded-2xl bg-[#F4EDDA]/40 border border-[#BFA668]/20 hover:border-[#BFA668] hover:shadow-md transition-all">
+                <div className="w-10 h-10 rounded-xl bg-[#F4EDDA] text-[#3E4E31] flex items-center justify-center font-bold text-sm mb-4 font-mono border border-[#BFA668]/30">
                   03
                 </div>
-                <h3 className="text-lg font-bold text-[#0F172A] font-editorial">Direct Agent Representation</h3>
-                <p className="text-xs text-[#334155] mt-2 leading-relaxed font-medium">
+                <h3 className="text-lg font-bold text-[#1A2315] font-editorial">Direct Agent Representation</h3>
+                <p className="text-xs text-[#596638] mt-2 leading-relaxed font-medium">
                   Licensed US agents and verified sellers collaborate transparently with calendar viewing slots and WhatsApp messaging.
                 </p>
               </div>
@@ -371,13 +371,13 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="up">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="text-blue-700 text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
+            <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
               Transparent Monetization
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight font-editorial">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight font-editorial">
               Listing Packages & Syndication Tiers
             </h2>
-            <p className="text-xs text-[#334155] mt-2 font-medium">
+            <p className="text-xs text-[#596638] mt-2 font-medium">
               Designed for individual property owners, high-volume brokers, and land developers.
             </p>
           </div>
@@ -389,29 +389,29 @@ export default function Home() {
               <div
                 className={`rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 relative h-full ${
                   plan.highlight
-                    ? 'glass-panel-luxury border-2 border-sky-600 shadow-2xl scale-105 bg-[#FFFFFF]'
-                    : 'glass-panel-luxury border border-slate-200 hover:border-sky-500 shadow-sm hover:shadow-xl bg-white'
+                    ? 'glass-panel-luxury border-2 border-[#BFA668] shadow-2xl scale-105 bg-[#FFFFFF]'
+                    : 'glass-panel-luxury border border-[#3E4E31]/15 hover:border-[#BFA668] shadow-sm hover:shadow-xl bg-white'
                 }`}
               >
                 {plan.highlight && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#0F172A] text-white text-[10px] font-bold uppercase tracking-widest font-mono shadow-md">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#3E4E31] text-white text-[10px] font-bold uppercase tracking-widest font-mono shadow-md">
                     {plan.badge}
                   </div>
                 )}
 
                 <div>
-                  <h3 className="text-xl font-bold text-[#0F172A] font-editorial">{plan.name}</h3>
-                  <p className="text-xs text-[#334155] mt-1 font-medium">{plan.description}</p>
+                  <h3 className="text-xl font-bold text-[#1A2315] font-editorial">{plan.name}</h3>
+                  <p className="text-xs text-[#596638] mt-1 font-medium">{plan.description}</p>
 
                   <div className="mt-6 flex items-baseline gap-1">
-                    <span className="text-4xl font-extrabold text-[#0F172A] font-editorial">{plan.price}</span>
-                    <span className="text-xs text-[#475569] font-mono font-bold">/ {plan.period}</span>
+                    <span className="text-4xl font-extrabold text-[#1A2315] font-editorial">{plan.price}</span>
+                    <span className="text-xs text-[#596638] font-mono font-bold">/ {plan.period}</span>
                   </div>
 
                   <div className="mt-8 space-y-3">
                     {plan.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-center gap-2.5 text-xs text-[#1E293B] font-medium">
-                        <svg className="w-4 h-4 text-sky-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div key={fIdx} className="flex items-center gap-2.5 text-xs text-[#1A2315] font-medium">
+                        <svg className="w-4 h-4 text-[#BFA668] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
                         </svg>
                         <span>{feat}</span>
@@ -420,7 +420,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-slate-200">
+                <div className="mt-8 pt-6 border-t border-[#3E4E31]/10">
                   <Link
                     to="/contact"
                     className={`block text-center py-3 px-4 rounded-xl text-xs font-bold transition-all ${
@@ -443,18 +443,18 @@ export default function Home() {
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="scale" duration={700}>
-          <div className="rounded-3xl p-10 sm:p-14 bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A] text-center relative overflow-hidden text-white shadow-2xl border border-slate-700">
+          <div className="rounded-3xl p-10 sm:p-14 bg-gradient-to-br from-[#3E4E31] via-[#596638] to-[#3E4E31] text-center relative overflow-hidden text-white shadow-2xl border border-[#596638]">
             <div className="max-w-2xl mx-auto space-y-4 relative z-10">
               <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-editorial">
                 Ready to Syndicate Your Property to 5,000+ Buyers?
               </h2>
-              <p className="text-sm text-slate-200 font-medium leading-relaxed">
+              <p className="text-sm text-[#D4C28E] font-medium leading-relaxed">
                 Submit your property details, upload photos, and attach ownership documentation. Our review desk verifies submissions in under 24 hours.
               </p>
               <div className="pt-4 flex flex-wrap justify-center gap-4">
                 <Link
                   to="/submit"
-                  className="py-3 px-6 rounded-xl text-xs font-bold bg-white text-[#0F172A] hover:bg-sky-50 transition-all shadow-lg"
+                  className="py-3 px-6 rounded-xl text-xs font-bold bg-[#BFA668] text-[#1A2315] hover:bg-[#D4C28E] transition-all shadow-lg"
                 >
                   Submit Property for Approval →
                 </Link>
