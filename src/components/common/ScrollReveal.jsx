@@ -1,5 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { prefersReducedMotion } from '../../lib/motion';
 
+/**
+ * Lightweight IntersectionObserver reveal (no library cost per instance).
+ * API unchanged from the original implementation; now honours
+ * prefers-reduced-motion and releases `will-change` once revealed so
+ * dozens of instances don't hold compositor layers forever.
+ */
 export default function ScrollReveal({
   children,
   className = '',
@@ -9,11 +16,17 @@ export default function ScrollReveal({
   duration = 700,
   threshold = 0.15,
   once = true,
+  blur = false,
 }) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(() => prefersReducedMotion());
   const domRef = useRef(null);
 
   useEffect(() => {
+    if (prefersReducedMotion()) {
+      setIsVisible(true);
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -69,14 +82,19 @@ export default function ScrollReveal({
       break;
   }
 
+  const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+
   return (
     <div
       ref={domRef}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translate3d(0, 0, 0) scale3d(1, 1, 1)' : initialTransform,
-        transition: `opacity ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
-        willChange: 'opacity, transform',
+        transform: isVisible ? 'none' : initialTransform,
+        filter: blur ? (isVisible ? 'blur(0px)' : 'blur(8px)') : undefined,
+        transition: `opacity ${duration}ms ${ease} ${delay}ms, transform ${duration}ms ${ease} ${delay}ms${
+          blur ? `, filter ${duration}ms ${ease} ${delay}ms` : ''
+        }`,
+        willChange: isVisible ? 'auto' : 'opacity, transform',
       }}
       className={className}
     >
@@ -84,4 +102,3 @@ export default function ScrollReveal({
     </div>
   );
 }
-

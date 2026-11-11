@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import { FavoritesProvider } from './context/FavoritesContext';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import AIAssistantWidget from './components/common/AIAssistantWidget';
 import FavoritesDrawer from './components/common/FavoritesDrawer';
 import ScrollProgressBar from './components/common/ScrollProgressBar';
+import IntroCurtain from './components/motion/IntroCurtain';
+import PageTransition from './components/motion/PageTransition';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Agents from './pages/Agents';
@@ -15,33 +18,40 @@ import SubmitProperty from './pages/SubmitProperty';
 
 function App() {
   return (
-    <FavoritesProvider>
-      <Router>
-        <div className="min-h-screen bg-[#FBF8F2] text-[#1A2315] flex flex-col architect-grid relative selection:bg-[#BFA668]/20 selection:text-[#1A2315]">
-          <ScrollProgressBar />
-          <Header />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/agents" element={<Agents />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/submit" element={<SubmitProperty />} />
-              <Route path="/property/:id" element={<PropertyDetail />} />
-            </Routes>
-          </main>
-          
-          {/* 24/7 AI Real Estate Assistant Floating Hub */}
-          <AIAssistantWidget />
+    // reducedMotion="user": Framer Motion drops transform/layout animation
+    // (keeps opacity) whenever the OS requests reduced motion.
+    <MotionConfig reducedMotion="user">
+      <FavoritesProvider>
+        <Router>
+          <div className="min-h-screen bg-[#FBF8F2] text-[#1A2315] flex flex-col architect-grid relative selection:bg-[#BFA668]/20 selection:text-[#1A2315]">
+            <IntroCurtain />
+            <ScrollProgressBar />
+            <Header />
+            <main className="flex-1">
+              <PageTransition>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/agents" element={<Agents />} />
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/submit" element={<SubmitProperty />} />
+                  <Route path="/property/:id" element={<PropertyDetail />} />
+                </Routes>
+              </PageTransition>
+            </main>
 
-          {/* Saved Properties Slide-out Drawer */}
-          <FavoritesDrawer />
+            {/* 24/7 AI Real Estate Assistant Floating Hub */}
+            <AIAssistantWidget />
 
-          <Footer />
-        </div>
-      </Router>
-    </FavoritesProvider>
+            {/* Saved Properties Slide-out Drawer */}
+            <FavoritesDrawer />
+
+            <Footer />
+          </div>
+        </Router>
+      </FavoritesProvider>
+    </MotionConfig>
   );
 }
 

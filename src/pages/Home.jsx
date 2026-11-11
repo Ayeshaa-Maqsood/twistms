@@ -1,15 +1,52 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { propertiesData, platformStats, listingPlans } from '../data/properties';
 import PropertyCard from '../components/common/PropertyCard';
-import InteractiveWaveCanvas from '../components/common/InteractiveWaveCanvas';
 import MortgageCalculator from '../components/common/MortgageCalculator';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
-import AnimatedCounter from '../components/common/AnimatedCounter';
+import HeroSection from '../components/sections/HeroSection';
 import ScrollReveal from '../components/common/ScrollReveal';
+import SplitText from '../components/motion/SplitText';
+import ImageReveal from '../components/motion/ImageReveal';
+import SectionRule from '../components/motion/SectionRule';
+import BlueprintLines from '../components/motion/BlueprintLines';
+import ParallaxLayer from '../components/motion/ParallaxLayer';
+import MagneticButton from '../components/motion/MagneticButton';
+import { StaggerGroup, StaggerItem } from '../components/motion/StaggerGroup';
+import { EASE, SPRING_SOFT } from '../lib/motion';
+
+const CTA_IMG =
+  'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=70';
+
+/** Eyebrow + masked headline + subline, consistent across homepage sections. */
+function SectionHeading({ eyebrow, title, sub, align = 'left', className = '' }) {
+  const center = align === 'center';
+  return (
+    <div className={`${center ? 'text-center mx-auto' : ''} ${className}`}>
+      <ScrollReveal direction="up" distance={14} duration={600}>
+        <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">{eyebrow}</div>
+      </ScrollReveal>
+      <SplitText
+        as="h2"
+        text={title}
+        inView
+        stagger={0.035}
+        duration={0.8}
+        className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight font-editorial"
+      />
+      {sub && (
+        <ScrollReveal direction="up" distance={12} duration={600} delay={200}>
+          <p className="text-xs text-[#596638] mt-1.5 font-medium">{sub}</p>
+        </ScrollReveal>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   const navigate = useNavigate();
+  const reduce = useReducedMotion();
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedState, setSelectedState] = useState('');
@@ -39,323 +76,269 @@ export default function Home() {
     { code: 'NY', name: 'New York', count: '65+ Listings', tag: 'Commercial & Metro', img: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=600&q=80' },
   ];
 
+  const trustSteps = [
+    {
+      n: '01',
+      title: 'Title & Deed Review',
+      body: 'Mandatory check of ownership deeds, tax records, and boundary surveys prior to granting the Verified Property badge.',
+    },
+    {
+      n: '02',
+      title: 'Multi-Channel Promotion',
+      body: 'Paid and premium listings automatically syndicate to official social media pipelines for targeted nationwide buyer reach.',
+    },
+    {
+      n: '03',
+      title: 'Direct Agent Representation',
+      body: 'Licensed US agents and verified sellers collaborate transparently with calendar viewing slots and WhatsApp messaging.',
+    },
+  ];
+
   return (
-    <div className="space-y-28 pb-20">
-      
+    <div className="space-y-24 sm:space-y-28 pb-20">
+
       {/* =========================================================================
-          1. HERO SECTION WITH CHAMPAGNE INTERACTIVE WAVE CANVAS & HIGH CONTRAST
+          1. CINEMATIC HERO
       ========================================================================= */}
-      <section className="relative min-h-[85vh] flex items-center justify-center pt-12 pb-20 overflow-hidden">
-        
-        {/* INTERACTIVE PHYSICS WAVE & PARTICLE CANVAS */}
-        <InteractiveWaveCanvas />
-
-        {/* Soft Radial Lighting */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#BFA668]/15 blur-[130px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-10 left-10 w-80 h-80 bg-[#3E4E31]/10 blur-[100px] rounded-full pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          
-          {/* High-Contrast Nationwide Pill */}
-          <ScrollReveal direction="down" duration={600}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel-warm text-[#1A2315] text-xs font-semibold mb-8 shadow-sm border border-[#BFA668]/50">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#BFA668] animate-pulse" />
-              <span className="tracking-widest uppercase font-mono text-[11px] text-[#1A2315] font-bold">
-                USA Nationwide Marketplace • All 50 States
-              </span>
-            </div>
-          </ScrollReveal>
-
-          {/* Hero Headline: Brand gradient — forest green → gold */}
-          <ScrollReveal direction="up" delay={100} duration={750}>
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1A2315] max-w-5xl mx-auto leading-[1.08] font-editorial">
-              Architectural Living, <br />
-              <span className="relative inline-block mt-2">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3E4E31] via-[#596638] to-[#BFA668] font-black">
-                  Verified & Engineered Across America.
-                </span>
-                <span className="absolute -bottom-1 left-0 right-0 h-1.5 bg-gradient-to-r from-[#3E4E31] via-[#BFA668] to-[#596638] rounded-full opacity-80" />
-              </span>
-            </h1>
-
-            <p className="mt-7 text-base sm:text-lg text-[#596638] max-w-2xl mx-auto font-medium leading-relaxed">
-              Curating premier residential sanctuaries, high-yield commercial assets, and sprawling timberland with verified ownership deeds across America.
-            </p>
-          </ScrollReveal>
-
-          {/* Frosted Alabaster Glass Search Console with Scroll Reveal */}
-          <ScrollReveal direction="up" delay={200} duration={700}>
-            <div className="mt-12 max-w-4xl mx-auto">
-              <form
-                onSubmit={handleSearchSubmit}
-                className="glass-panel-luxury p-3 sm:p-4 rounded-3xl shadow-xl shadow-stone-900/5 grid grid-cols-1 sm:grid-cols-12 gap-3 items-center relative z-20 border border-[#3E4E31]/20"
-              >
-                {/* Category Dropdown */}
-                <div className="sm:col-span-3">
-                  <select
-                    value={activeCategory}
-                    onChange={(e) => setActiveCategory(e.target.value)}
-                    className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/20 rounded-2xl px-3.5 py-3.5 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
-                  >
-                    {categories.map((c) => (
-                      <option key={c} value={c} className="bg-white text-[#1A2315]">
-                        {c === 'All' ? 'All Categories' : c}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Keyword / City Search Input */}
-                <div className="sm:col-span-4">
-                  <input
-                    type="text"
-                    placeholder="City, ZIP, or landmark (e.g. Austin, Aspen)..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-2xl px-4 py-3.5 placeholder:text-[#838961] focus:outline-none focus:border-[#BFA668] shadow-sm"
-                  />
-                </div>
-
-                {/* State Filter */}
-                <div className="sm:col-span-3">
-                  <select
-                    value={selectedState}
-                    onChange={(e) => setSelectedState(e.target.value)}
-                    className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/20 rounded-2xl px-3.5 py-3.5 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
-                  >
-                    <option value="" className="bg-white text-[#1A2315]">All 50 US States</option>
-                    <option value="TX" className="bg-white text-[#1A2315]">Texas (TX)</option>
-                    <option value="CO" className="bg-white text-[#1A2315]">Colorado (CO)</option>
-                    <option value="FL" className="bg-white text-[#1A2315]">Florida (FL)</option>
-                    <option value="CA" className="bg-white text-[#1A2315]">California (CA)</option>
-                    <option value="MT" className="bg-white text-[#1A2315]">Montana (MT)</option>
-                    <option value="NY" className="bg-white text-[#1A2315]">New York (NY)</option>
-                  </select>
-                </div>
-
-                {/* Button */}
-                <div className="sm:col-span-2">
-                  <button
-                    type="submit"
-                    className="w-full py-3.5 px-4 rounded-2xl text-xs font-bold btn-luxury flex items-center justify-center gap-2 cursor-pointer"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    Search
-                  </button>
-                </div>
-              </form>
-            </div>
-          </ScrollReveal>
-
-          {/* Telemetry Stats Strip with Animated Number Counters */}
-          <ScrollReveal direction="up" delay={300} duration={700}>
-            <div className="mt-14 max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
-              {platformStats.map((stat, i) => (
-                <div
-                  key={i}
-                  className="glass-panel-luxury p-5 rounded-2xl border border-[#3E4E31]/15 text-center hover:border-[#BFA668] hover:shadow-lg transition-all duration-300 group"
-                >
-                  <p className="text-3xl font-extrabold font-editorial text-[#1A2315] tracking-tight group-hover:text-[#BFA668] transition-colors">
-                    <AnimatedCounter target={stat.value} />
-                  </p>
-                  <p className="text-[11px] text-[#596638] mt-1.5 uppercase tracking-wider font-mono font-bold">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </ScrollReveal>
-
-        </div>
-      </section>
+      <HeroSection
+        categories={categories}
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        selectedState={selectedState}
+        setSelectedState={setSelectedState}
+        onSubmit={handleSearchSubmit}
+        stats={platformStats}
+      />
 
       {/* =========================================================================
-          2. BROWSE BY US STATE SHOWCASE (PRD §20.7) WITH STAGGERED SCROLL REVEAL
+          2. BROWSE BY US STATE SHOWCASE (PRD §20.7)
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal direction="up">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-            <div>
-              <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
-                Regional Portfolios
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight font-editorial">
-                Explore Prime US Territories
-              </h2>
-              <p className="text-xs text-[#596638] mt-1 font-medium">
-                Direct access to state-regulated deeds and regional MLS syndications.
-              </p>
-            </div>
+        <SectionRule index="01" label="Regional Portfolios" className="mb-10" />
+
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <SectionHeading
+            eyebrow="Regional Portfolios"
+            title="Explore Prime US Territories"
+            sub="Direct access to state-regulated deeds and regional MLS syndications."
+          />
+          <ScrollReveal direction="up" distance={12} delay={250} duration={600}>
             <Link
               to="/search"
-              className="text-xs font-bold text-[#1A2315] hover:text-[#BFA668] flex items-center gap-1.5 transition-colors"
+              className="link-draw text-xs font-bold text-[#1A2315] hover:text-[#9E8547] inline-flex items-center gap-1.5 transition-colors"
             >
               <span>Explore All 50 States</span>
-              <span>→</span>
+              <span aria-hidden="true">→</span>
             </Link>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" stagger={0.07}>
           {usStates.map((st, idx) => (
-            <ScrollReveal key={st.code} direction="up" delay={idx * 75} duration={600}>
-              <div
+            <StaggerItem key={st.code}>
+              <motion.div
+                role="link"
+                tabIndex={0}
+                aria-label={`Browse ${st.name} listings`}
                 onClick={() => navigate(`/search?st=${st.code}`)}
-                className="glass-panel-luxury glass-card-interactive rounded-2xl overflow-hidden cursor-pointer group flex flex-col h-44 relative shadow-sm hover:shadow-xl border border-[#3E4E31]/15"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    navigate(`/search?st=${st.code}`);
+                  }
+                }}
+                whileHover={reduce ? undefined : { y: -6 }}
+                transition={SPRING_SOFT}
+                className="glow-border rounded-2xl overflow-hidden cursor-pointer group flex flex-col h-44 relative shadow-sm hover:shadow-xl border border-[#3E4E31]/15 bg-[#1A2315] transition-shadow duration-500"
               >
-                <img
-                  src={st.img}
-                  alt={st.name}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-65 group-hover:opacity-85"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A2315]/95 via-[#1A2315]/40 to-transparent" />
-                
+                <ImageReveal className="absolute inset-0" direction="up" delay={idx * 0.04} duration={1}>
+                  <img
+                    src={st.img}
+                    alt={st.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-[transform,opacity] duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  />
+                </ImageReveal>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0F140C]/95 via-[#0F140C]/35 to-transparent" />
+
                 <div className="relative z-10 p-4 h-full flex flex-col justify-between">
-                  <span className="self-start px-2 py-0.5 rounded-md text-[10px] font-mono font-extrabold bg-[#FFFFFF] text-[#1A2315] shadow-md border border-[#3E4E31]/10">
+                  <span className="self-start px-2 py-0.5 rounded-md text-[10px] font-mono font-extrabold bg-white text-[#1A2315] shadow-md border border-[#3E4E31]/10">
                     {st.code}
                   </span>
                   <div>
-                    <h3 className="text-base font-bold text-white font-editorial tracking-wide">
-                      {st.name}
-                    </h3>
+                    <h3 className="text-base font-bold text-white font-editorial tracking-wide">{st.name}</h3>
                     <p className="text-[11px] text-[#D4C28E] font-mono mt-0.5 font-semibold">{st.count}</p>
+                    <p className="text-[10px] text-white/60 font-medium mt-1 max-h-0 overflow-hidden opacity-0 group-hover:max-h-6 group-hover:opacity-100 transition-all duration-500">
+                      {st.tag}
+                    </p>
                   </div>
                 </div>
-              </div>
-            </ScrollReveal>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </section>
 
       {/* =========================================================================
-          3. FEATURED PROPERTIES WITH SCROLL REVEAL & CRISP HIGH-CONTRAST CARDS
+          3. FEATURED PROPERTIES
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal direction="up">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-            <div>
-              <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
-                Vetted Acquisitions
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight font-editorial">
-                Featured Marketplace Portfolio
-              </h2>
-              <p className="text-xs text-[#596638] mt-1 font-medium">
-                Directly vetted titles, tax receipts, and ownership deeds.
-              </p>
-            </div>
+        <SectionRule index="02" label="Featured Portfolio" className="mb-10" />
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap gap-2">
-              {categories.map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setActiveCategory(c)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
-                    activeCategory === c
-                      ? 'bg-[#3E4E31] text-white shadow-md'
-                      : 'bg-white text-[#596638] border border-[#3E4E31]/20 hover:text-[#1A2315] hover:border-[#BFA668]'
-                  }`}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <SectionHeading
+            eyebrow="Vetted Acquisitions"
+            title="Featured Marketplace Portfolio"
+            sub="Directly vetted titles, tax receipts, and ownership deeds."
+          />
 
-        {/* Property Grid with staggered animations */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProperties.length > 0 ? (
-            filteredProperties.map((prop, idx) => (
-              <ScrollReveal key={prop.id} direction="up" delay={(idx % 6) * 100} duration={650}>
-                <PropertyCard property={prop} />
-              </ScrollReveal>
-            ))
-          ) : (
-            <div className="col-span-full py-16 text-center glass-panel-luxury rounded-3xl border border-[#3E4E31]/15">
-              <p className="text-[#596638] text-sm font-medium">No properties match your current filters.</p>
-              <button
-                onClick={() => { setActiveCategory('All'); setSearchTerm(''); setSelectedState(''); }}
-                className="mt-4 px-4 py-2 rounded-xl text-xs font-bold btn-luxury"
-              >
-                Reset All Filters
-              </button>
+          {/* Category Filter Pills with a sliding active indicator */}
+          <ScrollReveal direction="up" distance={12} delay={200} duration={600}>
+            <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter by category">
+              {categories.map((c) => {
+                const active = activeCategory === c;
+                return (
+                  <button
+                    key={c}
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setActiveCategory(c)}
+                    className={`relative px-4 py-2 rounded-xl text-xs font-bold transition-colors duration-300 cursor-pointer ${
+                      active
+                        ? 'text-white'
+                        : 'bg-white text-[#596638] border border-[#3E4E31]/20 hover:text-[#1A2315] hover:border-[#BFA668]'
+                    }`}
+                  >
+                    {active && (
+                      <motion.span
+                        layoutId="home-category-pill"
+                        className="absolute inset-0 rounded-xl bg-[#3E4E31] shadow-md"
+                        transition={SPRING_SOFT}
+                      />
+                    )}
+                    <span className="relative z-10">{c}</span>
+                  </button>
+                );
+              })}
             </div>
-          )}
+          </ScrollReveal>
         </div>
+
+        {/* Property Grid: staggered reveal on scroll, smooth reflow on filter change */}
+        <motion.div layout className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filteredProperties.length > 0 ? (
+              filteredProperties.map((prop, idx) => (
+                <motion.div
+                  key={prop.id}
+                  layout
+                  initial={reduce ? false : { opacity: 0, y: 30, scale: 0.97 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: '0px 0px -8% 0px' }}
+                  exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.2 } }}
+                  transition={{
+                    duration: 0.75,
+                    ease: EASE,
+                    delay: (idx % 6) * 0.07,
+                    layout: { duration: 0.5, ease: EASE, delay: 0 },
+                  }}
+                >
+                  <PropertyCard property={prop} />
+                </motion.div>
+              ))
+            ) : (
+              <motion.div
+                key="empty"
+                layout
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="col-span-full py-16 text-center glass-panel-luxury rounded-3xl border border-[#3E4E31]/15"
+              >
+                <p className="text-[#596638] text-sm font-medium">No properties match your current filters.</p>
+                <button
+                  onClick={() => { setActiveCategory('All'); setSearchTerm(''); setSelectedState(''); }}
+                  className="mt-4 px-4 py-2 rounded-xl text-xs font-bold btn-luxury"
+                >
+                  Reset All Filters
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
         <ScrollReveal direction="up" delay={200}>
           <div className="mt-12 text-center">
-            <Link
-              to="/search"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl text-xs font-bold btn-luxury-outline"
-            >
-              Explore Complete 500+ Property Database →
-            </Link>
+            <MagneticButton>
+              <Link
+                to="/search"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl text-xs font-bold btn-luxury-outline"
+              >
+                Explore Complete 500+ Property Database →
+              </Link>
+            </MagneticButton>
           </div>
         </ScrollReveal>
       </section>
 
       {/* =========================================================================
-          4. VERIFICATION & TRUST FRAMEWORK (PRD §10) WITH SCROLL ENTRANCE
+          4. VERIFICATION & TRUST FRAMEWORK (PRD §10)
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionRule index="03" label="Trust & Escrow Protocol" className="mb-10" />
+
         <ScrollReveal direction="up">
-          <div className="glass-panel-luxury p-8 sm:p-14 rounded-3xl border border-[#3E4E31]/15 relative overflow-hidden bg-[#FFFFFF]">
-            <div className="max-w-2xl mb-10">
-              <span className="text-xs font-mono text-[#BFA668] uppercase tracking-widest font-bold">
-                Trust & Escrow Protocol
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight mt-2 font-editorial">
-                Administrative Verification for American Real Estate
-              </h2>
-              <p className="text-sm text-[#596638] mt-2 font-normal leading-relaxed">
-                Every listing undergoes rigorous administrative document verification before entering public marketplace syndication.
-              </p>
-            </div>
+          <div className="glass-panel-luxury p-8 sm:p-14 rounded-3xl border border-[#3E4E31]/15 relative overflow-hidden bg-white">
+            {/* Blueprint line drawing, revealed on scroll */}
+            <BlueprintLines variant="plan" tone="dark" className="hidden md:block" />
+            <div className="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-[#BFA668]/10 blur-[90px] pointer-events-none" />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-2xl bg-[#F4EDDA]/40 border border-[#BFA668]/20 hover:border-[#BFA668] hover:shadow-md transition-all">
-                <div className="w-10 h-10 rounded-xl bg-[#F4EDDA] text-[#3E4E31] flex items-center justify-center font-bold text-sm mb-4 font-mono border border-[#BFA668]/30">
-                  01
-                </div>
-                <h3 className="text-lg font-bold text-[#1A2315] font-editorial">Title & Deed Review</h3>
-                <p className="text-xs text-[#596638] mt-2 leading-relaxed font-medium">
-                  Mandatory check of ownership deeds, tax records, and boundary surveys prior to granting the Verified Property badge.
-                </p>
+            <div className="relative z-10">
+              <div className="max-w-2xl mb-10">
+                <SectionHeading
+                  eyebrow="Trust & Escrow Protocol"
+                  title="Administrative Verification for American Real Estate"
+                />
+                <ScrollReveal direction="up" distance={12} delay={250} duration={600}>
+                  <p className="text-sm text-[#596638] mt-3 font-normal leading-relaxed">
+                    Every listing undergoes rigorous administrative document verification before entering public marketplace syndication.
+                  </p>
+                </ScrollReveal>
               </div>
 
-              <div className="p-6 rounded-2xl bg-[#F4EDDA]/40 border border-[#BFA668]/20 hover:border-[#BFA668] hover:shadow-md transition-all">
-                <div className="w-10 h-10 rounded-xl bg-[#F4EDDA] text-[#3E4E31] flex items-center justify-center font-bold text-sm mb-4 font-mono border border-[#BFA668]/30">
-                  02
-                </div>
-                <h3 className="text-lg font-bold text-[#1A2315] font-editorial">Multi-Channel Promotion</h3>
-                <p className="text-xs text-[#596638] mt-2 leading-relaxed font-medium">
-                  Paid and premium listings automatically syndicate to official social media pipelines for targeted nationwide buyer reach.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-[#F4EDDA]/40 border border-[#BFA668]/20 hover:border-[#BFA668] hover:shadow-md transition-all">
-                <div className="w-10 h-10 rounded-xl bg-[#F4EDDA] text-[#3E4E31] flex items-center justify-center font-bold text-sm mb-4 font-mono border border-[#BFA668]/30">
-                  03
-                </div>
-                <h3 className="text-lg font-bold text-[#1A2315] font-editorial">Direct Agent Representation</h3>
-                <p className="text-xs text-[#596638] mt-2 leading-relaxed font-medium">
-                  Licensed US agents and verified sellers collaborate transparently with calendar viewing slots and WhatsApp messaging.
-                </p>
-              </div>
+              <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6" stagger={0.12}>
+                {trustSteps.map((step) => (
+                  <StaggerItem key={step.n}>
+                    <motion.div
+                      whileHover={reduce ? undefined : { y: -4 }}
+                      transition={SPRING_SOFT}
+                      className="glow-border h-full p-6 rounded-2xl bg-[#F4EDDA]/40 border border-[#BFA668]/20 hover:shadow-lg transition-shadow duration-500 group"
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 rounded-xl bg-[#F4EDDA] text-[#3E4E31] flex items-center justify-center font-bold text-sm font-mono border border-[#BFA668]/30 group-hover:bg-[#3E4E31] group-hover:text-[#F4EDDA] transition-colors duration-500">
+                          {step.n}
+                        </div>
+                        <span className="h-px flex-1 bg-gradient-to-r from-[#BFA668]/50 to-transparent" />
+                      </div>
+                      <h3 className="text-lg font-bold text-[#1A2315] font-editorial">{step.title}</h3>
+                      <p className="text-xs text-[#596638] mt-2 leading-relaxed font-medium">{step.body}</p>
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </StaggerGroup>
             </div>
           </div>
         </ScrollReveal>
       </section>
 
       {/* =========================================================================
-          5. FINANCIAL CALCULATOR & CLIENT TESTIMONIALS WITH SCROLL DELIGHT
+          5. FINANCIAL CALCULATOR & CLIENT TESTIMONIALS
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionRule index="04" label="Financial Instruments" className="mb-10" />
         <ScrollReveal direction="up" duration={700}>
           <MortgageCalculator defaultPrice={1850000} />
         </ScrollReveal>
@@ -369,34 +352,36 @@ export default function Home() {
           6. LISTING PLANS & PRICING
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal direction="up">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
-              Transparent Monetization
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight font-editorial">
-              Listing Packages & Syndication Tiers
-            </h2>
-            <p className="text-xs text-[#596638] mt-2 font-medium">
-              Designed for individual property owners, high-volume brokers, and land developers.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionRule index="05" label="Listing Packages" className="mb-10" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <SectionHeading
+          align="center"
+          eyebrow="Transparent Monetization"
+          title="Listing Packages & Syndication Tiers"
+          sub="Designed for individual property owners, high-volume brokers, and land developers."
+          className="max-w-3xl mb-14"
+        />
+
+        <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch" stagger={0.12}>
           {listingPlans.map((plan, idx) => (
-            <ScrollReveal key={idx} direction="up" delay={idx * 120} duration={650}>
-              <div
-                className={`rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 relative h-full ${
+            <StaggerItem key={idx} className="h-full">
+              <motion.div
+                whileHover={reduce ? undefined : { y: -8 }}
+                transition={SPRING_SOFT}
+                style={{ scale: plan.highlight ? 1.04 : 1 }}
+                className={`glow-border rounded-3xl p-8 flex flex-col justify-between relative h-full transition-shadow duration-500 ${
                   plan.highlight
-                    ? 'glass-panel-luxury border-2 border-[#BFA668] shadow-2xl scale-105 bg-[#FFFFFF]'
-                    : 'glass-panel-luxury border border-[#3E4E31]/15 hover:border-[#BFA668] shadow-sm hover:shadow-xl bg-white'
+                    ? 'is-active glass-panel-luxury border border-[#BFA668] shadow-2xl bg-white'
+                    : 'glass-panel-luxury border border-[#3E4E31]/15 shadow-sm hover:shadow-xl bg-white'
                 }`}
               >
                 {plan.highlight && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#3E4E31] text-white text-[10px] font-bold uppercase tracking-widest font-mono shadow-md">
-                    {plan.badge}
-                  </div>
+                  <>
+                    <div className="absolute inset-x-8 -top-px h-px bg-gradient-to-r from-transparent via-[#BFA668] to-transparent" />
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#3E4E31] text-white text-[10px] font-bold uppercase tracking-widest font-mono shadow-md">
+                      {plan.badge}
+                    </div>
+                  </>
                 )}
 
                 <div>
@@ -411,7 +396,7 @@ export default function Home() {
                   <div className="mt-8 space-y-3">
                     {plan.features.map((feat, fIdx) => (
                       <div key={fIdx} className="flex items-center gap-2.5 text-xs text-[#1A2315] font-medium">
-                        <svg className="w-4 h-4 text-[#BFA668] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-[#BFA668] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
                         </svg>
                         <span>{feat}</span>
@@ -423,49 +408,67 @@ export default function Home() {
                 <div className="mt-8 pt-6 border-t border-[#3E4E31]/10">
                   <Link
                     to="/contact"
-                    className={`block text-center py-3 px-4 rounded-xl text-xs font-bold transition-all ${
-                      plan.highlight
-                        ? 'btn-luxury'
-                        : 'btn-luxury-outline'
-                    }`}
+                    className={`block text-center py-3 px-4 rounded-xl text-xs font-bold ${plan.highlight ? 'btn-luxury' : 'btn-luxury-outline'}`}
                   >
                     Choose {plan.name}
                   </Link>
                 </div>
-              </div>
-            </ScrollReveal>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </section>
 
       {/* =========================================================================
-          7. CALL TO ACTION BANNER WITH AMBIENT SCALE REVEAL
+          7. CALL TO ACTION BANNER: parallax photography, drifting gradient, blueprint frame
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollReveal direction="scale" duration={700}>
-          <div className="rounded-3xl p-10 sm:p-14 bg-gradient-to-br from-[#3E4E31] via-[#596638] to-[#3E4E31] text-center relative overflow-hidden text-white shadow-2xl border border-[#596638]">
-            <div className="max-w-2xl mx-auto space-y-4 relative z-10">
-              <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-editorial">
-                Ready to Syndicate Your Property to 5,000+ Buyers?
-              </h2>
-              <p className="text-sm text-[#D4C28E] font-medium leading-relaxed">
-                Submit your property details, upload photos, and attach ownership documentation. Our review desk verifies submissions in under 24 hours.
-              </p>
-              <div className="pt-4 flex flex-wrap justify-center gap-4">
-                <Link
-                  to="/submit"
-                  className="py-3 px-6 rounded-xl text-xs font-bold bg-[#BFA668] text-[#1A2315] hover:bg-[#D4C28E] transition-all shadow-lg"
-                >
-                  Submit Property for Approval →
-                </Link>
-                <a
-                  href="https://wa.me/15550199000"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="py-3 px-6 rounded-xl text-xs font-bold text-white border border-white/40 hover:bg-white/10 transition-all flex items-center gap-2"
-                >
-                  Chat on WhatsApp Desk
-                </a>
+        <ScrollReveal direction="scale" duration={800}>
+          <div className="relative rounded-3xl overflow-hidden text-white shadow-2xl border border-[#596638]/60 bg-[#1A2315]">
+            <ParallaxLayer amount={-45} className="absolute inset-0" innerClassName="h-[125%] -mt-[12%]">
+              <img src={CTA_IMG} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+            </ParallaxLayer>
+            <div className="absolute inset-0 gradient-drift bg-gradient-to-br from-[#1A2315]/95 via-[#3E4E31]/80 to-[#0F140C]/92" />
+            <div className="absolute inset-0 grid-fine-light grid-drift opacity-70 pointer-events-none" />
+            <div className="absolute -left-20 bottom-0 w-96 h-96 rounded-full bg-[#BFA668]/15 blur-[110px] ambient-pulse pointer-events-none" />
+            <BlueprintLines variant="corners" tone="light" />
+
+            <div className="relative z-10 p-10 sm:p-16 text-center">
+              <div className="max-w-2xl mx-auto space-y-4">
+                <SplitText
+                  as="h2"
+                  text="Ready to Syndicate Your Property to 5,000+ Buyers?"
+                  inView
+                  stagger={0.04}
+                  className="text-3xl sm:text-5xl font-extrabold tracking-tight font-editorial text-balance"
+                />
+                <ScrollReveal direction="up" distance={14} delay={300}>
+                  <p className="text-sm text-[#D4C28E] font-medium leading-relaxed">
+                    Submit your property details, upload photos, and attach ownership documentation. Our review desk verifies submissions in under 24 hours.
+                  </p>
+                </ScrollReveal>
+                <ScrollReveal direction="up" distance={14} delay={450}>
+                  <div className="pt-4 flex flex-wrap justify-center gap-4">
+                    <MagneticButton>
+                      <Link
+                        to="/submit"
+                        className="inline-block py-3 px-6 rounded-xl text-xs font-bold bg-[#BFA668] text-[#1A2315] hover:bg-[#E6D8AE] transition-colors duration-300 shadow-lg shadow-black/20"
+                      >
+                        Submit Property for Approval →
+                      </Link>
+                    </MagneticButton>
+                    <MagneticButton>
+                      <a
+                        href="https://wa.me/15550199000"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-ghost-light inline-flex items-center gap-2 py-3 px-6 rounded-xl text-xs"
+                      >
+                        Chat on WhatsApp Desk
+                      </a>
+                    </MagneticButton>
+                  </div>
+                </ScrollReveal>
               </div>
             </div>
           </div>

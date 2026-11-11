@@ -1,131 +1,249 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { EASE, SPRING_SNAPPY } from '../../lib/motion';
+
+// Approximate relative coordinates for 6 USA states on the map canvas
+const STATE_COORDINATES = {
+  TX: { top: 65, left: 46 },
+  CO: { top: 48, left: 38 },
+  FL: { top: 78, left: 76 },
+  CA: { top: 48, left: 14 },
+  MT: { top: 22, left: 32 },
+  NY: { top: 34, left: 84 },
+};
+
+// Small deterministic spread so several listings in the same state don't stack
+const SPREAD = [
+  [0, 0], [3.2, -2.4], [-3, 2.6], [2.6, 3], [-2.8, -2.8], [0.5, 4.2], [4, 1], [-4, 0.6],
+];
 
 export default function InteractiveMapView({ properties, onSelectProperty }) {
-  const [hoveredProperty, setHoveredProperty] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [hoveredId, setHoveredId] = useState(null);
+  const reduce = useReducedMotion();
 
-  // Approximate relative coordinates for 6 USA states on the map canvas
-  const stateCoordinates = {
-    TX: { top: '65%', left: '46%' },
-    CO: { top: '48%', left: '38%' },
-    FL: { top: '78%', left: '76%' },
-    CA: { top: '48%', left: '14%' },
-    MT: { top: '22%', left: '32%' },
-    NY: { top: '34%', left: '84%' },
+  const pins = useMemo(() => {
+    const perState = {};
+    return properties.map((prop) => {
+      const base = STATE_COORDINATES[prop.stateCode] || { top: 50, left: 50 };
+      const n = (perState[prop.stateCode] = (perState[prop.stateCode] || 0) + 1) - 1;
+      const [dx, dy] = SPREAD[n % SPREAD.length];
+      return { prop, top: base.top + dy, left: base.left + dx };
+    });
+  }, [properties]);
+
+  const select = (prop) => {
+    setSelected(prop);
+    if (typeof onSelectProperty === 'function') onSelectProperty(prop);
   };
 
+  const selectedPin = selected ? pins.find((p) => p.prop.id === selected.id) : null;
+
   return (
-    <div className="glass-panel-luxury rounded-3xl border border-[#2C3539]/10 bg-[#FFFFFF] p-4 sm:p-6 overflow-hidden shadow-xl space-y-4">
-      
+    <div className="glass-panel-luxury rounded-3xl border border-[#3E4E31]/10 bg-white p-4 sm:p-6 overflow-hidden shadow-xl space-y-4">
+
       {/* Map Control Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-[#2C3539]/10">
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#C5A880] animate-pulse" />
-          <h3 className="text-sm font-bold text-[#1A202C] font-mono uppercase tracking-wider">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-3 border-b border-[#3E4E31]/10">
+        <div className="flex items-center gap-2.5">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-[#BFA668] opacity-70 animate-ping [animation-duration:2.2s]" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#BFA668]" />
+          </span>
+          <h3 className="text-sm font-bold text-[#1A2315] font-mono uppercase tracking-wider">
             USA Interactive Satellite Map (PRD §7)
           </h3>
         </div>
-        <div className="flex items-center gap-3 text-xs text-[#64748B]">
-          <span className="flex items-center gap-1 font-mono">
-            <span className="w-2 h-2 rounded-full bg-[#1A202C]"></span> {properties.length} Active Pins
+        <div className="flex items-center gap-3 text-xs text-[#838961]">
+          <span className="flex items-center gap-1.5 font-mono">
+            <span className="w-2 h-2 rounded-full bg-[#1A2315]" />
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.span
+                key={properties.length}
+                initial={{ y: 6, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -6, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="tabular-nums font-bold text-[#1A2315]"
+              >
+                {properties.length}
+              </motion.span>
+            </AnimatePresence>
+            Active Pins
           </span>
-          <span className="text-[11px] font-mono text-[#A6885E]">
+          <span className="text-[11px] font-mono text-[#9E8547]">
             *Click pin to inspect parcel preview
           </span>
         </div>
       </div>
 
       {/* Map Viewport Area */}
-      <div className="relative w-full h-[540px] rounded-2xl overflow-hidden bg-[#1E242B] border border-[#2C3539]/15">
-        
+      <div className="relative w-full h-[540px] rounded-2xl overflow-hidden bg-[#1A2315] border border-[#3E4E31]/15">
+
         {/* Stylized Minimalist Map Texture Backing */}
-        <div 
+        <div
           className="absolute inset-0 opacity-40 bg-cover bg-center"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1600&q=80')"
           }}
         />
-        <div className="absolute inset-0 bg-[#0F141C]/50 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-[#0F140C]/55" />
+        {/* Vignette for depth */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(15,20,12,0.65)_100%)]" />
 
-        {/* Map Grid Watermark */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+        {/* Map Grid Watermark (slow drift) */}
+        <div className="absolute inset-0 grid-fine-light grid-drift opacity-60 pointer-events-none" />
 
         {/* Territory Compass Watermark */}
-        <div className="absolute top-4 left-4 z-10 glass-panel-luxury px-3 py-1.5 rounded-xl bg-white/90 text-[10px] font-mono font-bold text-[#1A202C]">
-          MAP DATUM: WGS84 • CONTINENTAL USA
-        </div>
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
+          className="absolute top-4 left-4 z-10 glass-panel-luxury px-3 py-1.5 rounded-xl bg-white/90 text-[10px] font-mono font-bold text-[#1A2315]"
+        >
+          MAP DATUM: WGS84 · CONTINENTAL USA
+        </motion.div>
+
+        {/* Crosshair guides for the selected parcel */}
+        <AnimatePresence>
+          {selectedPin && !reduce && (
+            <React.Fragment key={`guides-${selected.id}`}>
+              <motion.div
+                className="absolute left-0 right-0 h-px bg-[#BFA668]/45 pointer-events-none z-10 origin-left"
+                style={{ top: `${selectedPin.top}%` }}
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.7, ease: EASE }}
+              />
+              <motion.div
+                className="absolute top-0 bottom-0 w-px bg-[#BFA668]/45 pointer-events-none z-10 origin-top"
+                style={{ left: `${selectedPin.left}%` }}
+                initial={{ scaleY: 0, opacity: 0 }}
+                animate={{ scaleY: 1, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.7, ease: EASE }}
+              />
+            </React.Fragment>
+          )}
+        </AnimatePresence>
 
         {/* Interactive Property Map Pins */}
-        {properties.map((prop) => {
-          const coords = stateCoordinates[prop.stateCode] || { top: '50%', left: '50%' };
-          const isSelected = hoveredProperty?.id === prop.id;
+        {pins.map(({ prop, top, left }, i) => {
+          const isSelected = selected?.id === prop.id;
+          const isHovered = hoveredId === prop.id;
 
           return (
             <div
               key={prop.id}
-              style={{ top: coords.top, left: coords.left }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer group"
-              onClick={() => setHoveredProperty(prop)}
+              style={{ top: `${top}%`, left: `${left}%`, transform: 'translate(-50%, -50%)' }}
+              className={`absolute ${isSelected || isHovered ? 'z-30' : 'z-20'}`}
             >
-              {/* Radar concentric pulse */}
-              <div className="relative flex items-center justify-center">
-                <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-[#C5A880] opacity-50" />
-                
+              <motion.button
+                type="button"
+                initial={reduce ? false : { opacity: 0, y: -18, scale: 0.6 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ type: 'spring', stiffness: 320, damping: 22, delay: 0.15 + i * 0.05 }}
+                onClick={() => select(prop)}
+                onPointerEnter={() => setHoveredId(prop.id)}
+                onPointerLeave={() => setHoveredId(null)}
+                whileHover={reduce ? undefined : { scale: 1.08 }}
+                whileTap={reduce ? undefined : { scale: 0.95 }}
+                className="relative block cursor-pointer group focus:outline-none"
+                aria-label={`${prop.title}, ${prop.city} ${prop.stateCode}, $${prop.price.toLocaleString()}`}
+                aria-pressed={isSelected}
+              >
+                {/* Concentric pulse */}
+                <span className={`absolute inset-0 m-auto w-8 h-8 rounded-full ring-expand ${isSelected ? 'opacity-100' : 'opacity-60'}`} />
+
                 {/* Pin Head Pill */}
-                <div className={`px-2.5 py-1 rounded-full text-[11px] font-bold font-editorial shadow-lg flex items-center gap-1 transition-all ${
-                  isSelected
-                    ? 'bg-[#C5A880] text-[#1A202C] scale-110 ring-2 ring-white'
-                    : 'bg-[#1A202C] text-white hover:bg-[#C5A880] hover:text-[#1A202C]'
-                }`}>
-                  <span>📍</span>
-                  <span>${(prop.price / 1000).toFixed(0)}k</span>
-                </div>
-              </div>
+                <span
+                  className={`relative px-2.5 py-1 rounded-full text-[11px] font-bold font-editorial shadow-lg flex items-center gap-1.5 transition-colors duration-300 border ${
+                    isSelected
+                      ? 'bg-[#BFA668] text-[#1A2315] border-white/80 ring-2 ring-[#BFA668]/40'
+                      : 'bg-[#1A2315] text-white border-white/20 group-hover:bg-[#BFA668] group-hover:text-[#1A2315]'
+                  }`}
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-[#1A2315]' : 'bg-[#BFA668] group-hover:bg-[#1A2315]'}`} />
+                  <span className="tabular-nums">${(prop.price / 1000).toFixed(0)}k</span>
+                </span>
+
+                {/* Hover tooltip */}
+                <AnimatePresence>
+                  {isHovered && !isSelected && (
+                    <motion.span
+                      key="tip"
+                      initial={{ opacity: 0, y: 4, scale: 0.96, x: '-50%' }}
+                      animate={{ opacity: 1, y: 0, scale: 1, x: '-50%' }}
+                      exit={{ opacity: 0, y: 4, scale: 0.96, x: '-50%' }}
+                      transition={{ duration: 0.2, ease: EASE }}
+                      className="absolute left-1/2 bottom-full mb-2 whitespace-nowrap px-2.5 py-1.5 rounded-lg bg-white text-[#1A2315] text-[10px] font-bold shadow-xl border border-[#3E4E31]/10 pointer-events-none"
+                    >
+                      <span className="block font-mono text-[#9E8547] uppercase tracking-wider text-[9px]">{prop.city}, {prop.stateCode}</span>
+                      <span className="block max-w-[180px] truncate">{prop.title}</span>
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             </div>
           );
         })}
 
-        {/* Hovered / Clicked Property Preview Card Over Map */}
-        {hoveredProperty && (
-          <div className="absolute bottom-5 left-5 right-5 sm:right-auto sm:w-84 z-30 glass-panel-luxury p-3.5 rounded-2xl border border-[#2C3539]/20 bg-white/95 shadow-2xl animate-fade-in flex gap-3">
-            <img
-              src={hoveredProperty.image}
-              alt={hoveredProperty.title}
-              className="w-24 h-24 rounded-xl object-cover bg-slate-200 shrink-0"
-            />
-            <div className="flex-1 flex flex-col justify-between py-0.5">
-              <div>
-                <span className="text-[10px] font-mono text-[#A6885E] uppercase font-bold">
-                  {hoveredProperty.city}, {hoveredProperty.stateCode}
-                </span>
-                <h4 className="text-xs font-bold text-[#1A202C] font-editorial line-clamp-1">
-                  {hoveredProperty.title}
-                </h4>
-                <p className="text-sm font-bold text-[#1A202C] font-editorial mt-0.5">
-                  ${hoveredProperty.price.toLocaleString()}
-                </p>
+        {/* Selected Property Preview Card */}
+        <AnimatePresence mode="wait">
+          {selected && (
+            <motion.div
+              key={selected.id}
+              initial={{ opacity: 0, y: 24, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 300, damping: 28 } }}
+              exit={{ opacity: 0, y: 16, scale: 0.98, transition: { duration: 0.18 } }}
+              className="absolute bottom-5 left-5 right-5 sm:right-auto sm:w-[340px] z-40 glass-panel-luxury glow-border is-active p-3.5 rounded-2xl border border-[#3E4E31]/20 bg-white/95 shadow-2xl flex gap-3"
+            >
+              <div className="w-24 h-24 rounded-xl overflow-hidden bg-[#F4EDDA] shrink-0">
+                <motion.img
+                  src={selected.image}
+                  alt={selected.title}
+                  initial={reduce ? false : { scale: 1.15 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.8, ease: EASE }}
+                  className="w-full h-full object-cover"
+                />
               </div>
+              <div className="flex-1 flex flex-col justify-between py-0.5 min-w-0">
+                <div>
+                  <span className="text-[10px] font-mono text-[#9E8547] uppercase font-bold">
+                    {selected.city}, {selected.stateCode}
+                  </span>
+                  <h4 className="text-xs font-bold text-[#1A2315] font-editorial line-clamp-1">
+                    {selected.title}
+                  </h4>
+                  <p className="text-sm font-bold text-[#1A2315] font-editorial mt-0.5">
+                    ${selected.price.toLocaleString()}
+                  </p>
+                </div>
 
-              <div className="flex items-center justify-between pt-2 border-t border-[#2C3539]/10">
-                <Link
-                  to={`/property/${hoveredProperty.id}`}
-                  className="btn-luxury px-3 py-1 rounded-lg text-[10px] font-semibold"
-                >
-                  View Details →
-                </Link>
-                <button
-                  onClick={() => setHoveredProperty(null)}
-                  className="text-[10px] text-[#9CA3AF] hover:text-[#1A202C] font-mono"
-                >
-                  Close
-                </button>
+                <div className="flex items-center justify-between pt-2 border-t border-[#3E4E31]/10">
+                  <Link
+                    to={`/property/${selected.id}`}
+                    className="btn-luxury px-3 py-1.5 rounded-lg text-[10px] font-semibold"
+                  >
+                    View Details →
+                  </Link>
+                  <motion.button
+                    onClick={() => setSelected(null)}
+                    whileTap={reduce ? undefined : { scale: 0.9 }}
+                    transition={SPRING_SNAPPY}
+                    className="text-[10px] text-[#838961] hover:text-[#1A2315] font-mono transition-colors"
+                  >
+                    Close
+                  </motion.button>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </div>
   );
 }
-
