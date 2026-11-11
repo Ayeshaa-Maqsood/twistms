@@ -6,21 +6,21 @@ export default function TestimonialsSection() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="glass-panel-luxury p-8 sm:p-14 rounded-3xl border border-[#2C3539]/10 bg-white relative overflow-hidden">
+      <div className="glass-panel-luxury p-8 sm:p-14 rounded-3xl border border-slate-200 bg-white relative overflow-hidden shadow-xl">
         
         {/* Subtle background glow */}
-        <div className="absolute right-0 top-0 w-80 h-80 bg-[#C5A880]/10 blur-[100px] pointer-events-none" />
+        <div className="absolute right-0 top-0 w-80 h-80 bg-blue-100/50 blur-[100px] pointer-events-none" />
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
-            <div className="text-[#C5A880] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">
-              PRD §16 & §20.12 Verified Records
+            <div className="text-blue-700 text-xs font-mono uppercase tracking-widest mb-1.5 font-extrabold">
+              Verified Client Records
             </div>
-            <h2 className="text-3xl sm:text-4xl font-normal text-[#1A202C] tracking-tight font-editorial">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight font-editorial">
               Client & Investor Testimonials
             </h2>
-            <p className="text-xs text-[#64748B] mt-1 font-light">
-              Unfiltered feedback from verified buyers, sellers, and licensed brokerage partners.
+            <p className="text-xs text-[#334155] mt-1 font-medium">
+              Unfiltered feedback from verified buyers, sellers, and licensed brokerage partners across the United States.
             </p>
           </div>
 
@@ -30,10 +30,10 @@ export default function TestimonialsSection() {
               <button
                 key={i}
                 onClick={() => setActiveIndex(i)}
-                className={`h-2.5 rounded-full transition-all ${
+                className={`h-2.5 rounded-full transition-all cursor-pointer ${
                   activeIndex === i
-                    ? 'w-8 bg-[#1A202C]'
-                    : 'w-2.5 bg-[#E2E3E5] hover:bg-[#C5A880]'
+                    ? 'w-8 bg-[#0F172A]'
+                    : 'w-2.5 bg-slate-300 hover:bg-blue-600'
                 }`}
                 aria-label={`Testimonial ${i + 1}`}
               />
@@ -49,30 +49,30 @@ export default function TestimonialsSection() {
               onClick={() => setActiveIndex(idx)}
               className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between ${
                 activeIndex === idx
-                  ? 'bg-[#FBF8F2] border-[#C5A880] shadow-md -translate-y-1'
-                  : 'bg-white border-[#2C3539]/10 hover:border-[#C5A880]/40'
+                  ? 'bg-blue-50/50 border-sky-500 shadow-lg -translate-y-1 ring-1 ring-sky-500'
+                  : 'bg-white border-slate-200 hover:border-sky-400 shadow-sm'
               }`}
             >
               <div>
                 {/* 5 Stars */}
-                <div className="flex items-center gap-1 text-[#C5A880] text-sm mb-4">
+                <div className="flex items-center gap-1 text-amber-500 text-sm mb-4">
                   {'★'.repeat(rev.rating)}
                 </div>
 
-                <p className="text-xs sm:text-sm text-[#2C3539] font-light leading-relaxed italic font-editorial">
+                <p className="text-xs sm:text-sm text-[#0F172A] font-normal leading-relaxed italic">
                   "{rev.quote}"
                 </p>
               </div>
 
-              <div className="flex items-center gap-3 pt-6 border-t border-[#2C3539]/10 mt-6">
+              <div className="flex items-center gap-3 pt-6 border-t border-slate-200 mt-6">
                 <img
                   src={rev.avatar}
                   alt={rev.client}
-                  className="w-10 h-10 rounded-full object-cover bg-[#E2E3E5]"
+                  className="w-10 h-10 rounded-full object-cover bg-slate-100 border border-slate-200 shadow-sm"
                 />
                 <div>
-                  <h4 className="text-sm font-bold text-[#1A202C] font-editorial">{rev.client}</h4>
-                  <p className="text-[10px] text-[#A6885E] font-medium font-mono">{rev.role}</p>
+                  <h4 className="text-sm font-bold text-[#0F172A] font-editorial">{rev.client}</h4>
+                  <p className="text-[11px] text-blue-700 font-bold font-mono">{rev.role}</p>
                 </div>
               </div>
             </div>
@@ -83,4 +83,3 @@ export default function TestimonialsSection() {
     </section>
   );
 }
-

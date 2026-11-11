@@ -109,7 +109,7 @@ export default function AIAssistantWidget() {
           <div className="p-4 bg-[#1A202C] text-white flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img
-                src="/logos/TwistMs-White-Logo-removebg-preview.png"
+                src="/logos/new-logo-white-removebg-preview.png"
                 alt="TwistMS AI"
                 className="h-14 w-auto object-contain"
               />
@@ -147,27 +147,27 @@ export default function AIAssistantWidget() {
                 >
                   <p className="leading-relaxed">{m.text}</p>
                 </div>
-                <span className="text-[9px] text-[#9CA3AF] mt-1 font-mono px-1">{m.time}</span>
+                <span className="text-[10px] text-[#475569] mt-1 font-mono px-1 font-semibold">{m.time}</span>
               </div>
             ))}
 
             {isTyping && (
-              <div className="flex items-center gap-1.5 bg-white border border-[#2C3539]/10 px-3 py-2 rounded-2xl w-fit">
-                <span className="w-1.5 h-1.5 bg-[#C5A880] rounded-full animate-bounce"></span>
-                <span className="w-1.5 h-1.5 bg-[#C5A880] rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                <span className="w-1.5 h-1.5 bg-[#C5A880] rounded-full animate-bounce [animation-delay:0.4s]"></span>
+              <div className="flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-2 rounded-2xl w-fit shadow-sm">
+                <span className="w-1.5 h-1.5 bg-sky-600 rounded-full animate-bounce"></span>
+                <span className="w-1.5 h-1.5 bg-sky-600 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                <span className="w-1.5 h-1.5 bg-sky-600 rounded-full animate-bounce [animation-delay:0.4s]"></span>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
           {/* Quick Prompts */}
-          <div className="p-2.5 bg-white border-t border-[#2C3539]/5 flex gap-1.5 overflow-x-auto no-scrollbar">
+          <div className="p-2.5 bg-white border-t border-slate-200 flex gap-1.5 overflow-x-auto no-scrollbar">
             {predefinedPrompts.map((p, i) => (
               <button
                 key={i}
                 onClick={() => handleSend(p)}
-                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-[#F4ECE1] text-[10px] font-medium text-[#1A202C] hover:bg-[#C5A880]/30 transition-colors shrink-0"
+                className="whitespace-nowrap px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-[11px] font-bold text-[#0F172A] hover:bg-sky-50 hover:border-sky-400 transition-colors shrink-0"
               >
                 {p}
               </button>
@@ -175,21 +175,21 @@ export default function AIAssistantWidget() {
           </div>
 
           {/* Input Footer */}
-          <div className="p-3 bg-white border-t border-[#2C3539]/10 flex items-center gap-2">
+          <div className="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Ask about properties, deeds, plans..."
-              className="flex-1 bg-[#FBF8F2] text-xs text-[#1A202C] border border-[#2C3539]/10 rounded-xl px-3 py-2.5 focus:outline-none focus:border-[#C5A880]"
+              className="flex-1 bg-white text-xs text-[#0F172A] font-medium border border-slate-300 rounded-xl px-3 py-2.5 placeholder:text-[#64748B] focus:outline-none focus:border-sky-600 shadow-sm"
             />
             <button
               onClick={() => handleSend()}
-              className="p-2.5 rounded-xl bg-[#1A202C] text-[#FBF8F2] hover:bg-[#C5A880] hover:text-[#1A202C] transition-colors"
+              className="p-2.5 rounded-xl bg-[#0F172A] text-white hover:bg-sky-700 transition-colors shadow-sm"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
           </div>

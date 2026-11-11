@@ -32,15 +32,15 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
   const insShare = 100 - piShare - taxShare;
 
   return (
-    <div className="glass-panel-luxury p-8 sm:p-12 rounded-3xl border border-[#2C3539]/10 bg-white">
+    <div className="glass-panel-luxury p-8 sm:p-12 rounded-3xl border border-slate-200 bg-white shadow-xl">
       <div className="max-w-3xl mb-8">
-        <span className="text-[10px] font-mono text-[#C5A880] uppercase tracking-widest font-bold">
-          Financial Advisory Instrument • PRD §17.7
+        <span className="text-[11px] font-mono text-blue-700 uppercase tracking-widest font-extrabold">
+          Financial Advisory Instrument • USA Real Estate
         </span>
-        <h2 className="text-3xl sm:text-4xl font-normal text-[#1A202C] tracking-tight mt-1.5 font-editorial">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0F172A] tracking-tight mt-1.5 font-editorial">
           Estimated Acquisition & Escrow Calculator
         </h2>
-        <p className="text-xs text-[#64748B] mt-1 font-light leading-relaxed">
+        <p className="text-xs text-[#334155] mt-1 font-medium leading-relaxed">
           Estimate monthly mortgage installments, county tax withholdings, and property insurance across US states.
         </p>
       </div>
@@ -53,10 +53,10 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
           {/* Home Price */}
           <div>
             <div className="flex justify-between items-center text-xs mb-2">
-              <label className="font-mono text-[#64748B] uppercase tracking-wider font-semibold">
+              <label className="font-mono text-[#0F172A] uppercase tracking-wider font-bold">
                 Property Valuation
               </label>
-              <span className="font-editorial text-lg font-bold text-[#1A202C]">
+              <span className="font-editorial text-lg font-extrabold text-[#0F172A]">
                 ${homePrice.toLocaleString()}
               </span>
             </div>
@@ -67,17 +67,17 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
               step="50000"
               value={homePrice}
               onChange={(e) => setHomePrice(Number(e.target.value))}
-              className="w-full accent-[#C5A880] cursor-pointer"
+              className="w-full accent-blue-600 cursor-pointer"
             />
           </div>
 
           {/* Down Payment */}
           <div>
             <div className="flex justify-between items-center text-xs mb-2">
-              <label className="font-mono text-[#64748B] uppercase tracking-wider font-semibold">
+              <label className="font-mono text-[#0F172A] uppercase tracking-wider font-bold">
                 Down Payment ({downPaymentPercent}%)
               </label>
-              <span className="font-editorial text-lg font-bold text-[#A6885E]">
+              <span className="font-editorial text-lg font-extrabold text-blue-700">
                 ${downPaymentAmount.toLocaleString()}
               </span>
             </div>
@@ -88,7 +88,7 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
               step="5"
               value={downPaymentPercent}
               onChange={(e) => setDownPaymentPercent(Number(e.target.value))}
-              className="w-full accent-[#C5A880] cursor-pointer"
+              className="w-full accent-blue-600 cursor-pointer"
             />
           </div>
 
@@ -96,10 +96,10 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <div className="flex justify-between items-center text-xs mb-2">
-                <label className="font-mono text-[#64748B] uppercase tracking-wider font-semibold">
+                <label className="font-mono text-[#0F172A] uppercase tracking-wider font-bold">
                   Interest Rate
                 </label>
-                <span className="font-mono font-bold text-[#1A202C]">
+                <span className="font-mono font-extrabold text-[#0F172A]">
                   {interestRate}%
                 </span>
               </div>
@@ -110,18 +110,18 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
                 step="0.1"
                 value={interestRate}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
-                className="w-full accent-[#C5A880] cursor-pointer"
+                className="w-full accent-blue-600 cursor-pointer"
               />
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono text-[#64748B] uppercase mb-1.5 font-semibold">
+              <label className="block text-[11px] font-mono text-[#0F172A] uppercase mb-1.5 font-bold">
                 Loan Term
               </label>
               <select
                 value={loanTermYears}
                 onChange={(e) => setLoanTermYears(Number(e.target.value))}
-                className="w-full bg-[#FBF8F2] text-xs text-[#1A202C] border border-[#2C3539]/15 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-[#C5A880] cursor-pointer font-medium"
+                className="w-full bg-white text-xs text-[#0F172A] border border-slate-300 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-sky-600 cursor-pointer font-semibold shadow-sm"
               >
                 <option value={30}>30 Years Fixed</option>
                 <option value={20}>20 Years Fixed</option>
@@ -134,16 +134,16 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
         </div>
 
         {/* Results Panel & Dynamic Breakdown (5 Cols) */}
-        <div className="lg:col-span-5 p-6 rounded-3xl bg-[#FBF8F2] border border-[#2C3539]/10 space-y-5">
+        <div className="lg:col-span-5 p-6 rounded-3xl bg-slate-50 border border-slate-200 space-y-5 shadow-inner">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-[#64748B]">
+            <span className="text-[11px] font-mono uppercase tracking-widest text-[#334155] font-bold">
               Estimated Monthly Outlay
             </span>
             <div className="flex items-baseline gap-1 mt-1">
-              <span className="text-4xl sm:text-5xl font-bold font-editorial text-[#1A202C]">
+              <span className="text-4xl sm:text-5xl font-extrabold font-editorial text-[#0F172A]">
                 ${totalMonthlyPayment.toLocaleString()}
               </span>
-              <span className="text-xs text-[#64748B] font-mono">/mo</span>
+              <span className="text-xs text-[#334155] font-mono font-bold">/mo</span>
             </div>
           </div>
 
@@ -152,56 +152,56 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
             <div className="h-3 w-full rounded-full overflow-hidden flex bg-slate-200">
               <div
                 style={{ width: `${piShare}%` }}
-                className="bg-[#1A202C] transition-all duration-300"
+                className="bg-[#0F172A] transition-all duration-300"
                 title="Principal & Interest"
               />
               <div
                 style={{ width: `${taxShare}%` }}
-                className="bg-[#C5A880] transition-all duration-300"
+                className="bg-blue-600 transition-all duration-300"
                 title="Property Tax"
               />
               <div
                 style={{ width: `${insShare}%` }}
-                className="bg-[#9CA3AF] transition-all duration-300"
+                className="bg-sky-400 transition-all duration-300"
                 title="Insurance"
               />
             </div>
           </div>
 
           {/* Breakdown Items */}
-          <div className="space-y-2.5 text-xs pt-2 border-t border-[#2C3539]/10">
+          <div className="space-y-2.5 text-xs pt-2 border-t border-slate-200">
             <div className="flex justify-between items-center">
-              <span className="flex items-center gap-2 text-[#2C3539]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#1A202C]" />
+              <span className="flex items-center gap-2 text-[#0F172A] font-semibold">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#0F172A]" />
                 Principal & Interest
               </span>
-              <span className="font-mono font-bold text-[#1A202C]">
+              <span className="font-mono font-bold text-[#0F172A]">
                 ${monthlyPrincipalInterest.toLocaleString()}
               </span>
             </div>
 
             <div className="flex justify-between items-center">
-              <span className="flex items-center gap-2 text-[#2C3539]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#C5A880]" />
+              <span className="flex items-center gap-2 text-[#0F172A] font-semibold">
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-600" />
                 Est. Property Taxes
               </span>
-              <span className="font-mono font-bold text-[#1A202C]">
+              <span className="font-mono font-bold text-[#0F172A]">
                 ${estimatedPropertyTax.toLocaleString()}
               </span>
             </div>
 
             <div className="flex justify-between items-center">
-              <span className="flex items-center gap-2 text-[#2C3539]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#9CA3AF]" />
+              <span className="flex items-center gap-2 text-[#0F172A] font-semibold">
+                <span className="w-2.5 h-2.5 rounded-full bg-sky-400" />
                 Homeowner's Insurance
               </span>
-              <span className="font-mono font-bold text-[#1A202C]">
+              <span className="font-mono font-bold text-[#0F172A]">
                 ${estimatedInsurance.toLocaleString()}
               </span>
             </div>
           </div>
 
-          <div className="text-[10px] text-[#9CA3AF] leading-relaxed pt-2 border-t border-[#2C3539]/5">
+          <div className="text-[10px] text-[#475569] font-medium leading-relaxed pt-2 border-t border-slate-200">
             *Estimates provided for informational escrow modeling. Real rates vary per lender under Federal Truth in Lending regulations.
           </div>
         </div>
@@ -210,4 +210,3 @@ export default function MortgageCalculator({ defaultPrice = 1850000 }) {
     </div>
   );
 }
-

@@ -1,19 +1,23 @@
 /* =========================================================================
-   TWISTMS LUXURY REAL ESTATE PALETTE
+   TWISTMS ARCHITECTURAL LUXURY REAL ESTATE PALETTE & STYLES
    Primary Linen Canvas:       #FBF8F2
    Pure Alabaster Glass:       #FFFFFF
    Warm Greige Surface:        #F4ECE1 / #EAE5DE
-   Muted Slate Charcoal:       #1A202C & #2C3539
+   Deep Obsidian / Charcoal:   #0F172A & #1E293B (High-contrast, crisp readability)
+   Secondary Slate Body:       #334155 & #475569 (WCAG AAA compliant text)
    Champagne Bronze Accent:    #C5A880 (Hover: #A6885E)
-   Soft Border Mist:           rgba(44, 53, 57, 0.08)
+   Ocean Cobalt Accent:        #0284C7 & #1E3A8A
+   Soft Border Mist:           rgba(30, 41, 59, 0.12)
 ========================================================================= */
 
 :root {
   --canvas-bg: #FBF8F2;
-  --card-bg: rgba(255, 255, 255, 0.82);
-  --border-light: rgba(44, 53, 57, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --border-light: rgba(30, 41, 59, 0.12);
   --accent-gold: #C5A880;
-  --text-primary: #1A202C;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #475569;
 }
 
 html {
@@ -23,39 +27,45 @@ html {
 body {
   background-color: var(--canvas-bg);
   color: var(--text-primary);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Luxury Architectural Typography Class */
+/* =========================================================================
+   TYPOGRAPHY: Harmonized Architectural Modern Sans
+========================================================================= */
 .font-editorial {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.025em;
+  font-weight: 700;
 }
 
 /* Subtle Architectural Grid Pattern (Warm & Understated) */
 .architect-grid {
   background-size: 60px 60px;
   background-image: 
-    linear-gradient(to right, rgba(44, 53, 57, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(44, 53, 57, 0.025) 1px, transparent 1px);
+    linear-gradient(to right, rgba(30, 41, 59, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 59, 0.035) 1px, transparent 1px);
 }
 
 /* Frosted Alabaster Glassmorphism */
 .glass-panel-luxury {
-  background: rgba(255, 255, 255, 0.78);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(30, 41, 59, 0.1);
   box-shadow: 
-    0 4px 6px -1px rgba(28, 25, 23, 0.03),
-    0 20px 40px -15px rgba(28, 25, 23, 0.06);
+    0 4px 6px -1px rgba(15, 23, 42, 0.04),
+    0 20px 40px -15px rgba(15, 23, 42, 0.08);
 }
 
 .glass-panel-warm {
-  background: rgba(244, 236, 225, 0.65);
+  background: rgba(244, 236, 225, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(197, 168, 128, 0.2);
+  border: 1px solid rgba(197, 168, 128, 0.3);
 }
 
 .glass-card-interactive {
@@ -64,39 +74,89 @@ body {
 }
 
 .glass-card-interactive:hover {
-  transform: translateY(-5px);
-  border-color: rgba(197, 168, 128, 0.5);
+  transform: translateY(-6px);
+  border-color: rgba(2, 132, 199, 0.4);
   box-shadow: 
-    0 25px 50px -12px rgba(44, 53, 57, 0.12),
-    0 0 0 1px rgba(197, 168, 128, 0.35);
+    0 25px 50px -12px rgba(15, 23, 42, 0.14),
+    0 0 0 1px rgba(2, 132, 199, 0.25);
 }
 
-/* High-End Architectural Button */
+/* High-End Architectural Buttons */
 .btn-luxury {
-  background-color: #1A202C;
-  color: #FBF8F2;
+  background-color: #0F172A;
+  color: #F8FAFC;
   font-weight: 600;
   letter-spacing: 0.02em;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 14px 0 rgba(26, 32, 44, 0.2);
+  box-shadow: 0 4px 14px 0 rgba(15, 23, 42, 0.25);
 }
 
 .btn-luxury:hover {
-  background-color: #C5A880;
-  color: #1A202C;
-  box-shadow: 0 6px 20px rgba(197, 168, 128, 0.4);
-  transform: translateY(-1px);
+  background-color: #1E3A8A;
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+  transform: translateY(-1.5px);
 }
 
 .btn-luxury-outline {
-  background: transparent;
-  color: #1A202C;
-  border: 1px solid rgba(44, 53, 57, 0.18);
+  background: rgba(255, 255, 255, 0.6);
+  color: #0F172A;
+  border: 1px solid rgba(30, 41, 59, 0.22);
+  font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .btn-luxury-outline:hover {
-  border-color: #C5A880;
-  background-color: rgba(244, 236, 225, 0.5);
-  color: #1A202C;
+  border-color: #0F172A;
+  background-color: #0F172A;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* =========================================================================
+   ANIMATIONS & VISUAL DELIGHT
+========================================================================= */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(2, 132, 199, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(2, 132, 199, 0.45);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Text Shimmer Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, #0F172A 0%, #0284C7 50%, #0F172A 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 6s linear infinite;
 }
