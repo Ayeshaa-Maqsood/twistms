@@ -5,7 +5,8 @@ import { propertiesData, platformStats, listingPlans } from '../data/properties'
 import PropertyCard from '../components/common/PropertyCard';
 import MortgageCalculator from '../components/common/MortgageCalculator';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
-import HeroSection from '../components/sections/HeroSection';
+import HeroBlueprint from '../components/sections/HeroBlueprint';
+import SearchConsole from '../components/sections/SearchConsole';
 import ScrollReveal from '../components/common/ScrollReveal';
 import SplitText from '../components/motion/SplitText';
 import ImageReveal from '../components/motion/ImageReveal';
@@ -98,9 +99,13 @@ export default function Home() {
     <div className="space-y-24 sm:space-y-28 pb-20">
 
       {/* =========================================================================
-          1. CINEMATIC HERO
+          1. BLUEPRINT-TO-REALITY 3D HERO (pinned scroll journey)
       ========================================================================= */}
-      <HeroSection
+      <div>
+        <HeroBlueprint />
+
+        {/* Marketplace search console: lands directly after the journey */}
+        <SearchConsole
         categories={categories}
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
@@ -111,6 +116,7 @@ export default function Home() {
         onSubmit={handleSearchSubmit}
         stats={platformStats}
       />
+      </div>
 
       {/* =========================================================================
           2. BROWSE BY US STATE SHOWCASE (PRD §20.7)
