@@ -109,7 +109,8 @@ export default function PropertyCard({ property }) {
         />
 
         {/* Badges */}
-        <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-2 z-10">
+        {/* Right edge stops short of the heart + Verified cluster so tags wrap instead of sliding underneath */}
+        <div className="absolute top-3.5 left-3.5 right-14 sm:right-44 flex flex-wrap items-start gap-2 z-10">
           {property.featured && (
             <motion.span
               initial={reduce ? false : { opacity: 0, x: -8 }}
