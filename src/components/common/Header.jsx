@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent, useReducedMoti
 import { useFavorites } from '../../context/FavoritesContext';
 import MagneticButton from '../motion/MagneticButton';
 import { EASE, SPRING_SOFT, SPRING_SNAPPY } from '../../lib/motion';
+import { BRAND } from '../../config/brand';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,43 +21,58 @@ export default function Header() {
     { name: 'Marketplace', path: '/' },
     { name: 'Browse Properties', path: '/search' },
     { name: 'Find an Agent', path: '/agents' },
-    { name: 'Pricing Tiers', path: '/pricing' },
-    { name: 'Direct Escrow & Contact', path: '/contact' }
+    { name: 'Pricing', path: '/pricing' },
+    { name: 'Contact', path: '/contact' }
   ];
 
   return (
     <header
-      className={`sticky top-0 z-50 backdrop-blur-2xl border-b transition-[background-color,border-color,box-shadow] duration-500 ${
+      className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-500 ${
         scrolled
-          ? 'bg-[#FBF8F2]/95 border-[#3E4E31]/15 shadow-[0_10px_30px_-18px_rgba(26,35,21,0.35)]'
-          : 'bg-[#FBF8F2]/85 border-[#3E4E31]/10 shadow-sm'
-      }`}
+          ? 'bg-[#1A2315]/95 border-[#BFA668]/35 shadow-[0_14px_34px_-18px_rgba(0,0,0,0.65)]'
+          : 'bg-[#1F2A17] border-[#BFA668]/20 shadow-[0_6px_18px_-14px_rgba(0,0,0,0.5)]'
+      } backdrop-blur-xl`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24 py-2">
+      {/* Gold hairline + soft forest-to-olive sheen */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#26321D] via-[#1F2A17] to-[#2B3820] opacity-90" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#BFA668]/70 to-transparent" />
 
-          {/* Logo & Brand Identity */}
-          <Link to="/" className="flex items-center gap-3.5 group" aria-label="TwistMS Properties home">
-            <motion.img
-              src="/logos/new-logo-removebg-preview.png"
-              alt="TwistMS Properties Logo"
-              animate={{ scale: scrolled ? 0.86 : 1 }}
-              transition={{ duration: 0.5, ease: EASE }}
-              className="h-16 sm:h-20 w-auto object-contain drop-shadow-md origin-left group-hover:drop-shadow-lg transition-[filter] duration-300"
-            />
-            <div className="hidden sm:block">
-              <span className="text-2xl font-extrabold tracking-tight text-[#1A2315] flex items-center gap-1.5 font-editorial">
-                TwistMS <span className="text-[#BFA668] font-sans text-xs uppercase font-extrabold tracking-widest px-2 py-0.5 rounded bg-[#F4EDDA] border border-[#BFA668]/40">USA</span>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-4 h-24">
+
+          {/* Logo + brand name: one unit, so they always scale and move together */}
+          <Link to="/" className="group shrink-0" aria-label={`${BRAND.fullName} home`}>
+            <motion.div
+              className="flex items-center gap-3 origin-left"
+              animate={{ scale: scrolled ? 0.92 : 1 }}
+              transition={{ duration: 0.45, ease: EASE }}
+            >
+              <span className="relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FBF8F2] ring-2 ring-[#BFA668]/60 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.6)] group-hover:ring-[#BFA668] transition-[box-shadow,ring-color] duration-300">
+                <img
+                  src={BRAND.logo.color}
+                  alt=""
+                  className="w-[88%] h-[88%] object-contain"
+                />
               </span>
-              <span className="block text-[11px] tracking-wider text-[#596638] uppercase font-mono font-bold">
-                Architectural Real Estate
+              <span className="flex flex-col leading-none">
+                <span className="flex items-center gap-1.5">
+                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#FBF8F2] font-editorial">
+                    {BRAND.name}
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] uppercase font-extrabold tracking-widest px-1.5 py-0.5 rounded bg-[#BFA668] text-[#1A2315]">
+                    {BRAND.market}
+                  </span>
+                </span>
+                <span className="mt-1 text-[10px] sm:text-[11px] tracking-[0.32em] text-[#D4C28E] uppercase font-bold">
+                  Properties
+                </span>
               </span>
-            </div>
+            </motion.div>
           </Link>
 
           {/* Desktop Navigation with sliding active indicator */}
           <nav
-            className="hidden md:flex items-center gap-1 bg-white/80 p-1.5 rounded-full border border-[#3E4E31]/20 shadow-sm backdrop-blur-md"
+            className="hidden lg:flex items-center gap-1 bg-white/[0.06] p-1.5 rounded-full border border-white/10"
             aria-label="Primary"
           >
             {navLinks.map((link) => {
@@ -68,14 +84,14 @@ export default function Header() {
                   aria-current={active ? 'page' : undefined}
                   className={`relative px-4 py-2 rounded-full text-xs transition-colors duration-300 ${
                     active
-                      ? 'text-[#FBF8F2] font-bold'
-                      : 'text-[#596638] hover:text-[#3E4E31] hover:bg-[#F4EDDA] font-semibold'
+                      ? 'text-[#1A2315] font-bold'
+                      : 'text-[#FBF8F2]/80 hover:text-white hover:bg-white/10 font-semibold'
                   }`}
                 >
                   {active && (
                     <motion.span
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-[#3E4E31] shadow-sm"
+                      className="absolute inset-0 rounded-full bg-[#BFA668] shadow-sm"
                       transition={reduce ? { duration: 0 } : SPRING_SOFT}
                     />
                   )}
@@ -86,12 +102,12 @@ export default function Header() {
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             {/* Saved Properties Pill */}
             <motion.button
               onClick={() => setIsDrawerOpen(true)}
               whileTap={reduce ? undefined : { scale: 0.96 }}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white border border-[#3E4E31]/30 text-xs font-bold text-[#1A2315] hover:border-[#BFA668] hover:shadow-md shadow-sm transition-[border-color,box-shadow] duration-300 cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/[0.06] border border-white/20 text-xs font-bold text-[#FBF8F2] hover:border-[#BFA668] hover:bg-white/10 transition-[border-color,background-color] duration-300 cursor-pointer"
               aria-label={`Open saved properties, ${favorites.length} saved`}
             >
               <motion.svg
@@ -99,7 +115,7 @@ export default function Header() {
                 initial={reduce ? false : { scale: 0.7 }}
                 animate={{ scale: 1 }}
                 transition={SPRING_SNAPPY}
-                className={`w-3.5 h-3.5 ${favorites.length > 0 ? 'text-red-500 fill-current' : 'text-[#596638] fill-current'}`}
+                className={`w-3.5 h-3.5 ${favorites.length > 0 ? 'text-red-400 fill-current' : 'text-[#D4C28E] fill-current'}`}
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
@@ -125,7 +141,7 @@ export default function Header() {
             <MagneticButton strength={0.22} radius={8}>
               <Link
                 to="/submit"
-                className="btn-luxury px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5"
+                className="px-4 py-2.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 bg-[#BFA668] text-[#1A2315] hover:bg-[#E6D8AE] shadow-[0_10px_24px_-10px_rgba(191,166,104,0.8)] transition-colors duration-300"
               >
                 <span>+ List Property</span>
               </Link>
@@ -133,10 +149,10 @@ export default function Header() {
           </div>
 
           {/* Mobile hamburger button */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-[#3E4E31] hover:bg-[#F4EDDA] transition-colors"
+              className="p-2.5 rounded-xl text-[#FBF8F2] border border-white/15 hover:bg-white/10 transition-colors"
               aria-label="Toggle Navigation"
               aria-expanded={mobileMenuOpen}
             >
@@ -177,7 +193,7 @@ export default function Header() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1, transition: { duration: 0.4, ease: EASE } }}
             exit={{ height: 0, opacity: 0, transition: { duration: 0.25, ease: 'easeIn' } }}
-            className="md:hidden overflow-hidden border-b border-[#3E4E31]/10 bg-[#FBF8F2]"
+            className="lg:hidden relative overflow-hidden border-t border-white/10 bg-[#1A2315]"
           >
             <motion.div
               className="px-4 pt-3 pb-6 space-y-1"
@@ -199,11 +215,11 @@ export default function Header() {
                       onClick={() => setMobileMenuOpen(false)}
                       aria-current={active ? 'page' : undefined}
                       className={`flex items-center justify-between px-3 py-3 rounded-lg text-sm font-medium transition-colors ${
-                        active ? 'bg-[#3E4E31] text-[#FBF8F2]' : 'text-[#596638] hover:bg-[#F4EDDA] active:bg-[#F4EDDA]'
+                        active ? 'bg-[#BFA668] text-[#1A2315] font-bold' : 'text-[#FBF8F2]/85 hover:bg-white/10 active:bg-white/10'
                       }`}
                     >
                       {link.name}
-                      <span aria-hidden="true" className={active ? 'text-[#D4C28E]' : 'text-[#BFA668]'}>→</span>
+                      <span aria-hidden="true" className={active ? 'text-[#1A2315]' : 'text-[#BFA668]'}>→</span>
                     </Link>
                   </motion.div>
                 );
@@ -211,18 +227,18 @@ export default function Header() {
               <motion.div
                 variants={{ hidden: { opacity: 0, y: 8 }, visible: { opacity: 1, y: 0 } }}
                 transition={{ duration: 0.35, ease: EASE }}
-                className="pt-4 mt-3 border-t border-[#3E4E31]/10 flex flex-col gap-2"
+                className="pt-4 mt-3 border-t border-white/10 flex flex-col gap-2"
               >
                 <button
                   onClick={() => { setMobileMenuOpen(false); setIsDrawerOpen(true); }}
-                  className="w-full text-center py-2.5 rounded-xl text-xs font-bold btn-luxury-outline"
+                  className="w-full text-center py-2.5 rounded-xl text-xs font-bold btn-ghost-light"
                 >
                   Saved Properties ({favorites.length})
                 </button>
                 <Link
                   to="/submit"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2.5 rounded-xl text-xs font-semibold btn-luxury"
+                  className="w-full text-center py-2.5 rounded-xl text-xs font-extrabold bg-[#BFA668] text-[#1A2315]"
                 >
                   + List Property
                 </Link>

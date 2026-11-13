@@ -175,12 +175,12 @@ export const listingPlans = [
   {
     name: "Free Listing",
     price: "$0",
-    period: "for 90 days",
+    period: "for 45 days",
     description: "Ideal for individual owners testing the US marketplace.",
     features: [
-      "90-Day Listing Duration",
-      "Up to 50 HD Photos",
-      "Up to 5 HD Videos",
+      "45-Day Listing Duration",
+      "5 to 100 HD Photos",
+      "1 to 5 HD Videos",
       "Public Search Display",
       "Direct Buyer Inquiries",
       "Standard Admin Review"
@@ -197,7 +197,7 @@ export const listingPlans = [
       "150-Day Listing Duration",
       "Verified Ownership Badge",
       "Prioritized Search Placement",
-      "Up to 50 Photos + 5 Videos",
+      "Up to 100 Photos + 5 Videos",
       "Official Social Media Spotlight",
       "Lead Management Analytics"
     ],

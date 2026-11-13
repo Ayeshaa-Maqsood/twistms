@@ -1,0 +1,59 @@
+# =====================================================================
+# TwistMS Properties: Hostinger (Apache / LiteSpeed) URL & HTTPS rules
+# Copied to dist/ by Vite on build. Upload dist/ contents to public_html.
+#
+# Result: every visitor lands on  https://twistmsproperties.com/...
+#   - http://          -> https://
+#   - www.             -> no www
+#   - trailing dot     -> removed   (twistmsproperties.com.  -> .com)
+#   - /index.html      -> /
+#   - trailing slash   -> removed   (/search/ -> /search)
+#   - duplicate slashes collapsed   (//property//tx-101 -> /property/tx-101)
+#   - deep links (/property/tx-101) served by the React app, no 404
+# =====================================================================
+
+Options -MultiViews -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Canonical host + HTTPS in a single redirect
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC,OR]
+  RewriteCond %{HTTP_HOST} \.$
+  RewriteRule ^ https://twistmsproperties.com%{REQUEST_URI} [L,R=301,NE]
+
+  # 2. Collapse repeated slashes in the path
+  RewriteCond %{THE_REQUEST} \s[^?\s]*//
+  RewriteRule ^(.*)$ /$1 [L,R=301,NE]
+
+  # 3. /index.html -> /
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^ / [L,R=301]
+
+  # 4. Strip trailing slash (except real directories and the root)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [L,R=301]
+
+  # 5. Single-page app fallback: unknown paths are handled by React Router
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Browsers remember to use HTTPS for one year
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Long cache for hashed build assets, no cache for the HTML shell
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "index\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>

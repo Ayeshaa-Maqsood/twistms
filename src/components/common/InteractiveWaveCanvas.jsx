@@ -46,7 +46,7 @@ export default function InteractiveWaveCanvas() {
     const luxuryColors = [
       { r: 197, g: 168, b: 128 }, // Champagne Gold (#C5A880)
       { r: 166, g: 136, b: 94 },  // Deep Sand Bronze (#A6885E)
-      { r: 100, g: 116, b: 139 }, // Muted Slate Grey (#64748B)
+      { r: 100, g: 116, b: 139 }, // Muted Slate Grey (#686E4A)
       { r: 160, g: 174, b: 192 }, // Soft Cool Silver Grey
       { r: 216, g: 194, b: 157 }, // Pale Linen Beige
     ];

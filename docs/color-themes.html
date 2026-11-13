@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TwistMS Color Themes</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#1A2315; --muted:#596638; --bg:#F4F1EA; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:'Plus Jakarta Sans',system-ui,sans-serif; padding:32px 16px; }
+  h1 { margin:0 auto 4px; max-width:1200px; font-size:26px; }
+  .lead { max-width:1200px; margin:0 auto 24px; color:var(--muted); font-size:14px; }
+  .grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:18px; }
+  .theme { border-radius:16px; overflow:hidden; background:#fff; box-shadow:0 10px 30px -18px rgba(0,0,0,.4); border:1px solid rgba(0,0,0,.06); }
+  .theme.pick { outline:3px solid #BFA668; }
+  .hdr { display:flex; align-items:center; gap:10px; padding:12px 14px; }
+  .hdr img { width:36px; height:36px; border-radius:50%; background:#FBF8F2; padding:2px; }
+  .hdr b { font-size:15px; } .hdr small { display:block; font-size:9px; letter-spacing:.3em; text-transform:uppercase; font-weight:700; }
+  .hdr .cta { margin-left:auto; font-size:11px; font-weight:800; padding:7px 10px; border-radius:8px; }
+  .body { padding:14px; }
+  .card { border-radius:12px; overflow:hidden; border:1px solid rgba(0,0,0,.08); }
+  .card .ph { height:90px; background:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=60') center/cover; }
+  .card .in { padding:10px 12px; font-size:12px; }
+  .price { font-weight:800; font-size:16px; }
+  .btn { display:inline-block; margin-top:8px; padding:7px 10px; border-radius:8px; font-weight:800; font-size:11px; }
+  .sw { display:flex; } .sw span { flex:1; height:30px; }
+  .meta { padding:12px 14px 16px; font-size:12px; }
+  .meta h2 { margin:0 0 4px; font-size:16px; } .meta p { margin:0; color:#596638; line-height:1.5; }
+  .tag { display:inline-block; margin-left:6px; font-size:10px; background:#BFA668; color:#1A2315; padding:2px 7px; border-radius:99px; vertical-align:middle; }
+  code { font-size:11px; }
+</style>
+</head>
+<body>
+<h1>TwistMS Properties: Color Themes from the US Logo</h1>
+<p class="lead">All four themes use only colors sampled from the TwistMS US logo (forest green #3E4E31, gold #BFA668, olive #596638, light olive #838961). Theme 1 is selected and applied across the website.</p>
+
+<div class="grid">
+  <!-- 1 -->
+  <div class="theme pick">
+    <div class="hdr" style="background:#1F2A17;color:#FBF8F2">
+      <img src="../public/logos/new-logo-removebg-preview.png" alt=""><div><b>TwistMS</b><small style="color:#D4C28E">Properties</small></div>
+      <span class="cta" style="background:#BFA668;color:#1A2315">+ List Property</span>
+    </div>
+    <div class="body" style="background:#FBF8F2">
+      <div class="card" style="background:#fff"><div class="ph"></div><div class="in">
+        <div class="price" style="color:#1A2315">$890,000 <span style="color:#BFA668">|</span> <span style="color:#3E4E31">84 Acres</span></div>
+        <div style="color:#9E8547;font-weight:700">PITKIN COUNTY, CO</div>
+        <span class="btn" style="background:#3E4E31;color:#FBF8F2">View Property</span>
+      </div></div>
+    </div>
+    <div class="sw"><span style="background:#1F2A17"></span><span style="background:#3E4E31"></span><span style="background:#BFA668"></span><span style="background:#F4EDDA"></span><span style="background:#FBF8F2"></span></div>
+    <div class="meta"><h2>1. Heritage Forest <span class="tag">Selected</span></h2>
+      <p>Deep forest header, linen pages, gold for actions. Strongest text contrast (forest on linen ≈ 10:1), matches the logo's dominant colors and suits a land, ranch and home audience.</p>
+      <p><code>#1F2A17 · #3E4E31 · #BFA668 · #F4EDDA · #FBF8F2</code></p></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="theme">
+    <div class="hdr" style="background:#FFFDF8;color:#2A2A1F;border-bottom:2px solid #BFA668">
+      <img src="../public/logos/new-logo-removebg-preview.png" alt=""><div><b>TwistMS</b><small style="color:#9E8547">Properties</small></div>
+      <span class="cta" style="background:#9E8547;color:#fff">+ List Property</span>
+    </div>
+    <div class="body" style="background:#FFFDF8">
+      <div class="card" style="background:#fff"><div class="ph"></div><div class="in">
+        <div class="price" style="color:#2A2A1F">$890,000 <span style="color:#9E8547">|</span> 84 Acres</div>
+        <div style="color:#3E4E31;font-weight:700">PITKIN COUNTY, CO</div>
+        <span class="btn" style="background:#9E8547;color:#fff">View Property</span>
+      </div></div>
+    </div>
+    <div class="sw"><span style="background:#9E8547"></span><span style="background:#BFA668"></span><span style="background:#3E4E31"></span><span style="background:#F4EDDA"></span><span style="background:#FFFDF8"></span></div>
+    <div class="meta"><h2>2. Golden Prairie</h2>
+      <p>Light, airy and gold-led. Warm and friendly, but gold buttons with white text are weaker for accessibility and the header blends into the page.</p>
+      <p><code>#9E8547 · #BFA668 · #3E4E31 · #F4EDDA · #FFFDF8</code></p></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="theme">
+    <div class="hdr" style="background:#596638;color:#fff">
+      <img src="../public/logos/new-logo-removebg-preview.png" alt=""><div><b>TwistMS</b><small style="color:#E6D8AE">Properties</small></div>
+      <span class="cta" style="background:#E6D8AE;color:#22281A">+ List Property</span>
+    </div>
+    <div class="body" style="background:#F6F7F0">
+      <div class="card" style="background:#fff"><div class="ph"></div><div class="in">
+        <div class="price" style="color:#22281A">$890,000 <span style="color:#838961">|</span> 84 Acres</div>
+        <div style="color:#596638;font-weight:700">PITKIN COUNTY, CO</div>
+        <span class="btn" style="background:#596638;color:#fff">View Property</span>
+      </div></div>
+    </div>
+    <div class="sw"><span style="background:#596638"></span><span style="background:#838961"></span><span style="background:#E6D8AE"></span><span style="background:#EEF0E4"></span><span style="background:#F6F7F0"></span></div>
+    <div class="meta"><h2>3. Olive Meadow</h2>
+      <p>Softer olive-led palette inspired by the logo's fields. Calm and natural, but less premium and lower contrast than Heritage Forest.</p>
+      <p><code>#596638 · #838961 · #E6D8AE · #EEF0E4 · #F6F7F0</code></p></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="theme">
+    <div class="hdr" style="background:#121810;color:#F4EDDA">
+      <img src="../public/logos/new-logo-removebg-preview.png" alt=""><div><b>TwistMS</b><small style="color:#BFA668">Properties</small></div>
+      <span class="cta" style="background:#BFA668;color:#121810">+ List Property</span>
+    </div>
+    <div class="body" style="background:#1A2315">
+      <div class="card" style="background:#1F2A17;border-color:rgba(255,255,255,.08)"><div class="ph"></div><div class="in" style="color:#F4EDDA">
+        <div class="price">$890,000 <span style="color:#BFA668">|</span> 84 Acres</div>
+        <div style="color:#D4C28E;font-weight:700">PITKIN COUNTY, CO</div>
+        <span class="btn" style="background:#BFA668;color:#121810">View Property</span>
+      </div></div>
+    </div>
+    <div class="sw"><span style="background:#121810"></span><span style="background:#1A2315"></span><span style="background:#1F2A17"></span><span style="background:#BFA668"></span><span style="background:#F4EDDA"></span></div>
+    <div class="meta"><h2>4. Evergreen Night</h2>
+      <p>Full dark mode with gold highlights. Dramatic for photos, but long property descriptions are harder to read and it feels less approachable for land buyers.</p>
+      <p><code>#121810 · #1A2315 · #1F2A17 · #BFA668 · #F4EDDA</code></p></div>
+  </div>
+</div>
+</body>
+</html>

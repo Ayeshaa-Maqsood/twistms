@@ -20,13 +20,13 @@ export default function Agents() {
       {/* Page Header */}
       <ScrollReveal direction="down">
         <div className="text-center max-w-3xl mx-auto space-y-2">
-          <span className="text-[11px] font-mono uppercase tracking-widest text-blue-700 font-extrabold">
+          <span className="text-[11px] font-mono uppercase tracking-widest text-[#9E8547] font-extrabold">
             Licensed Real Estate Directory
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0F172A] font-editorial">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1A2315] font-editorial">
             Verified US Real Estate Agents & Advisors
           </h1>
-          <p className="text-sm text-[#334155] font-medium leading-relaxed">
+          <p className="text-sm text-[#3E4E31] font-medium leading-relaxed">
             Connect directly with state-licensed real estate advisors across all 50 US states. Vetted licensure, verifiable transaction histories, and dedicated buyer & seller representation.
           </p>
         </div>
@@ -34,21 +34,21 @@ export default function Agents() {
 
       {/* Filter / Search Controls */}
       <ScrollReveal direction="up" delay={100}>
-        <div className="glass-panel-luxury p-5 rounded-2xl border border-slate-200 bg-white max-w-4xl mx-auto flex flex-col sm:flex-row gap-3 items-center shadow-md">
+        <div className="glass-panel-luxury p-5 rounded-2xl border border-[#3E4E31]/15 bg-white max-w-4xl mx-auto flex flex-col sm:flex-row gap-3 items-center shadow-md">
           <div className="flex-1 w-full">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by advisor name, brokerage, or license #..."
-              className="w-full bg-[#FFFFFF] text-xs text-[#0F172A] font-medium border border-slate-300 rounded-xl px-4 py-3 placeholder:text-[#64748B] focus:outline-none focus:border-sky-600 shadow-sm"
+              className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
             />
           </div>
           <div className="w-full sm:w-48">
             <select
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
-              className="w-full bg-[#FFFFFF] text-xs text-[#0F172A] font-semibold border border-slate-300 rounded-xl px-3.5 py-3 focus:outline-none focus:border-sky-600 cursor-pointer shadow-sm"
+              className="w-full bg-[#FFFFFF] text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/25 rounded-xl px-3.5 py-3 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
             >
               <option value="">All Licensed States</option>
               <option value="TX">Texas (TX)</option>
@@ -66,29 +66,29 @@ export default function Agents() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredAgents.map((agent, idx) => (
           <ScrollReveal key={agent.id} direction="up" delay={(idx % 6) * 100} duration={650}>
-            <div className="glass-panel-luxury glass-card-interactive p-6 rounded-3xl border border-slate-200 bg-white flex flex-col justify-between space-y-6 shadow-md hover:shadow-xl h-full">
+            <div className="glass-panel-luxury glass-card-interactive p-6 rounded-3xl border border-[#3E4E31]/15 bg-white flex flex-col justify-between space-y-6 shadow-md hover:shadow-xl h-full">
               {/* Top Identity Header */}
               <div>
                 <div className="flex items-start gap-4">
                   <img
                     src={agent.avatar}
                     alt={agent.name}
-                    className="w-16 h-16 rounded-2xl object-cover bg-slate-100 shadow-md border border-slate-200"
+                    className="w-16 h-16 rounded-2xl object-cover bg-[#F4EDDA]/50 shadow-md border border-[#3E4E31]/15"
                   />
                   <div className="flex-1">
                     <div className="flex items-center gap-1.5">
-                      <h3 className="text-lg font-bold text-[#0F172A] font-editorial">{agent.name}</h3>
-                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" title="Verified Agent"></span>
+                      <h3 className="text-lg font-bold text-[#1A2315] font-editorial">{agent.name}</h3>
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#F4EDDA]/600" title="Verified Agent"></span>
                     </div>
-                    <p className="text-xs text-blue-700 font-bold">{agent.agency}</p>
-                    <span className="text-[10px] font-mono text-[#334155] block mt-0.5 font-bold">
+                    <p className="text-xs text-[#9E8547] font-bold">{agent.agency}</p>
+                    <span className="text-[10px] font-mono text-[#3E4E31] block mt-0.5 font-bold">
                       {agent.license}
                     </span>
                   </div>
                 </div>
 
                 {/* Bio */}
-                <p className="text-xs text-[#334155] mt-4 leading-relaxed font-normal line-clamp-3">
+                <p className="text-xs text-[#3E4E31] mt-4 leading-relaxed font-normal line-clamp-3">
                   {agent.bio}
                 </p>
 
@@ -97,7 +97,7 @@ export default function Agents() {
                   {agent.states.map((st) => (
                     <span
                       key={st}
-                      className="px-2.5 py-0.5 rounded-md text-[10px] font-mono bg-slate-100 text-[#0F172A] font-bold border border-slate-200"
+                      className="px-2.5 py-0.5 rounded-md text-[10px] font-mono bg-[#F4EDDA]/50 text-[#1A2315] font-bold border border-[#3E4E31]/15"
                     >
                       {st}
                     </span>
@@ -107,18 +107,18 @@ export default function Agents() {
 
               {/* Performance Stats Matrix */}
               <div>
-                <div className="grid grid-cols-3 gap-2 p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center mb-4">
+                <div className="grid grid-cols-3 gap-2 p-3 rounded-2xl bg-[#FBF8F2] border border-[#3E4E31]/15 text-center mb-4">
                   <div>
-                    <span className="block text-sm font-extrabold text-[#0F172A] font-editorial">★ {agent.rating}</span>
-                    <span className="text-[9px] text-[#334155] uppercase font-mono font-bold">{agent.reviewsCount} Reviews</span>
+                    <span className="block text-sm font-extrabold text-[#1A2315] font-editorial">★ {agent.rating}</span>
+                    <span className="text-[9px] text-[#3E4E31] uppercase font-mono font-bold">{agent.reviewsCount} Reviews</span>
                   </div>
-                  <div className="border-x border-slate-200">
-                    <span className="block text-sm font-extrabold text-[#0F172A] font-editorial">{agent.activeListings}</span>
-                    <span className="text-[9px] text-[#334155] uppercase font-mono font-bold">Listings</span>
+                  <div className="border-x border-[#3E4E31]/15">
+                    <span className="block text-sm font-extrabold text-[#1A2315] font-editorial">{agent.activeListings}</span>
+                    <span className="text-[9px] text-[#3E4E31] uppercase font-mono font-bold">Listings</span>
                   </div>
                   <div>
-                    <span className="block text-sm font-extrabold text-blue-700 font-editorial">{agent.soldCount}</span>
-                    <span className="text-[9px] text-[#334155] uppercase font-mono font-bold">Closed</span>
+                    <span className="block text-sm font-extrabold text-[#9E8547] font-editorial">{agent.soldCount}</span>
+                    <span className="text-[9px] text-[#3E4E31] uppercase font-mono font-bold">Closed</span>
                   </div>
                 </div>
 

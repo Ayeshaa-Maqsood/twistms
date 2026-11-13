@@ -7,6 +7,7 @@ import MortgageCalculator from '../components/common/MortgageCalculator';
 import TestimonialsSection from '../components/sections/TestimonialsSection';
 import HeroBlueprint from '../components/sections/HeroBlueprint';
 import SearchConsole from '../components/sections/SearchConsole';
+import CategoryShowcase from '../components/sections/CategoryShowcase';
 import ScrollReveal from '../components/common/ScrollReveal';
 import SplitText from '../components/motion/SplitText';
 import ImageReveal from '../components/motion/ImageReveal';
@@ -38,7 +39,7 @@ function SectionHeading({ eyebrow, title, sub, align = 'left', className = '' })
       />
       {sub && (
         <ScrollReveal direction="up" distance={12} duration={600} delay={200}>
-          <p className="text-xs text-[#596638] mt-1.5 font-medium">{sub}</p>
+          <p className={`text-sm text-[#596638] mt-2 font-medium leading-relaxed max-w-2xl ${center ? 'mx-auto' : ''}`}>{sub}</p>
         </ScrollReveal>
       )}
     </div>
@@ -65,7 +66,13 @@ export default function Home() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search?q=${encodeURIComponent(searchTerm)}&cat=${activeCategory}&st=${selectedState}`);
+    // Only include filters that are actually set, e.g. /search?cat=Land&st=TX
+    const params = new URLSearchParams();
+    if (searchTerm.trim()) params.set('q', searchTerm.trim());
+    if (activeCategory && activeCategory !== 'All') params.set('cat', activeCategory);
+    if (selectedState) params.set('st', selectedState);
+    const qs = params.toString();
+    navigate(qs ? `/search?${qs}` : '/search');
   };
 
   const usStates = [
@@ -96,7 +103,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="space-y-24 sm:space-y-28 pb-20">
+    <div className="space-y-16 sm:space-y-20 pb-16">
 
       {/* =========================================================================
           1. BLUEPRINT-TO-REALITY 3D HERO (pinned scroll journey)
@@ -121,27 +128,18 @@ export default function Home() {
       {/* =========================================================================
           2. BROWSE BY US STATE SHOWCASE (PRD §20.7)
       ========================================================================= */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionRule index="01" label="Regional Portfolios" className="mb-10" />
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 !mt-10 sm:!mt-12" aria-labelledby="regional-heading">
+        <div className="relative rounded-3xl bg-white/80 border border-[#3E4E31]/10 shadow-[0_20px_50px_-30px_rgba(26,35,21,0.35)] py-10 sm:py-12 px-4 sm:px-8 overflow-hidden">
+        <div aria-hidden="true" className="absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-48 rounded-full bg-[#BFA668]/15 blur-[80px] pointer-events-none" />
+        <SectionHeading
+          align="center"
+          eyebrow="Regional Portfolios"
+          title="Browse Properties by State"
+          sub="Pick a state to see every home, ranch, land parcel and commercial listing we have there. Each card shows the number of active listings and the type of property the region is known for."
+          className="relative mb-8"
+        />
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-          <SectionHeading
-            eyebrow="Regional Portfolios"
-            title="Explore Prime US Territories"
-            sub="Direct access to state-regulated deeds and regional MLS syndications."
-          />
-          <ScrollReveal direction="up" distance={12} delay={250} duration={600}>
-            <Link
-              to="/search"
-              className="link-draw text-xs font-bold text-[#1A2315] hover:text-[#9E8547] inline-flex items-center gap-1.5 transition-colors"
-            >
-              <span>Explore All 50 States</span>
-              <span aria-hidden="true">→</span>
-            </Link>
-          </ScrollReveal>
-        </div>
-
-        <StaggerGroup className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" stagger={0.07}>
+        <StaggerGroup className="relative grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 max-w-6xl mx-auto" stagger={0.07}>
           {usStates.map((st, idx) => (
             <StaggerItem key={st.code}>
               <motion.div
@@ -186,19 +184,43 @@ export default function Home() {
             </StaggerItem>
           ))}
         </StaggerGroup>
+
+        <div className="relative mt-8 text-center">
+          <Link
+            to="/search"
+            className="link-draw text-xs font-bold text-[#1A2315] hover:text-[#9E8547] inline-flex items-center gap-1.5 transition-colors"
+          >
+            <span>Explore All 50 States</span>
+            <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          2b. WHAT YOU'LL FIND: scroll-linked parallax category showcase
+      ========================================================================= */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-labelledby="showcase-heading">
+        <SectionHeading
+          eyebrow="What You'll Find"
+          title="Homes, Land, Ranches & More"
+          sub="TwistMS lists every kind of US property. Scroll through the four main categories below, then tap one to see all matching listings."
+          className="mb-8"
+        />
+        <CategoryShowcase />
       </section>
 
       {/* =========================================================================
           3. FEATURED PROPERTIES
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionRule index="02" label="Featured Portfolio" className="mb-10" />
+        <SectionRule index="02" label="Featured Portfolio" className="mb-6" />
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <SectionHeading
-            eyebrow="Vetted Acquisitions"
-            title="Featured Marketplace Portfolio"
-            sub="Directly vetted titles, tax receipts, and ownership deeds."
+            eyebrow="Featured Listings"
+            title="Featured Properties"
+            sub="Hand-picked listings whose title, tax receipts and ownership deeds we have already checked. Use the buttons to filter by property type, or open any card for full details."
           />
 
           {/* Category Filter Pills with a sliding active indicator */}
@@ -294,25 +316,21 @@ export default function Home() {
           4. VERIFICATION & TRUST FRAMEWORK (PRD §10)
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionRule index="03" label="Trust & Escrow Protocol" className="mb-10" />
+        <SectionRule index="03" label="Trust & Escrow Protocol" className="mb-6" />
 
         <ScrollReveal direction="up">
-          <div className="glass-panel-luxury p-8 sm:p-14 rounded-3xl border border-[#3E4E31]/15 relative overflow-hidden bg-white">
+          <div className="glass-panel-luxury p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#3E4E31]/15 relative overflow-hidden bg-white">
             {/* Blueprint line drawing, revealed on scroll */}
             <BlueprintLines variant="plan" tone="dark" className="hidden md:block" />
             <div className="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-[#BFA668]/10 blur-[90px] pointer-events-none" />
 
             <div className="relative z-10">
-              <div className="max-w-2xl mb-10">
+              <div className="max-w-2xl mb-8">
                 <SectionHeading
-                  eyebrow="Trust & Escrow Protocol"
-                  title="Administrative Verification for American Real Estate"
+                  eyebrow="How We Verify Listings"
+                  title="Three Checks Before Any Property Goes Live"
+                  sub="Every listing passes these steps before buyers can see it, so you know the seller really owns the property and the details are accurate."
                 />
-                <ScrollReveal direction="up" distance={12} delay={250} duration={600}>
-                  <p className="text-sm text-[#596638] mt-3 font-normal leading-relaxed">
-                    Every listing undergoes rigorous administrative document verification before entering public marketplace syndication.
-                  </p>
-                </ScrollReveal>
               </div>
 
               <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-6" stagger={0.12}>
@@ -344,7 +362,7 @@ export default function Home() {
           5. FINANCIAL CALCULATOR & CLIENT TESTIMONIALS
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionRule index="04" label="Financial Instruments" className="mb-10" />
+        <SectionRule index="04" label="Financial Instruments" className="mb-6" />
         <ScrollReveal direction="up" duration={700}>
           <MortgageCalculator defaultPrice={1850000} />
         </ScrollReveal>
@@ -358,14 +376,14 @@ export default function Home() {
           6. LISTING PLANS & PRICING
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionRule index="05" label="Listing Packages" className="mb-10" />
+        <SectionRule index="05" label="Listing Packages" className="mb-6" />
 
         <SectionHeading
           align="center"
           eyebrow="Transparent Monetization"
           title="Listing Packages & Syndication Tiers"
-          sub="Designed for individual property owners, high-volume brokers, and land developers."
-          className="max-w-3xl mb-14"
+          sub="Choose how long your listing stays live and how widely we promote it. Start free for 45 days, or upgrade for a verified badge and social media promotion."
+          className="max-w-3xl mb-12"
         />
 
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch" stagger={0.12}>

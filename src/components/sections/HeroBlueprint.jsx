@@ -13,6 +13,7 @@ import {
 import SplitText from '../motion/SplitText';
 import MagneticButton from '../motion/MagneticButton';
 import HeroFallback from './HeroFallback';
+import HeroHandoff from './HeroHandoff';
 import { useWebGLSupport } from '../../three/useWebGLSupport';
 import { DIMENSIONS } from '../../three/dimensions';
 import { phaseLabel, PHASE } from '../../three/sceneMath';
@@ -43,7 +44,7 @@ export default function HeroBlueprint() {
   const [phase, setPhase] = useState(() => phaseLabel(0));
 
   // Pin length: shorter on low-power / touch devices so the journey never traps the visitor
-  const pinVh = reduce ? 100 : quality === 'high' ? 320 : 200;
+  const pinVh = reduce ? 100 : quality === 'high' ? 230 : 160;
 
   /* ---- scroll progress across the pinned section ---- */
   const { scrollYProgress } = useScroll({
@@ -252,6 +253,8 @@ export default function HeroBlueprint() {
 
         {/* ---------- Phase D hand-off: linen wipe into the marketplace ---------- */}
         {!reduce && <motion.div className="absolute inset-0 pointer-events-none" style={{ background: wipeBg }} aria-hidden="true" />}
+        {/* Interactive category picker shown on the cream hand-off screen */}
+        {!reduce && <HeroHandoff progress={scrollYProgress} mouseX={mouseX} mouseY={mouseY} />}
 
         {/* ---------- Scroll cue ---------- */}
         {!reduce && (

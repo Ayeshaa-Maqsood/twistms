@@ -51,6 +51,11 @@ export default function SearchConsole({
         transition={{ duration: 0.9, ease: EASE }}
         className="relative overflow-hidden rounded-3xl p-4 sm:p-6 text-white bg-gradient-to-br from-[#171A1D] via-[#1A2315] to-[#172331] border border-white/10 shadow-[0_40px_80px_-30px_rgba(15,20,12,0.55)]"
       >
+        <div className="mb-4">
+          <h2 className="text-lg sm:text-xl font-extrabold font-editorial text-white">Search US Properties</h2>
+          <p className="text-xs text-white/65 font-medium mt-0.5">Choose a property type, enter a city or ZIP code, and pick a state to find listings for sale or rent.</p>
+        </div>
+
         {/* Category quick links: real routes into the search page */}
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-4 text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-[#FBF8F2]/60">
           <span className="text-[#D4C28E]">Browse</span>

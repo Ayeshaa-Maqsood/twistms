@@ -6,12 +6,12 @@ export default function TestimonialsSection() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="glass-panel-luxury p-8 sm:p-14 rounded-3xl border border-[#3E4E31]/15 bg-white relative overflow-hidden shadow-xl">
+      <div className="glass-panel-luxury p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#3E4E31]/15 bg-white relative overflow-hidden shadow-xl">
         
         {/* Subtle background glow */}
         <div className="absolute right-0 top-0 w-80 h-80 bg-[#BFA668]/15 blur-[100px] pointer-events-none" />
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
             <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-extrabold">
               Verified Client Records
@@ -19,7 +19,7 @@ export default function TestimonialsSection() {
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight font-editorial">
               Client & Investor Testimonials
             </h2>
-            <p className="text-xs text-[#596638] mt-1 font-medium">
+            <p className="text-sm text-[#596638] mt-2 font-medium leading-relaxed max-w-2xl">
               Unfiltered feedback from verified buyers, sellers, and licensed brokerage partners across the United States.
             </p>
           </div>

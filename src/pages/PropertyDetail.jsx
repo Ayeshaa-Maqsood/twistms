@@ -1,307 +1,482 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { propertiesData } from '../data/properties';
+import { getListingDetails } from '../data/propertyDetails';
+import { useFavorites } from '../context/FavoritesContext';
+import PropertyCard from '../components/common/PropertyCard';
 import ScrollReveal from '../components/common/ScrollReveal';
+import { whatsappLink } from '../config/brand';
+import { EASE } from '../lib/motion';
+
+const SECTIONS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'features', label: 'Features' },
+  { id: 'details', label: 'Details' },
+  { id: 'location', label: 'Location' },
+  { id: 'utilities', label: 'Utilities' },
+  { id: 'videos', label: 'Videos' },
+  { id: 'verification', label: 'Verification' },
+  { id: 'contact', label: 'Contact' },
+];
+
+const fmtUSD = (n) => `$${Number(n).toLocaleString()}`;
+
+/** Card wrapper with a heading and a one-line explanation, used for every section. */
+function InfoSection({ id, title, sub, children }) {
+  return (
+    <ScrollReveal direction="up" distance={20} duration={600}>
+      <section id={id} className="scroll-mt-40 bg-white rounded-2xl border border-[#3E4E31]/12 shadow-sm p-5 sm:p-7">
+        <h2 className="text-lg sm:text-xl font-extrabold text-[#1A2315] font-editorial">{title}</h2>
+        {sub && <p className="text-xs text-[#596638] mt-1 font-medium">{sub}</p>}
+        <div className="mt-5">{children}</div>
+      </section>
+    </ScrollReveal>
+  );
+}
+
+function FactRow({ label, value }) {
+  return (
+    <div className="flex items-start justify-between gap-4 py-2.5 border-b border-[#3E4E31]/10 last:border-0 text-xs">
+      <dt className="text-[#596638] font-semibold">{label}</dt>
+      <dd className="text-[#1A2315] font-bold text-right">{value}</dd>
+    </div>
+  );
+}
 
 export default function PropertyDetail() {
   const { id } = useParams();
   const property = propertiesData.find((p) => p.id === id) || propertiesData[0];
-  const [inquirySent, setInquirySent] = useState(false);
-  const [activeTab, setActiveTab] = useState('overview'); // overview, documents, agent
+  // key: a fresh page (form, lightbox) for every listing
+  return <ListingPage key={property.id} property={property} />;
+}
 
-  const handleSubmitInquiry = (e) => {
-    e.preventDefault();
-    setInquirySent(true);
+function ListingPage({ property }) {
+  const reduce = useReducedMotion();
+  const info = getListingDetails(property);
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const favorited = isFavorite(property.id);
+
+  const [inquirySent, setInquirySent] = useState(false);
+  const [lightbox, setLightbox] = useState(null); // photo index or null
+  const [shareMsg, setShareMsg] = useState('');
+
+  const pricePerAcre = property.acreage > 0 && !property.pricePeriod ? Math.round(property.price / property.acreage) : null;
+  const locationLine = [property.city, info.county, `${property.stateCode} ${property.zip}`].filter(Boolean).join(', ');
+  // Closest matches first (same category or state), topped up to three listings
+  const others = propertiesData.filter((p) => p.id !== property.id);
+  const isClose = (p) => p.category === property.category || p.stateCode === property.stateCode;
+  const similarList = [...others.filter(isClose), ...others.filter((p) => !isClose(p))].slice(0, 3);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
+  // Lightbox keyboard controls
+  useEffect(() => {
+    if (lightbox === null) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLightbox(null);
+      if (e.key === 'ArrowRight') setLightbox((i) => (i + 1) % info.photos.length);
+      if (e.key === 'ArrowLeft') setLightbox((i) => (i - 1 + info.photos.length) % info.photos.length);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox, info.photos.length]);
+
+  const handleShare = async () => {
+    const url = window.location.href;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: property.title, url });
+        return;
+      }
+      await navigator.clipboard.writeText(url);
+      setShareMsg('Link copied');
+    } catch {
+      setShareMsg('Copy the address bar link to share');
+    }
+    setTimeout(() => setShareMsg(''), 2200);
   };
 
+  const quickFacts = [
+    { label: 'Price', value: `${fmtUSD(property.price)}${property.pricePeriod || ''}` },
+    property.acreage > 0 && { label: 'Acreage', value: `${property.acreage} acres` },
+    property.bedrooms > 0 && { label: 'Bedrooms', value: property.bedrooms },
+    property.bathrooms > 0 && { label: 'Bathrooms', value: property.bathrooms },
+    property.sqft > 0 && { label: 'Living Area', value: `${property.sqft.toLocaleString()} sq ft` },
+    { label: 'Type', value: info.propertyType },
+  ].filter(Boolean);
+
+  const inputCls =
+    'input-luxury w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-xl px-3.5 py-2.5 placeholder:text-[#838961] focus:outline-none shadow-sm';
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
-      
-      {/* Navigation Breadcrumb */}
-      <ScrollReveal direction="down">
-        <div className="flex items-center gap-2 text-xs font-mono text-[#596638] font-bold">
-          <Link to="/" className="hover:text-[#BFA668]">Marketplace</Link>
-          <span>/</span>
-          <Link to="/search" className="hover:text-[#BFA668]">Properties</Link>
-          <span>/</span>
-          <span className="text-[#BFA668] font-extrabold">{property.id.toUpperCase()}</span>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
+
+      {/* 1. Breadcrumb */}
+      <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-[#596638] font-semibold">
+        <Link to="/" className="hover:text-[#9E8547]">Home</Link>
+        <span aria-hidden="true">/</span>
+        <Link to="/search" className="hover:text-[#9E8547]">Properties</Link>
+        <span aria-hidden="true">/</span>
+        <Link to={`/search?st=${property.stateCode}`} className="hover:text-[#9E8547]">{property.state}</Link>
+        <span aria-hidden="true">/</span>
+        <span className="text-[#1A2315] font-bold truncate max-w-[60vw]">{property.title}</span>
+      </nav>
+
+      {/* 2. Title, location, price & acreage */}
+      <motion.header
+        initial={reduce ? false : { opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: EASE }}
+        className="flex flex-col lg:flex-row lg:items-end justify-between gap-5"
+      >
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#3E4E31] text-white">{info.status}</span>
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#F4EDDA] text-[#3E4E31] border border-[#BFA668]/40">For {property.type}</span>
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-white text-[#1A2315] border border-[#3E4E31]/15">{property.category}</span>
+            {property.verified && (
+              <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-white text-[#1A2315] border border-[#3E4E31]/15 inline-flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#BFA668]" /> Verified Deed
+              </span>
+            )}
+            <span className="text-[10px] font-mono font-bold text-[#596638] tracking-widest">ID {property.id.toUpperCase()}</span>
+          </div>
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#1A2315] font-editorial tracking-tight text-balance">{property.title}</h1>
+          <p className="mt-2 text-sm text-[#3E4E31] font-semibold flex items-center gap-1.5">
+            <svg className="w-4 h-4 text-[#BFA668] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            {locationLine}
+          </p>
         </div>
+
+        <div className="lg:text-right shrink-0">
+          <p className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] font-editorial">
+            {fmtUSD(property.price)}
+            {property.pricePeriod && <span className="text-sm font-semibold text-[#596638] ml-1">{property.pricePeriod}</span>}
+          </p>
+          <p className="text-xs text-[#596638] font-bold mt-1">
+            {property.acreage > 0 && <span>{property.acreage} Acres</span>}
+            {pricePerAcre && <span> · {fmtUSD(pricePerAcre)} / acre</span>}
+          </p>
+          <div className="mt-3 flex flex-wrap lg:justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => toggleFavorite(property)}
+              aria-pressed={favorited}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${favorited ? 'bg-red-500 text-white border-red-500' : 'bg-white text-[#1A2315] border-[#3E4E31]/20 hover:border-[#BFA668]'}`}
+            >
+              {favorited ? '♥ Saved' : '♡ Save'}
+            </button>
+            <button type="button" onClick={handleShare} className="px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-[#1A2315] border border-[#3E4E31]/20 hover:border-[#BFA668] cursor-pointer">
+              {shareMsg || 'Share'}
+            </button>
+            <button type="button" onClick={() => window.print()} className="hidden sm:inline-block px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-[#1A2315] border border-[#3E4E31]/20 hover:border-[#BFA668] cursor-pointer">
+              Print
+            </button>
+            <a href="#contact" className="px-4 py-2 rounded-xl text-xs font-bold btn-luxury">Contact Agent</a>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* 3. Photo gallery */}
+      <section aria-label="Property photos" className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-2 h-[300px] sm:h-[420px] md:h-[480px] rounded-2xl overflow-hidden">
+        {info.photos.slice(0, 5).map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            onClick={() => setLightbox(i)}
+            className={`relative overflow-hidden bg-[#EDE6D6] group cursor-zoom-in ${i === 0 ? 'md:col-span-2 md:row-span-2' : 'hidden md:block'}`}
+            aria-label={`Open photo ${i + 1} of ${info.photos.length}`}
+          >
+            <img
+              src={src}
+              alt={i === 0 ? property.title : ''}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              className="w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
+            />
+            {i === 0 && (
+              <span className="md:hidden absolute bottom-3 left-3 px-3 py-1.5 rounded-lg bg-[#1A2315]/85 text-white text-[11px] font-bold">
+                {info.photos.length} photos · tap to view
+              </span>
+            )}
+            {i === Math.min(4, info.photos.length - 1) && (
+              <span className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-[#1A2315]/85 text-white text-[11px] font-bold backdrop-blur">
+                View all {info.photos.length} photos
+              </span>
+            )}
+          </button>
+        ))}
+      </section>
+
+      {/* 4. Quick facts */}
+      <ScrollReveal direction="up" distance={16} duration={600}>
+        <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 bg-white rounded-2xl border border-[#3E4E31]/12 shadow-sm divide-x divide-y lg:divide-y-0 divide-[#3E4E31]/10 overflow-hidden">
+          {quickFacts.map((f) => (
+            <div key={f.label} className="p-4 text-center">
+              <dt className="text-[10px] uppercase tracking-wider font-bold text-[#596638]">{f.label}</dt>
+              <dd className="mt-1 text-sm sm:text-base font-extrabold text-[#1A2315] font-editorial">{f.value}</dd>
+            </div>
+          ))}
+        </dl>
       </ScrollReveal>
 
-      {/* Main Showcase Hero */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        {/* Left Column: Media & Details (8 Cols) */}
+      {/* In-page section navigation */}
+      <nav aria-label="Listing sections" className="sticky top-24 z-30 -mx-4 sm:mx-0 px-4 sm:px-2 py-2 bg-[#FBF8F2]/95 backdrop-blur border-y sm:border sm:rounded-xl border-[#3E4E31]/10 flex gap-1 overflow-x-auto no-scrollbar">
+        {SECTIONS.map((s) => (
+          <a key={s.id} href={`#${s.id}`} className="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-[#3E4E31] hover:bg-[#F4EDDA] hover:text-[#1A2315] transition-colors">
+            {s.label}
+          </a>
+        ))}
+      </nav>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        {/* Left column: information sequence */}
         <div className="lg:col-span-8 space-y-6">
-          
-          {/* Main Photo Banner with Glass Overlays */}
-          <ScrollReveal direction="up">
-            <div className="relative h-[380px] sm:h-[480px] rounded-3xl overflow-hidden border border-[#3E4E31]/15 shadow-2xl bg-[#F4EDDA]">
-              <img
-                src={property.image}
-                alt={property.title}
-                className="w-full h-full object-cover"
+
+          <InfoSection id="overview" title="Property Overview" sub="A summary of the property written by the listing agent.">
+            <p className="text-sm text-[#3E4E31] leading-relaxed">{property.description}</p>
+          </InfoSection>
+
+          {info.features.length > 0 && (
+            <InfoSection id="features" title="Property Features" sub="Key amenities and improvements included with this listing.">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {info.features.map((f) => (
+                  <li key={f} className="flex items-center gap-2.5 text-xs font-semibold text-[#1A2315] p-2.5 rounded-xl bg-[#F4EDDA]/50 border border-[#BFA668]/20">
+                    <svg className="w-4 h-4 text-[#9E8547] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </InfoSection>
+          )}
+
+          <InfoSection id="details" title="Property Details" sub="Price, size and record information at a glance.">
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+              <div>
+                <FactRow label="Listing ID" value={property.id.toUpperCase()} />
+                <FactRow label="Status" value={info.status} />
+                <FactRow label="Listing Type" value={`For ${property.type}`} />
+                <FactRow label="Property Type" value={info.propertyType} />
+                <FactRow label="Price" value={`${fmtUSD(property.price)}${property.pricePeriod || ''}`} />
+                {pricePerAcre && <FactRow label="Price per Acre" value={fmtUSD(pricePerAcre)} />}
+              </div>
+              <div>
+                <FactRow label="Acreage" value={property.acreage > 0 ? `${property.acreage} acres` : '—'} />
+                <FactRow label="Living Area" value={property.sqft > 0 ? `${property.sqft.toLocaleString()} sq ft` : '—'} />
+                <FactRow label="Bedrooms / Baths" value={property.bedrooms > 0 ? `${property.bedrooms} bd / ${property.bathrooms} ba` : property.bathrooms > 0 ? `${property.bathrooms} ba` : '—'} />
+                <FactRow label="Year Built" value={info.yearBuilt || '—'} />
+                <FactRow label="Annual Taxes" value={info.annualTaxes ? fmtUSD(info.annualTaxes) : '—'} />
+                <FactRow label="Zoning" value={info.zoning} />
+              </div>
+            </dl>
+          </InfoSection>
+
+          <InfoSection id="location" title="Location" sub="Where the property is, with an interactive map.">
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 mb-5">
+              <div>
+                <FactRow label="Address" value={property.address} />
+                <FactRow label="City" value={property.city} />
+                <FactRow label="County" value={info.county || '—'} />
+              </div>
+              <div>
+                <FactRow label="State" value={`${property.state} (${property.stateCode})`} />
+                <FactRow label="ZIP Code" value={property.zip} />
+                <FactRow label="Terrain" value={info.topography} />
+              </div>
+            </dl>
+            <div className="rounded-xl overflow-hidden border border-[#3E4E31]/15 h-64 sm:h-80 bg-[#EDE6D6]">
+              <iframe
+                title={`Map of ${property.title}`}
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(`${property.address}, ${property.city}, ${property.stateCode} ${property.zip}`)}&z=12&output=embed`}
+                className="w-full h-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A2315]/95 via-[#1A2315]/30 to-transparent" />
+            </div>
+          </InfoSection>
 
-              {/* Badges Overlay */}
-              <div className="absolute top-4 left-4 flex gap-2">
-                <span className="px-3 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-white text-[#1A2315] shadow-md backdrop-blur-md border border-[#3E4E31]/20">
-                  {property.category}
-                </span>
-                <span className="px-3 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-[#3E4E31]/90 text-white shadow-md backdrop-blur-md">
-                  For {property.type}
-                </span>
-                {property.verified && (
-                  <span className="px-3 py-1.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-white text-[#1A2315] shadow-md backdrop-blur-md flex items-center gap-1.5 border border-[#3E4E31]/20">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#BFA668]"></span>
-                    Verified Deed
-                  </span>
+          {Object.keys(info.utilities).length > 0 && (
+            <InfoSection id="utilities" title="Utilities & Access" sub="Power, water, sewer, internet and road access available on site.">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {Object.entries(info.utilities).map(([k, v]) => (
+                  <div key={k} className="p-3.5 rounded-xl bg-[#FBF8F2] border border-[#3E4E31]/12">
+                    <span className="block text-[10px] uppercase tracking-wider font-bold text-[#596638]">{k}</span>
+                    <span className="block mt-0.5 text-xs font-bold text-[#1A2315]">{v}</span>
+                  </div>
+                ))}
+              </div>
+            </InfoSection>
+          )}
+
+          {info.videos.length > 0 && (
+            <InfoSection id="videos" title="Video Tours" sub="Walkthrough and drone videos supplied by the seller (1–5 per listing).">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {info.videos.map((v) => (
+                  <a
+                    key={v.title}
+                    href="#contact"
+                    className="group relative block aspect-video rounded-xl overflow-hidden bg-[#1A2315]"
+                    aria-label={`${v.title}: request this video tour`}
+                  >
+                    <img src={v.poster} alt="" loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-95 group-hover:scale-105 transition-[transform,opacity] duration-700" />
+                    <span className="absolute inset-0 flex items-center justify-center">
+                      <span className="w-14 h-14 rounded-full bg-[#BFA668] text-[#1A2315] flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                        <svg className="w-6 h-6 ml-0.5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                      </span>
+                    </span>
+                    <span className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-[#0F140C]/90 to-transparent text-white text-xs font-bold">{v.title}</span>
+                  </a>
+                ))}
+              </div>
+            </InfoSection>
+          )}
+
+          <InfoSection id="verification" title="Legal Verification" sub="Documents our review desk checked before this listing went live.">
+            <div className="p-4 rounded-xl bg-[#F4EDDA]/60 border border-[#BFA668]/30 text-[#1A2315] text-xs mb-3">
+              <span className="font-bold text-[#3E4E31]">✓ Administrative Compliance Passed:</span> All ownership deeds, property tax receipts, and boundary surveys have been filed and vetted.
+            </div>
+            <div className="space-y-2 text-xs">
+              {[
+                ['Grant Deed / Title Policy Record', 'VERIFIED ✓'],
+                ['County Property Tax Assessment', 'CURRENT ✓'],
+                ['Boundary & Topographic Survey', 'ON FILE ✓'],
+              ].map(([doc, st]) => (
+                <div key={doc} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#FBF8F2] border border-[#3E4E31]/10">
+                  <span className="text-[#1A2315] font-bold">{doc}</span>
+                  <span className="text-[#3E4E31] font-mono text-[11px] font-extrabold shrink-0">{st}</span>
+                </div>
+              ))}
+              <p className="pt-1 text-[11px] text-[#596638] font-medium">Syndication tier: <span className="font-bold text-[#9E8547]">{property.plan}</span></p>
+            </div>
+          </InfoSection>
+        </div>
+
+        {/* Right column: agent + inquiry (sticky on desktop) */}
+        <aside id="contact" className="lg:col-span-4 scroll-mt-40 lg:sticky lg:top-40">
+          <div className="bg-white rounded-2xl border border-[#3E4E31]/12 shadow-xl overflow-hidden">
+            <div className="p-5 bg-[#1F2A17] text-white flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-[#BFA668] text-[#1A2315] flex items-center justify-center font-editorial font-extrabold text-xl shrink-0">
+                {property.agent.name[0]}
+              </div>
+              <div className="min-w-0">
+                <p className="text-[10px] uppercase tracking-widest font-bold text-[#D4C28E]">Listing Agent</p>
+                <h3 className="text-base font-extrabold font-editorial truncate">{property.agent.name}</h3>
+                <p className="text-xs text-white/70 font-medium truncate">{property.agent.agency}</p>
+              </div>
+            </div>
+            <div className="px-5 pt-4 grid grid-cols-2 gap-2 text-xs">
+              <a href={`tel:${property.agent.phone.replace(/[^+\d]/g, '')}`} className="py-2.5 rounded-xl text-center font-bold btn-luxury-outline">Call</a>
+              <a href={`mailto:${property.agent.email}?subject=${encodeURIComponent(`Inquiry: ${property.title} (${property.id.toUpperCase()})`)}`} className="py-2.5 rounded-xl text-center font-bold btn-luxury-outline">Email</a>
+              <p className="col-span-2 text-[11px] text-[#596638] font-semibold text-center">{property.agent.phone} · {property.agent.email}</p>
+            </div>
+
+            <div className="p-5 space-y-4">
+              <div>
+                <h4 className="text-base font-extrabold text-[#1A2315] font-editorial">Request Information</h4>
+                <p className="text-xs text-[#596638] font-medium">Ask a question or schedule a showing with the agent.</p>
+              </div>
+              <AnimatePresence mode="wait" initial={false}>
+                {inquirySent ? (
+                  <motion.div key="sent" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="p-5 rounded-xl bg-[#F4EDDA] border border-[#BFA668]/40 text-center space-y-2">
+                    <p className="font-bold text-sm text-[#3E4E31]">Inquiry Sent Successfully!</p>
+                    <p className="text-[#596638] text-[11px] font-medium">The agent will reach out via email or WhatsApp within 2 hours.</p>
+                    <button onClick={() => setInquirySent(false)} className="mt-2 text-[#9E8547] underline text-xs font-bold cursor-pointer">Send Another Inquiry</button>
+                  </motion.div>
+                ) : (
+                  <motion.form key="form" initial={false} exit={{ opacity: 0 }} onSubmit={(e) => { e.preventDefault(); setInquirySent(true); }} className="space-y-3">
+                    <label className="block">
+                      <span className="block text-[11px] text-[#1A2315] uppercase mb-1 font-bold">Full Name</span>
+                      <input type="text" required placeholder="e.g. John Doe" className={inputCls} />
+                    </label>
+                    <label className="block">
+                      <span className="block text-[11px] text-[#1A2315] uppercase mb-1 font-bold">Email</span>
+                      <input type="email" required placeholder="you@domain.com" className={inputCls} />
+                    </label>
+                    <label className="block">
+                      <span className="block text-[11px] text-[#1A2315] uppercase mb-1 font-bold">Phone / WhatsApp</span>
+                      <input type="tel" placeholder="+1 (555) 000-0000" className={inputCls} />
+                    </label>
+                    <label className="block">
+                      <span className="block text-[11px] text-[#1A2315] uppercase mb-1 font-bold">Message</span>
+                      <textarea rows={3} defaultValue={`I'm interested in ${property.title} (${property.id.toUpperCase()}). Please send more information.`} className={inputCls} />
+                    </label>
+                    <button type="submit" className="w-full py-3 px-4 rounded-xl text-xs font-bold btn-luxury">Send Inquiry →</button>
+                  </motion.form>
                 )}
-              </div>
-
-              {/* Title & Price overlay at bottom */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <p className="text-3xl sm:text-5xl font-extrabold text-white font-editorial drop-shadow-md">
-                  ${property.price.toLocaleString()}
-                  {property.pricePeriod && (
-                    <span className="text-sm font-sans font-medium text-white/90 ml-1">{property.pricePeriod}</span>
-                  )}
-                </p>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-1.5 font-editorial tracking-wide">
-                  {property.title}
-                </h1>
-                <p className="text-xs font-mono text-[#D4C28E] mt-1 flex items-center gap-1 font-semibold">
-                  📍 {property.address}, {property.city}, {property.stateCode} {property.zip}
-                </p>
-              </div>
+              </AnimatePresence>
+              <a
+                href={whatsappLink(`Hi, I am inquiring about TwistMS Property ${property.id} (${property.title})`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2.5 px-4 rounded-xl text-xs font-bold btn-luxury-outline flex items-center justify-center gap-2"
+              >
+                Chat on WhatsApp
+              </a>
             </div>
-          </ScrollReveal>
-
-          {/* Key Specs Bar */}
-          <ScrollReveal direction="up" delay={100}>
-            <div className="glass-panel-luxury p-5 rounded-2xl border border-[#3E4E31]/15 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center bg-white shadow-md">
-              <div className="border-r border-[#3E4E31]/10 last:border-0">
-                <span className="block text-2xl font-extrabold text-[#1A2315] font-editorial">{property.bedrooms || '—'}</span>
-                <span className="text-[10px] text-[#596638] uppercase font-mono tracking-wider font-bold">Bedrooms</span>
-              </div>
-              <div className="border-r border-[#3E4E31]/10 last:border-0">
-                <span className="block text-2xl font-extrabold text-[#1A2315] font-editorial">{property.bathrooms || '—'}</span>
-                <span className="text-[10px] text-[#596638] uppercase font-mono tracking-wider font-bold">Bathrooms</span>
-              </div>
-              <div className="border-r border-[#3E4E31]/10 last:border-0">
-                <span className="block text-2xl font-extrabold text-[#BFA668] font-editorial">
-                  {property.acreage > 0 ? `${property.acreage} AC` : property.sqft ? `${property.sqft.toLocaleString()} SF` : '—'}
-                </span>
-                <span className="text-[10px] text-[#596638] uppercase font-mono tracking-wider font-bold">Parcel Size</span>
-              </div>
-              <div>
-                <span className="block text-2xl font-extrabold text-[#596638] font-editorial">100% Vetted</span>
-                <span className="text-[10px] text-[#596638] uppercase font-mono tracking-wider font-bold">Deed Status</span>
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Interactive Information Tabs */}
-          <ScrollReveal direction="up" delay={150}>
-            <div className="glass-panel-luxury p-6 sm:p-8 rounded-3xl border border-[#3E4E31]/15 space-y-6 bg-white shadow-md">
-              <div className="flex border-b border-[#3E4E31]/10 gap-6 text-xs font-mono">
-                <button
-                  onClick={() => setActiveTab('overview')}
-                  className={`pb-3 font-bold transition-colors ${
-                    activeTab === 'overview'
-                      ? 'text-[#1A2315] border-b-2 border-[#BFA668]'
-                      : 'text-[#596638] hover:text-[#3E4E31]'
-                  }`}
-                >
-                  PROPERTY OVERVIEW
-                </button>
-                <button
-                  onClick={() => setActiveTab('documents')}
-                  className={`pb-3 font-bold transition-colors ${
-                    activeTab === 'documents'
-                      ? 'text-[#1A2315] border-b-2 border-[#BFA668]'
-                      : 'text-[#596638] hover:text-[#3E4E31]'
-                  }`}
-                >
-                  LEGAL VERIFICATION
-                </button>
-                <button
-                  onClick={() => setActiveTab('agent')}
-                  className={`pb-3 font-bold transition-colors ${
-                    activeTab === 'agent'
-                      ? 'text-[#1A2315] border-b-2 border-[#BFA668]'
-                      : 'text-[#596638] hover:text-[#3E4E31]'
-                  }`}
-                >
-                  ASSIGNED AGENT
-                </button>
-              </div>
-
-              {/* Tab 1: Overview */}
-              {activeTab === 'overview' && (
-                <div className="space-y-4">
-                  <h3 className="text-xl font-bold text-[#1A2315] font-editorial">Property Narrative & Features</h3>
-                  <p className="text-xs sm:text-sm text-[#596638] leading-relaxed font-normal">
-                    {property.description}
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
-                    <div className="p-3.5 rounded-xl bg-[#F4EDDA]/60 border border-[#BFA668]/30 text-xs">
-                      <span className="text-[#596638] block font-mono text-[10px] uppercase font-bold">Zoning Classification</span>
-                      <span className="text-[#1A2315] font-bold">Verified Residential / Agricultural</span>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-[#F4EDDA]/60 border border-[#BFA668]/30 text-xs">
-                      <span className="text-[#596638] block font-mono text-[10px] uppercase font-bold">Road Access</span>
-                      <span className="text-[#1A2315] font-bold">Paved County Road Frontage</span>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-[#F4EDDA]/60 border border-[#BFA668]/30 text-xs">
-                      <span className="text-[#596638] block font-mono text-[10px] uppercase font-bold">Utilities & Water</span>
-                      <span className="text-[#1A2315] font-bold">Municipal Electric, Private Well / Septic</span>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-[#F4EDDA]/60 border border-[#BFA668]/30 text-xs">
-                      <span className="text-[#596638] block font-mono text-[10px] uppercase font-bold">Syndication Tier</span>
-                      <span className="text-[#BFA668] font-bold">{property.plan} Verified Tier</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Tab 2: Legal Verification */}
-              {activeTab === 'documents' && (
-                <div className="space-y-4">
-                  <div className="p-4 rounded-2xl bg-[#F4EDDA]/60 border border-[#BFA668]/30 text-[#1A2315] text-xs">
-                    <span className="font-bold text-[#3E4E31]">✓ Administrative Compliance Passed:</span> All ownership deeds, property tax receipts, and boundary surveys have been filed and vetted.
-                  </div>
-                  <div className="space-y-2 text-xs">
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#F4EDDA]/40 border border-[#BFA668]/20">
-                      <span className="text-[#1A2315] font-bold">Grant Deed / Title Policy Record</span>
-                      <span className="text-[#596638] font-mono text-[11px] font-extrabold">VERIFIED ✓</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#F4EDDA]/40 border border-[#BFA668]/20">
-                      <span className="text-[#1A2315] font-bold">County Property Tax Assessment</span>
-                      <span className="text-[#596638] font-mono text-[11px] font-extrabold">CURRENT ✓</span>
-                    </div>
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#F4EDDA]/40 border border-[#BFA668]/20">
-                      <span className="text-[#1A2315] font-bold">Boundary & Topographic Survey</span>
-                      <span className="text-[#596638] font-mono text-[11px] font-extrabold">ON FILE ✓</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Tab 3: Agent Profile */}
-              {activeTab === 'agent' && (
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-[#3E4E31] text-white flex items-center justify-center font-editorial font-bold text-xl">
-                      {property.agent.name[0]}
-                    </div>
-                    <div>
-                      <h4 className="text-base font-bold text-[#1A2315] font-editorial">{property.agent.name}</h4>
-                      <p className="text-xs text-[#BFA668] font-mono font-bold">{property.agent.agency}</p>
-                      <p className="text-[11px] text-[#596638] font-medium">Licensed Real Estate Representative • USA</p>
-                    </div>
-                  </div>
-                  <div className="p-4 rounded-2xl bg-[#F4EDDA]/40 border border-[#BFA668]/20 text-xs space-y-2 text-[#596638]">
-                    <p>Direct Phone: <span className="text-[#1A2315] font-mono font-bold">{property.agent.phone}</span></p>
-                    <p>Inquiry Email: <span className="text-[#1A2315] font-mono font-bold">{property.agent.email}</span></p>
-                  </div>
-                </div>
-              )}
-
-            </div>
-          </ScrollReveal>
-
-        </div>
-
-        {/* Right Column: Inquiry / Appointment Form (4 Cols) */}
-        <div className="lg:col-span-4 space-y-6">
-          <ScrollReveal direction="up" delay={200}>
-            <div className="glass-panel-luxury p-6 sm:p-7 rounded-3xl border border-[#3E4E31]/15 space-y-6 sticky top-28 bg-white shadow-xl">
-              <div>
-                <span className="text-[10px] font-mono text-[#BFA668] uppercase tracking-widest font-extrabold">Direct Escrow & Contact</span>
-                <h3 className="text-xl font-bold text-[#1A2315] font-editorial mt-1">Schedule Consultation</h3>
-                <p className="text-xs text-[#596638] mt-1 font-medium">Inquire directly with the verified listing representative.</p>
-              </div>
-
-              {inquirySent ? (
-                <div className="p-5 rounded-2xl bg-[#F4EDDA] border border-[#BFA668]/40 text-center space-y-2">
-                  <p className="font-bold text-sm text-[#3E4E31]">Inquiry Transmitted Successfully!</p>
-                  <p className="text-[#596638] text-[11px] font-medium">The agent will reach out via email or WhatsApp within 2 hours.</p>
-                  <button
-                    onClick={() => setInquirySent(false)}
-                    className="mt-3 text-[#BFA668] underline text-xs font-bold cursor-pointer"
-                  >
-                    Send Another Inquiry
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmitInquiry} className="space-y-4">
-                  <div>
-                    <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1 font-bold">Your Full Name</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. John Doe"
-                      className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-xl px-3.5 py-2.5 placeholder:text-[#838961] focus:outline-none focus:border-[#BFA668] shadow-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1 font-bold">Email Address</label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="you@domain.com"
-                      className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-xl px-3.5 py-2.5 placeholder:text-[#838961] focus:outline-none focus:border-[#BFA668] shadow-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1 font-bold">Phone / WhatsApp</label>
-                    <input
-                      type="tel"
-                      placeholder="+1 (555) 000-0000"
-                      className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-xl px-3.5 py-2.5 placeholder:text-[#838961] focus:outline-none focus:border-[#BFA668] shadow-sm"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1 font-bold">Message or Viewing Request</label>
-                    <textarea
-                      rows={3}
-                      placeholder={`I am interested in inspecting ${property.title}...`}
-                      className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-xl px-3.5 py-2.5 placeholder:text-[#838961] focus:outline-none focus:border-[#BFA668] shadow-sm"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full py-3 px-4 rounded-xl text-xs font-bold btn-luxury"
-                  >
-                    Request Appointment & Details →
-                  </button>
-                </form>
-              )}
-
-              {/* Quick WhatsApp Action */}
-              <div className="pt-4 border-t border-[#3E4E31]/10">
-                <a
-                  href={`https://wa.me/15550199000?text=Hi,%20I%20am%20inquiring%20about%20TwistMS%20Property%20${property.id}%20(${encodeURIComponent(property.title)})`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl text-xs font-bold btn-luxury-outline flex items-center justify-center gap-2"
-                >
-                  Instant WhatsApp Agent Chat
-                </a>
-              </div>
-
-            </div>
-          </ScrollReveal>
-        </div>
-
+          </div>
+        </aside>
       </div>
 
+      {/* Similar listings */}
+      <section className="pt-6">
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#1A2315] font-editorial">Similar Properties</h2>
+        <p className="text-xs text-[#596638] mt-1 font-medium mb-5">Other listings in the same category or state you may want to compare.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {similarList.map((p) => (
+            <PropertyCard key={p.id} property={p} />
+          ))}
+        </div>
+      </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox !== null && (
+          <motion.div
+            className="fixed inset-0 z-[100] bg-[#0F140C]/95 flex flex-col"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Photo viewer"
+          >
+            <div className="flex items-center justify-between p-4 text-white text-xs font-bold">
+              <span>{lightbox + 1} / {info.photos.length}</span>
+              <button onClick={() => setLightbox(null)} className="px-3 py-1.5 rounded-lg border border-white/30 hover:bg-white/10 cursor-pointer">Close ✕</button>
+            </div>
+            <div className="flex-1 relative flex items-center justify-center px-4 pb-4 min-h-0">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={lightbox}
+                  src={info.photos[lightbox]}
+                  alt={`Photo ${lightbox + 1} of ${property.title}`}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="max-h-full max-w-full object-contain rounded-lg"
+                />
+              </AnimatePresence>
+              <button onClick={() => setLightbox((i) => (i - 1 + info.photos.length) % info.photos.length)} className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-xl cursor-pointer" aria-label="Previous photo">‹</button>
+              <button onClick={() => setLightbox((i) => (i + 1) % info.photos.length)} className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white text-xl cursor-pointer" aria-label="Next photo">›</button>
+            </div>
+            <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 pb-4">
+              {info.photos.map((src, i) => (
+                <button key={src} onClick={() => setLightbox(i)} className={`shrink-0 w-20 h-14 rounded-md overflow-hidden border-2 cursor-pointer ${i === lightbox ? 'border-[#BFA668]' : 'border-transparent opacity-60 hover:opacity-100'}`} aria-label={`Show photo ${i + 1}`}>
+                  <img src={src} alt="" className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -21,7 +21,7 @@ export default function AIAssistantWidget() {
     'Find land in Montana with river frontage',
     'What documents are needed to sell?',
     'Explain the Verified Deed process',
-    'How do the 90-day free listings work?'
+    'How do the 45-day free listings work?'
   ];
 
   const knowledgeBase = [
@@ -38,8 +38,8 @@ export default function AIAssistantWidget() {
       reply: 'The "Verified Deed" badge is issued only after our administrative compliance team verifies the title chain, county assessor parcel records, and seller authority. We never publish unverified listings.'
     },
     {
-      keywords: ['free', 'cost', 'price', 'pricing', 'plan', 'package', '90'],
-      reply: 'TwistMS offers three listing tiers: 1) Free Listing ($0 for 90 days, up to 50 photos), 2) Paid Verified ($49 for 150 days + Social Boost), and 3) Premium Elite ($129 for 365 days + full multi-channel TikTok/IG campaigns).'
+      keywords: ['free', 'cost', 'price', 'pricing', 'plan', 'package', '45'],
+      reply: 'TwistMS offers three listing tiers: 1) Free Listing ($0 for 45 days, 5–100 photos and 1–5 videos), 2) Paid Verified ($49 for 150 days + Social Boost), and 3) Premium Elite ($129 for 365 days + full multi-channel TikTok/IG campaigns).'
     },
     {
       keywords: ['austin', 'texas', 'tx', 'ranch', 'residential'],

@@ -16,13 +16,13 @@ export default function Contact() {
       {/* Header */}
       <ScrollReveal direction="down">
         <div className="text-center max-w-3xl mx-auto">
-          <div className="text-blue-700 text-xs font-mono uppercase tracking-widest mb-1.5 font-extrabold">
+          <div className="text-[#9E8547] text-xs font-mono uppercase tracking-widest mb-1.5 font-extrabold">
             Escrow & Verification Support
           </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#0F172A] tracking-tight font-editorial">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1A2315] tracking-tight font-editorial">
             Connect with TwistMS USA
           </h1>
-          <p className="text-sm text-[#334155] mt-3 font-medium leading-relaxed">
+          <p className="text-sm text-[#3E4E31] mt-3 font-medium leading-relaxed">
             Inquire directly regarding property acquisitions, agent representation, deed verification protocol, or connect with our USA escrow coordinators.
           </p>
         </div>
@@ -34,17 +34,17 @@ export default function Contact() {
         {/* Form Container (7 Cols) */}
         <div className="lg:col-span-7">
           <ScrollReveal direction="up" delay={100}>
-            <div className="glass-panel-luxury p-6 sm:p-10 rounded-3xl border border-slate-200 shadow-xl bg-white">
+            <div className="glass-panel-luxury p-6 sm:p-10 rounded-3xl border border-[#3E4E31]/15 shadow-xl bg-white">
               
               {/* Switcher: General Inquiry vs Submit Property */}
-              <div className="flex bg-slate-100 p-1.5 rounded-2xl mb-8 border border-slate-200">
+              <div className="flex bg-[#F4EDDA]/50 p-1.5 rounded-2xl mb-8 border border-[#3E4E31]/15">
                 <button
                   type="button"
                   onClick={() => setSubmissionType('inquiry')}
                   className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all ${
                     submissionType === 'inquiry'
-                      ? 'bg-[#0F172A] text-white shadow-sm'
-                      : 'text-[#334155] hover:text-[#0F172A]'
+                      ? 'bg-[#1A2315] text-white shadow-sm'
+                      : 'text-[#3E4E31] hover:text-[#1A2315]'
                   }`}
                 >
                   General Inquiry / Buyer Support
@@ -54,8 +54,8 @@ export default function Contact() {
                   onClick={() => setSubmissionType('escrow')}
                   className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all ${
                     submissionType === 'escrow'
-                      ? 'bg-[#0F172A] text-white shadow-sm'
-                      : 'text-[#334155] hover:text-[#0F172A]'
+                      ? 'bg-[#1A2315] text-white shadow-sm'
+                      : 'text-[#3E4E31] hover:text-[#1A2315]'
                   }`}
                 >
                   Escrow & Deed Coordination
@@ -63,12 +63,12 @@ export default function Contact() {
               </div>
 
               {submitted ? (
-                <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-300 text-center space-y-3">
-                  <div className="w-12 h-12 rounded-full bg-[#0F172A] text-white flex items-center justify-center mx-auto text-xl font-editorial font-bold">
+                <div className="p-8 rounded-2xl bg-[#F4EDDA]/60 border border-[#BFA668]/50 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-[#1A2315] text-white flex items-center justify-center mx-auto text-xl font-editorial font-bold">
                     ✓
                   </div>
-                  <h3 className="text-2xl font-bold text-[#0F172A] font-editorial">Transmission Received</h3>
-                  <p className="text-xs text-[#334155] font-medium leading-relaxed max-w-sm mx-auto">
+                  <h3 className="text-2xl font-bold text-[#1A2315] font-editorial">Transmission Received</h3>
+                  <p className="text-xs text-[#3E4E31] font-medium leading-relaxed max-w-sm mx-auto">
                     Your dossier has been routed to our USA compliance desk. A coordinator will respond via email or WhatsApp within 2-4 hours.
                   </p>
                   <button
@@ -83,37 +83,37 @@ export default function Contact() {
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] font-mono text-[#0F172A] uppercase mb-1.5 font-bold">Your Full Name</label>
+                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Your Full Name</label>
                       <input
                         type="text"
                         required
                         placeholder="e.g. Rachel Adams"
-                        className="w-full bg-white text-xs text-[#0F172A] font-medium border border-slate-300 rounded-xl px-4 py-3 placeholder:text-[#64748B] focus:outline-none focus:border-sky-600 shadow-sm"
+                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#0F172A] uppercase mb-1.5 font-bold">Email Address</label>
+                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Email Address</label>
                       <input
                         type="email"
                         required
                         placeholder="rachel@domain.com"
-                        className="w-full bg-white text-xs text-[#0F172A] font-medium border border-slate-300 rounded-xl px-4 py-3 placeholder:text-[#64748B] focus:outline-none focus:border-sky-600 shadow-sm"
+                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[11px] font-mono text-[#0F172A] uppercase mb-1.5 font-bold">Phone / WhatsApp</label>
+                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Phone / WhatsApp</label>
                       <input
                         type="tel"
                         placeholder="+1 (555) 000-0000"
-                        className="w-full bg-white text-xs text-[#0F172A] font-medium border border-slate-300 rounded-xl px-4 py-3 placeholder:text-[#64748B] focus:outline-none focus:border-sky-600 shadow-sm"
+                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#0F172A] uppercase mb-1.5 font-bold">Marketplace Role</label>
-                      <select className="w-full bg-white text-xs text-[#0F172A] font-semibold border border-slate-300 rounded-xl px-3.5 py-3 focus:outline-none focus:border-sky-600 cursor-pointer shadow-sm">
+                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Marketplace Role</label>
+                      <select className="w-full bg-white text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/25 rounded-xl px-3.5 py-3 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm">
                         <option value="buyer">Prospective Buyer / Investor</option>
                         <option value="seller">Property Owner / Seller</option>
                         <option value="agent">Licensed Real Estate Agent</option>
@@ -123,12 +123,12 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-mono text-[#0F172A] uppercase mb-1.5 font-bold">Your Message or Inquiry</label>
+                    <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Your Message or Inquiry</label>
                     <textarea
                       rows={4}
                       required
                       placeholder="Outline your inquiry, parcel question, or escrow timeline..."
-                      className="w-full bg-white text-xs text-[#0F172A] font-medium border border-slate-300 rounded-xl px-4 py-3 placeholder:text-[#64748B] focus:outline-none focus:border-sky-600 shadow-sm"
+                      className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
                     />
                   </div>
 
@@ -149,10 +149,10 @@ export default function Contact() {
         <div className="lg:col-span-5 space-y-6">
           <ScrollReveal direction="up" delay={200}>
             {/* WhatsApp Direct Card */}
-            <div className="glass-panel-luxury p-6 sm:p-7 rounded-3xl border border-sky-300 bg-sky-50/60 space-y-3 shadow-md">
-              <span className="text-[10px] font-mono text-blue-700 uppercase tracking-widest font-extrabold">Rapid Response</span>
-              <h3 className="text-xl font-bold text-[#0F172A] font-editorial">Instant WhatsApp Concierge</h3>
-              <p className="text-xs text-[#334155] leading-relaxed font-medium">
+            <div className="glass-panel-luxury p-6 sm:p-7 rounded-3xl border border-[#BFA668]/50 bg-[#F4EDDA]/60 space-y-3 shadow-md">
+              <span className="text-[10px] font-mono text-[#9E8547] uppercase tracking-widest font-extrabold">Rapid Response</span>
+              <h3 className="text-xl font-bold text-[#1A2315] font-editorial">Instant WhatsApp Concierge</h3>
+              <p className="text-xs text-[#3E4E31] leading-relaxed font-medium">
                 Direct connection with our USA listing coordinator for rapid deed verification and agent onboarding.
               </p>
               <a
@@ -168,9 +168,9 @@ export default function Contact() {
 
           <ScrollReveal direction="up" delay={250}>
             {/* Compliance & Escrow Notice */}
-            <div className="glass-panel-luxury p-6 sm:p-7 rounded-3xl border border-slate-200 space-y-3 bg-white shadow-md">
-              <h4 className="text-xs font-bold text-[#0F172A] uppercase font-mono tracking-wider">Verification Standards</h4>
-              <ul className="text-xs text-[#334155] space-y-2.5 list-disc pl-4 leading-relaxed font-medium">
+            <div className="glass-panel-luxury p-6 sm:p-7 rounded-3xl border border-[#3E4E31]/15 space-y-3 bg-white shadow-md">
+              <h4 className="text-xs font-bold text-[#1A2315] uppercase font-mono tracking-wider">Verification Standards</h4>
+              <ul className="text-xs text-[#3E4E31] space-y-2.5 list-disc pl-4 leading-relaxed font-medium">
                 <li>All listings must provide verifiable seller identity and property title deeds.</li>
                 <li>Agent representation requires verification of applicable state licensure.</li>
                 <li>Full compliance with Federal Fair Housing regulations across all 50 states.</li>
@@ -180,10 +180,10 @@ export default function Contact() {
 
           <ScrollReveal direction="up" delay={300}>
             {/* Contact Details */}
-            <div className="glass-panel-luxury p-6 rounded-3xl border border-slate-200 text-xs space-y-2 text-[#334155] bg-white shadow-sm font-medium">
-              <p><span className="text-[#0F172A] font-bold">Official Domain:</span> twistmsproperties.com</p>
-              <p><span className="text-[#0F172A] font-bold">Support Desk:</span> support@twistmsproperties.com</p>
-              <p><span className="text-[#0F172A] font-bold">Hosting Node:</span> Hostinger Business Enterprise</p>
+            <div className="glass-panel-luxury p-6 rounded-3xl border border-[#3E4E31]/15 text-xs space-y-2 text-[#3E4E31] bg-white shadow-sm font-medium">
+              <p><span className="text-[#1A2315] font-bold">Official Domain:</span> twistmsproperties.com</p>
+              <p><span className="text-[#1A2315] font-bold">Support Desk:</span> support@twistmsproperties.com</p>
+              <p><span className="text-[#1A2315] font-bold">Hosting Node:</span> Hostinger Business Enterprise</p>
             </div>
           </ScrollReveal>
         </div>
