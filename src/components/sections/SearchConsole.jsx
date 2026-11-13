@@ -43,7 +43,7 @@ export default function SearchConsole({
     'input-luxury w-full bg-white text-xs text-[#1A2315] font-semibold border border-transparent rounded-2xl px-4 py-3.5 focus:outline-none shadow-sm';
 
   return (
-    <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 sm:-mt-20" aria-label="Property search">
+    <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-10" aria-label="Property search">
       <motion.div
         initial={reduce ? false : { opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
