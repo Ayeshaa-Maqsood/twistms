@@ -58,7 +58,8 @@ Theme 1 is now applied everywhere. The Pricing, Submit, Contact and Agents pages
 ## 7. Scroll Animations
 - New "What You'll Find" section: house, land, commercial and rental images move with the scroll (parallax), scale in, and change shade.
 - Existing reveals, image wipes, card hover shadows and the parallax CTA were kept.
-- The 3D hero scroll was shortened from 3.2 to 2.3 screens (1.6 on phones), so there is less empty scrolling.
+- The 3D hero animation now spans about 4.2 screens of scrolling (3 on phones) and eases smoothly behind the scrollbar, so visitors see every stage at a normal scroll speed.
+- The end of the 3D hero shows an interactive "What are you looking for?" panel with category cards (hover lift, cursor drift) instead of an empty screen.
 - All animations turn off automatically for visitors who prefer reduced motion.
 
 ## 8. Section Explanations
