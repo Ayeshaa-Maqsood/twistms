@@ -46,7 +46,7 @@ function Panel({ item, index }) {
     <motion.div
       ref={ref}
       style={{ scale: reduce ? 1 : frameScale }}
-      className={`relative h-72 sm:h-80 rounded-2xl overflow-hidden shadow-[0_24px_50px_-24px_rgba(15,20,12,0.55)] bg-[#1A2315] ${offset}`}
+      className={`relative h-72 sm:h-80 rounded-2xl overflow-hidden shadow-[0_24px_50px_-24px_rgba(10, 10, 10,0.55)] bg-[#111111] ${offset}`}
     >
       <motion.img
         src={item.img}
@@ -56,7 +56,7 @@ function Panel({ item, index }) {
         style={{ y: reduce ? 0 : imgY }}
         className="absolute inset-0 w-full h-[124%] -top-[12%] object-cover"
       />
-      <motion.div style={{ opacity: reduce ? 0.6 : shade }} className="absolute inset-0 bg-gradient-to-t from-[#0F140C] via-[#0F140C]/50 to-transparent" />
+      <motion.div style={{ opacity: reduce ? 0.6 : shade }} className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent" />
       <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-6">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 18 }}
@@ -68,7 +68,7 @@ function Panel({ item, index }) {
           <p className="mt-1 text-xs text-white/80 font-medium leading-relaxed max-w-xs">{item.body}</p>
           <Link
             to={`/search?cat=${item.cat}`}
-            className="mt-3 inline-flex items-center gap-1.5 text-xs font-extrabold text-[#E6D8AE] hover:text-white link-draw"
+            className="mt-3 inline-flex items-center gap-1.5 text-xs font-extrabold text-[#E0E0E0] hover:text-white link-draw"
           >
             Browse {item.title} <span aria-hidden="true">→</span>
           </Link>

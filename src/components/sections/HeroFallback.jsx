@@ -48,7 +48,7 @@ export default function HeroFallback({ animate = true }) {
         </g>
         {/* Orbital rings */}
         <g className={draw} opacity="0.7">
-          <ellipse cx="640" cy="330" rx="420" ry="120" stroke="#BFA668" transform="rotate(-14 640 330)" />
+          <ellipse cx="640" cy="330" rx="420" ry="120" stroke="#B4B4B4" transform="rotate(-14 640 330)" />
           <ellipse cx="640" cy="340" rx="500" ry="150" stroke="#8BAFD0" transform="rotate(10 640 340)" opacity="0.7" />
         </g>
       </svg>

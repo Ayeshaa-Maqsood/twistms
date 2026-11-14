@@ -21,8 +21,8 @@ export default function BlueprintLines({
   inset = 24,
 }) {
   const reduce = useReducedMotion();
-  const stroke = tone === 'light' ? 'rgba(232, 220, 180, 0.6)' : 'rgba(62, 78, 49, 0.3)';
-  const strokeSoft = tone === 'light' ? 'rgba(232, 220, 180, 0.24)' : 'rgba(62, 78, 49, 0.13)';
+  const stroke = tone === 'light' ? 'rgba(226, 226, 226, 0.6)' : 'rgba(43, 43, 43, 0.3)';
+  const strokeSoft = tone === 'light' ? 'rgba(226, 226, 226, 0.24)' : 'rgba(43, 43, 43, 0.13)';
 
   const draw = (i, dur = 1.6) =>
     reduce

@@ -29,13 +29,13 @@ export default function Header() {
     <header
       className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-500 ${
         scrolled
-          ? 'bg-[#1A2315]/95 border-[#BFA668]/35 shadow-[0_14px_34px_-18px_rgba(0,0,0,0.65)]'
-          : 'bg-[#1F2A17] border-[#BFA668]/20 shadow-[0_6px_18px_-14px_rgba(0,0,0,0.5)]'
+          ? 'bg-[#111111]/95 border-[#B4B4B4]/35 shadow-[0_14px_34px_-18px_rgba(0,0,0,0.65)]'
+          : 'bg-[#1C1C1C] border-[#B4B4B4]/20 shadow-[0_6px_18px_-14px_rgba(0,0,0,0.5)]'
       } backdrop-blur-xl`}
     >
       {/* Gold hairline + soft forest-to-olive sheen */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#26321D] via-[#1F2A17] to-[#2B3820] opacity-90" />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#BFA668]/70 to-transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#232323] via-[#1C1C1C] to-[#282828] opacity-90" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#B4B4B4]/70 to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4 h-24">
@@ -47,7 +47,7 @@ export default function Header() {
               animate={{ scale: scrolled ? 0.92 : 1 }}
               transition={{ duration: 0.45, ease: EASE }}
             >
-              <span className="relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FBF8F2] ring-2 ring-[#BFA668]/60 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.6)] group-hover:ring-[#BFA668] transition-[box-shadow,ring-color] duration-300">
+              <span className="relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#FAFAFA] ring-2 ring-[#B4B4B4]/60 shadow-[0_6px_20px_-6px_rgba(0,0,0,0.6)] group-hover:ring-[#B4B4B4] transition-[box-shadow,ring-color] duration-300">
                 <img
                   src={BRAND.logo.color}
                   alt=""
@@ -56,14 +56,14 @@ export default function Header() {
               </span>
               <span className="flex flex-col leading-none">
                 <span className="flex items-center gap-1.5">
-                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#FBF8F2] font-editorial">
+                  <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#FAFAFA] font-editorial">
                     {BRAND.name}
                   </span>
-                  <span className="text-[9px] sm:text-[10px] uppercase font-extrabold tracking-widest px-1.5 py-0.5 rounded bg-[#BFA668] text-[#1A2315]">
+                  <span className="text-[9px] sm:text-[10px] uppercase font-extrabold tracking-widest px-1.5 py-0.5 rounded bg-[#B4B4B4] text-[#111111]">
                     {BRAND.market}
                   </span>
                 </span>
-                <span className="mt-1 text-[10px] sm:text-[11px] tracking-[0.32em] text-[#D4C28E] uppercase font-bold">
+                <span className="mt-1 text-[10px] sm:text-[11px] tracking-[0.32em] text-[#D0D0D0] uppercase font-bold">
                   Properties
                 </span>
               </span>
@@ -84,14 +84,14 @@ export default function Header() {
                   aria-current={active ? 'page' : undefined}
                   className={`relative px-4 py-2 rounded-full text-xs transition-colors duration-300 ${
                     active
-                      ? 'text-[#1A2315] font-bold'
-                      : 'text-[#FBF8F2]/80 hover:text-white hover:bg-white/10 font-semibold'
+                      ? 'text-[#111111] font-bold'
+                      : 'text-[#FAFAFA]/80 hover:text-white hover:bg-white/10 font-semibold'
                   }`}
                 >
                   {active && (
                     <motion.span
                       layoutId="nav-active-pill"
-                      className="absolute inset-0 rounded-full bg-[#BFA668] shadow-sm"
+                      className="absolute inset-0 rounded-full bg-[#B4B4B4] shadow-sm"
                       transition={reduce ? { duration: 0 } : SPRING_SOFT}
                     />
                   )}
@@ -107,7 +107,7 @@ export default function Header() {
             <motion.button
               onClick={() => setIsDrawerOpen(true)}
               whileTap={reduce ? undefined : { scale: 0.96 }}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/[0.06] border border-white/20 text-xs font-bold text-[#FBF8F2] hover:border-[#BFA668] hover:bg-white/10 transition-[border-color,background-color] duration-300 cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/[0.06] border border-white/20 text-xs font-bold text-[#FAFAFA] hover:border-[#B4B4B4] hover:bg-white/10 transition-[border-color,background-color] duration-300 cursor-pointer"
               aria-label={`Open saved properties, ${favorites.length} saved`}
             >
               <motion.svg
@@ -115,7 +115,7 @@ export default function Header() {
                 initial={reduce ? false : { scale: 0.7 }}
                 animate={{ scale: 1 }}
                 transition={SPRING_SNAPPY}
-                className={`w-3.5 h-3.5 ${favorites.length > 0 ? 'text-red-400 fill-current' : 'text-[#D4C28E] fill-current'}`}
+                className={`w-3.5 h-3.5 ${favorites.length > 0 ? 'text-red-400 fill-current' : 'text-[#D0D0D0] fill-current'}`}
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
@@ -141,7 +141,7 @@ export default function Header() {
             <MagneticButton strength={0.22} radius={8}>
               <Link
                 to="/submit"
-                className="px-4 py-2.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 bg-[#BFA668] text-[#1A2315] hover:bg-[#E6D8AE] shadow-[0_10px_24px_-10px_rgba(191,166,104,0.8)] transition-colors duration-300"
+                className="px-4 py-2.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 bg-[#B4B4B4] text-[#111111] hover:bg-[#E0E0E0] shadow-[0_10px_24px_-10px_rgba(180, 180, 180,0.8)] transition-colors duration-300"
               >
                 <span>+ List Property</span>
               </Link>
@@ -152,7 +152,7 @@ export default function Header() {
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl text-[#FBF8F2] border border-white/15 hover:bg-white/10 transition-colors"
+              className="p-2.5 rounded-xl text-[#FAFAFA] border border-white/15 hover:bg-white/10 transition-colors"
               aria-label="Toggle Navigation"
               aria-expanded={mobileMenuOpen}
             >
@@ -193,7 +193,7 @@ export default function Header() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1, transition: { duration: 0.4, ease: EASE } }}
             exit={{ height: 0, opacity: 0, transition: { duration: 0.25, ease: 'easeIn' } }}
-            className="lg:hidden relative overflow-hidden border-t border-white/10 bg-[#1A2315]"
+            className="lg:hidden relative overflow-hidden border-t border-white/10 bg-[#111111]"
           >
             <motion.div
               className="px-4 pt-3 pb-6 space-y-1"
@@ -215,11 +215,11 @@ export default function Header() {
                       onClick={() => setMobileMenuOpen(false)}
                       aria-current={active ? 'page' : undefined}
                       className={`flex items-center justify-between px-3 py-3 rounded-lg text-sm font-medium transition-colors ${
-                        active ? 'bg-[#BFA668] text-[#1A2315] font-bold' : 'text-[#FBF8F2]/85 hover:bg-white/10 active:bg-white/10'
+                        active ? 'bg-[#B4B4B4] text-[#111111] font-bold' : 'text-[#FAFAFA]/85 hover:bg-white/10 active:bg-white/10'
                       }`}
                     >
                       {link.name}
-                      <span aria-hidden="true" className={active ? 'text-[#1A2315]' : 'text-[#BFA668]'}>→</span>
+                      <span aria-hidden="true" className={active ? 'text-[#111111]' : 'text-[#B4B4B4]'}>→</span>
                     </Link>
                   </motion.div>
                 );
@@ -238,7 +238,7 @@ export default function Header() {
                 <Link
                   to="/submit"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2.5 rounded-xl text-xs font-extrabold bg-[#BFA668] text-[#1A2315]"
+                  className="w-full text-center py-2.5 rounded-xl text-xs font-extrabold bg-[#B4B4B4] text-[#111111]"
                 >
                   + List Property
                 </Link>

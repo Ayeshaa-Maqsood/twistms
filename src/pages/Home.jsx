@@ -27,7 +27,7 @@ function SectionHeading({ eyebrow, title, sub, align = 'left', className = '' })
   return (
     <div className={`${center ? 'text-center mx-auto' : ''} ${className}`}>
       <ScrollReveal direction="up" distance={14} duration={600}>
-        <div className="text-[#BFA668] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">{eyebrow}</div>
+        <div className="text-[#B4B4B4] text-xs font-mono uppercase tracking-widest mb-1.5 font-bold">{eyebrow}</div>
       </ScrollReveal>
       <SplitText
         as="h2"
@@ -35,11 +35,11 @@ function SectionHeading({ eyebrow, title, sub, align = 'left', className = '' })
         inView
         stagger={0.035}
         duration={0.8}
-        className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] tracking-tight font-editorial"
+        className="text-3xl sm:text-4xl font-extrabold text-[#111111] tracking-tight font-editorial"
       />
       {sub && (
         <ScrollReveal direction="up" distance={12} duration={600} delay={200}>
-          <p className={`text-sm text-[#596638] mt-2 font-medium leading-relaxed max-w-2xl ${center ? 'mx-auto' : ''}`}>{sub}</p>
+          <p className={`text-sm text-[#555555] mt-2 font-medium leading-relaxed max-w-2xl ${center ? 'mx-auto' : ''}`}>{sub}</p>
         </ScrollReveal>
       )}
     </div>
@@ -129,8 +129,8 @@ export default function Home() {
           2. BROWSE BY US STATE SHOWCASE (PRD §20.7)
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 !mt-10 sm:!mt-12" aria-labelledby="regional-heading">
-        <div className="relative rounded-3xl bg-white/80 border border-[#3E4E31]/10 shadow-[0_20px_50px_-30px_rgba(26,35,21,0.35)] py-10 sm:py-12 px-4 sm:px-8 overflow-hidden">
-        <div aria-hidden="true" className="absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-48 rounded-full bg-[#BFA668]/15 blur-[80px] pointer-events-none" />
+        <div className="relative rounded-3xl bg-white/80 border border-[#2B2B2B]/10 shadow-[0_20px_50px_-30px_rgba(17, 17, 17,0.35)] py-10 sm:py-12 px-4 sm:px-8 overflow-hidden">
+        <div aria-hidden="true" className="absolute -top-24 left-1/2 -translate-x-1/2 w-[36rem] h-48 rounded-full bg-[#B4B4B4]/15 blur-[80px] pointer-events-none" />
         <SectionHeading
           align="center"
           eyebrow="Regional Portfolios"
@@ -155,7 +155,7 @@ export default function Home() {
                 }}
                 whileHover={reduce ? undefined : { y: -6 }}
                 transition={SPRING_SOFT}
-                className="glow-border rounded-2xl overflow-hidden cursor-pointer group flex flex-col h-44 relative shadow-sm hover:shadow-xl border border-[#3E4E31]/15 bg-[#1A2315] transition-shadow duration-500"
+                className="glow-border rounded-2xl overflow-hidden cursor-pointer group flex flex-col h-44 relative shadow-sm hover:shadow-xl border border-[#2B2B2B]/15 bg-[#111111] transition-shadow duration-500"
               >
                 <ImageReveal className="absolute inset-0" direction="up" delay={idx * 0.04} duration={1}>
                   <img
@@ -166,15 +166,15 @@ export default function Home() {
                     className="w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-110 transition-[transform,opacity] duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
                   />
                 </ImageReveal>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F140C]/95 via-[#0F140C]/35 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/35 to-transparent" />
 
                 <div className="relative z-10 p-4 h-full flex flex-col justify-between">
-                  <span className="self-start px-2 py-0.5 rounded-md text-[10px] font-mono font-extrabold bg-white text-[#1A2315] shadow-md border border-[#3E4E31]/10">
+                  <span className="self-start px-2 py-0.5 rounded-md text-[10px] font-mono font-extrabold bg-white text-[#111111] shadow-md border border-[#2B2B2B]/10">
                     {st.code}
                   </span>
                   <div>
                     <h3 className="text-base font-bold text-white font-editorial tracking-wide">{st.name}</h3>
-                    <p className="text-[11px] text-[#D4C28E] font-mono mt-0.5 font-semibold">{st.count}</p>
+                    <p className="text-[11px] text-[#D0D0D0] font-mono mt-0.5 font-semibold">{st.count}</p>
                     <p className="text-[10px] text-white/60 font-medium mt-1 max-h-0 overflow-hidden opacity-0 group-hover:max-h-6 group-hover:opacity-100 transition-all duration-500">
                       {st.tag}
                     </p>
@@ -188,7 +188,7 @@ export default function Home() {
         <div className="relative mt-8 text-center">
           <Link
             to="/search"
-            className="link-draw text-xs font-bold text-[#1A2315] hover:text-[#9E8547] inline-flex items-center gap-1.5 transition-colors"
+            className="link-draw text-xs font-bold text-[#111111] hover:text-[#6E6E6E] inline-flex items-center gap-1.5 transition-colors"
           >
             <span>Explore All 50 States</span>
             <span aria-hidden="true">→</span>
@@ -237,13 +237,13 @@ export default function Home() {
                     className={`relative px-4 py-2 rounded-xl text-xs font-bold transition-colors duration-300 cursor-pointer ${
                       active
                         ? 'text-white'
-                        : 'bg-white text-[#596638] border border-[#3E4E31]/20 hover:text-[#1A2315] hover:border-[#BFA668]'
+                        : 'bg-white text-[#555555] border border-[#2B2B2B]/20 hover:text-[#111111] hover:border-[#B4B4B4]'
                     }`}
                   >
                     {active && (
                       <motion.span
                         layoutId="home-category-pill"
-                        className="absolute inset-0 rounded-xl bg-[#3E4E31] shadow-md"
+                        className="absolute inset-0 rounded-xl bg-[#2B2B2B] shadow-md"
                         transition={SPRING_SOFT}
                       />
                     )}
@@ -284,9 +284,9 @@ export default function Home() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="col-span-full py-16 text-center glass-panel-luxury rounded-3xl border border-[#3E4E31]/15"
+                className="col-span-full py-16 text-center glass-panel-luxury rounded-3xl border border-[#2B2B2B]/15"
               >
-                <p className="text-[#596638] text-sm font-medium">No properties match your current filters.</p>
+                <p className="text-[#555555] text-sm font-medium">No properties match your current filters.</p>
                 <button
                   onClick={() => { setActiveCategory('All'); setSearchTerm(''); setSelectedState(''); }}
                   className="mt-4 px-4 py-2 rounded-xl text-xs font-bold btn-luxury"
@@ -319,10 +319,10 @@ export default function Home() {
         <SectionRule index="03" label="Trust & Escrow Protocol" className="mb-6" />
 
         <ScrollReveal direction="up">
-          <div className="glass-panel-luxury p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#3E4E31]/15 relative overflow-hidden bg-white">
+          <div className="glass-panel-luxury p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#2B2B2B]/15 relative overflow-hidden bg-white">
             {/* Blueprint line drawing, revealed on scroll */}
             <BlueprintLines variant="plan" tone="dark" className="hidden md:block" />
-            <div className="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-[#BFA668]/10 blur-[90px] pointer-events-none" />
+            <div className="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-[#B4B4B4]/10 blur-[90px] pointer-events-none" />
 
             <div className="relative z-10">
               <div className="max-w-2xl mb-8">
@@ -339,16 +339,16 @@ export default function Home() {
                     <motion.div
                       whileHover={reduce ? undefined : { y: -4 }}
                       transition={SPRING_SOFT}
-                      className="glow-border h-full p-6 rounded-2xl bg-[#F4EDDA]/40 border border-[#BFA668]/20 hover:shadow-lg transition-shadow duration-500 group"
+                      className="glow-border h-full p-6 rounded-2xl bg-[#EFEFEF]/40 border border-[#B4B4B4]/20 hover:shadow-lg transition-shadow duration-500 group"
                     >
                       <div className="flex items-center gap-3 mb-4">
-                        <div className="w-10 h-10 rounded-xl bg-[#F4EDDA] text-[#3E4E31] flex items-center justify-center font-bold text-sm font-mono border border-[#BFA668]/30 group-hover:bg-[#3E4E31] group-hover:text-[#F4EDDA] transition-colors duration-500">
+                        <div className="w-10 h-10 rounded-xl bg-[#EFEFEF] text-[#2B2B2B] flex items-center justify-center font-bold text-sm font-mono border border-[#B4B4B4]/30 group-hover:bg-[#2B2B2B] group-hover:text-[#EFEFEF] transition-colors duration-500">
                           {step.n}
                         </div>
-                        <span className="h-px flex-1 bg-gradient-to-r from-[#BFA668]/50 to-transparent" />
+                        <span className="h-px flex-1 bg-gradient-to-r from-[#B4B4B4]/50 to-transparent" />
                       </div>
-                      <h3 className="text-lg font-bold text-[#1A2315] font-editorial">{step.title}</h3>
-                      <p className="text-xs text-[#596638] mt-2 leading-relaxed font-medium">{step.body}</p>
+                      <h3 className="text-lg font-bold text-[#111111] font-editorial">{step.title}</h3>
+                      <p className="text-xs text-[#555555] mt-2 leading-relaxed font-medium">{step.body}</p>
                     </motion.div>
                   </StaggerItem>
                 ))}
@@ -395,32 +395,32 @@ export default function Home() {
                 style={{ scale: plan.highlight ? 1.04 : 1 }}
                 className={`glow-border rounded-3xl p-8 flex flex-col justify-between relative h-full transition-shadow duration-500 ${
                   plan.highlight
-                    ? 'is-active glass-panel-luxury border border-[#BFA668] shadow-2xl bg-white'
-                    : 'glass-panel-luxury border border-[#3E4E31]/15 shadow-sm hover:shadow-xl bg-white'
+                    ? 'is-active glass-panel-luxury border border-[#B4B4B4] shadow-2xl bg-white'
+                    : 'glass-panel-luxury border border-[#2B2B2B]/15 shadow-sm hover:shadow-xl bg-white'
                 }`}
               >
                 {plan.highlight && (
                   <>
-                    <div className="absolute inset-x-8 -top-px h-px bg-gradient-to-r from-transparent via-[#BFA668] to-transparent" />
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#3E4E31] text-white text-[10px] font-bold uppercase tracking-widest font-mono shadow-md">
+                    <div className="absolute inset-x-8 -top-px h-px bg-gradient-to-r from-transparent via-[#B4B4B4] to-transparent" />
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#2B2B2B] text-white text-[10px] font-bold uppercase tracking-widest font-mono shadow-md">
                       {plan.badge}
                     </div>
                   </>
                 )}
 
                 <div>
-                  <h3 className="text-xl font-bold text-[#1A2315] font-editorial">{plan.name}</h3>
-                  <p className="text-xs text-[#596638] mt-1 font-medium">{plan.description}</p>
+                  <h3 className="text-xl font-bold text-[#111111] font-editorial">{plan.name}</h3>
+                  <p className="text-xs text-[#555555] mt-1 font-medium">{plan.description}</p>
 
                   <div className="mt-6 flex items-baseline gap-1">
-                    <span className="text-4xl font-extrabold text-[#1A2315] font-editorial">{plan.price}</span>
-                    <span className="text-xs text-[#596638] font-mono font-bold">/ {plan.period}</span>
+                    <span className="text-4xl font-extrabold text-[#111111] font-editorial">{plan.price}</span>
+                    <span className="text-xs text-[#555555] font-mono font-bold">/ {plan.period}</span>
                   </div>
 
                   <div className="mt-8 space-y-3">
                     {plan.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-center gap-2.5 text-xs text-[#1A2315] font-medium">
-                        <svg className="w-4 h-4 text-[#BFA668] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <div key={fIdx} className="flex items-center gap-2.5 text-xs text-[#111111] font-medium">
+                        <svg className="w-4 h-4 text-[#B4B4B4] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
                         </svg>
                         <span>{feat}</span>
@@ -429,7 +429,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="mt-8 pt-6 border-t border-[#3E4E31]/10">
+                <div className="mt-8 pt-6 border-t border-[#2B2B2B]/10">
                   <Link
                     to="/contact"
                     className={`block text-center py-3 px-4 rounded-xl text-xs font-bold ${plan.highlight ? 'btn-luxury' : 'btn-luxury-outline'}`}
@@ -448,13 +448,13 @@ export default function Home() {
       ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal direction="scale" duration={800}>
-          <div className="relative rounded-3xl overflow-hidden text-white shadow-2xl border border-[#596638]/60 bg-[#1A2315]">
+          <div className="relative rounded-3xl overflow-hidden text-white shadow-2xl border border-[#555555]/60 bg-[#111111]">
             <ParallaxLayer amount={-45} className="absolute inset-0" innerClassName="h-[125%] -mt-[12%]">
               <img src={CTA_IMG} alt="" loading="lazy" decoding="async" className="w-full h-full object-cover" />
             </ParallaxLayer>
-            <div className="absolute inset-0 gradient-drift bg-gradient-to-br from-[#1A2315]/95 via-[#3E4E31]/80 to-[#0F140C]/92" />
+            <div className="absolute inset-0 gradient-drift bg-gradient-to-br from-[#111111]/95 via-[#2B2B2B]/80 to-[#0A0A0A]/92" />
             <div className="absolute inset-0 grid-fine-light grid-drift opacity-70 pointer-events-none" />
-            <div className="absolute -left-20 bottom-0 w-96 h-96 rounded-full bg-[#BFA668]/15 blur-[110px] ambient-pulse pointer-events-none" />
+            <div className="absolute -left-20 bottom-0 w-96 h-96 rounded-full bg-[#B4B4B4]/15 blur-[110px] ambient-pulse pointer-events-none" />
             <BlueprintLines variant="corners" tone="light" />
 
             <div className="relative z-10 p-10 sm:p-16 text-center">
@@ -467,7 +467,7 @@ export default function Home() {
                   className="text-3xl sm:text-5xl font-extrabold tracking-tight font-editorial text-balance"
                 />
                 <ScrollReveal direction="up" distance={14} delay={300}>
-                  <p className="text-sm text-[#D4C28E] font-medium leading-relaxed">
+                  <p className="text-sm text-[#D0D0D0] font-medium leading-relaxed">
                     Submit your property details, upload photos, and attach ownership documentation. Our review desk verifies submissions in under 24 hours.
                   </p>
                 </ScrollReveal>
@@ -476,7 +476,7 @@ export default function Home() {
                     <MagneticButton>
                       <Link
                         to="/submit"
-                        className="inline-block py-3 px-6 rounded-xl text-xs font-bold bg-[#BFA668] text-[#1A2315] hover:bg-[#E6D8AE] transition-colors duration-300 shadow-lg shadow-black/20"
+                        className="inline-block py-3 px-6 rounded-xl text-xs font-bold bg-[#B4B4B4] text-[#111111] hover:bg-[#E0E0E0] transition-colors duration-300 shadow-lg shadow-black/20"
                       >
                         Submit Property for Approval →
                       </Link>

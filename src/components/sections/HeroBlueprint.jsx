@@ -108,7 +108,7 @@ export default function HeroBlueprint() {
   const stageScale = useTransform(scrollYProgress, [PHASE.C_END, 1], [1, 0.94]);
   const wipeEdge = useTransform(scrollYProgress, [PHASE.C_END + 0.04, 1], [0, 140]);
   const wipeSolid = useTransform(wipeEdge, (v) => v - 40);
-  const wipeBg = useMotionTemplate`linear-gradient(to top, #FBF8F2 ${wipeSolid}%, rgba(251,248,242,0) ${wipeEdge}%)`;
+  const wipeBg = useMotionTemplate`linear-gradient(to top, #FAFAFA ${wipeSolid}%, rgba(250, 250, 250,0) ${wipeEdge}%)`;
   const readoutOpacity = useTransform(scrollYProgress, [0.86, 0.96], [1, 0]);
   const progressBar = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
   const cueOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
@@ -136,7 +136,7 @@ export default function HeroBlueprint() {
         ref={stageRef}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
-        className="sticky overflow-hidden bg-[#0E141B] text-[#F5F3EE]"
+        className="sticky overflow-hidden bg-[#0E141B] text-[#F4F4F4]"
         style={{ top: HEADER_PX, height: `calc(100vh - ${HEADER_PX}px)` }}
       >
         {/* ---------- 3D stage ---------- */}
@@ -174,24 +174,24 @@ export default function HeroBlueprint() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-xl lg:max-w-2xl pt-6 pb-24 md:pb-10">
-              <motion.p {...enter(0)} className="font-mono text-[11px] tracking-[0.35em] uppercase text-[#BFA668] font-bold">
+              <motion.p {...enter(0)} className="font-mono text-[11px] tracking-[0.35em] uppercase text-[#B4B4B4] font-bold">
                 Real Estate, Reimagined.
               </motion.p>
               <SplitText
                 as="h1"
                 text="Where Vision Becomes Reality."
-                className="mt-5 text-4xl sm:text-6xl lg:text-[4.75rem] font-extrabold tracking-tight leading-[1.02] font-editorial text-[#F5F3EE]"
+                className="mt-5 text-4xl sm:text-6xl lg:text-[4.75rem] font-extrabold tracking-tight leading-[1.02] font-editorial text-[#F4F4F4]"
                 delay={base + 0.15}
                 stagger={0.06}
               />
-              <motion.p {...enter(0.55)} className="mt-6 text-base sm:text-lg text-[#F5F3EE]/75 leading-relaxed font-medium max-w-lg text-balance">
+              <motion.p {...enter(0.55)} className="mt-6 text-base sm:text-lg text-[#F4F4F4]/75 leading-relaxed font-medium max-w-lg text-balance">
                 Discover exceptional properties, explore new opportunities and find your next place across the United States.
               </motion.p>
               <motion.div {...enter(0.72, 26)} className="mt-9 flex flex-wrap items-center gap-4">
                 <MagneticButton>
                   <Link
                     to="/search"
-                    className="inline-flex items-center gap-2 py-3.5 px-7 rounded-2xl text-[11px] font-extrabold tracking-[0.2em] uppercase bg-[#BFA668] text-[#1A2315] hover:bg-[#E8DCB4] transition-colors duration-300 shadow-[0_18px_40px_-16px_rgba(191,166,104,0.7)]"
+                    className="inline-flex items-center gap-2 py-3.5 px-7 rounded-2xl text-[11px] font-extrabold tracking-[0.2em] uppercase bg-[#B4B4B4] text-[#111111] hover:bg-[#E2E2E2] transition-colors duration-300 shadow-[0_18px_40px_-16px_rgba(180, 180, 180,0.7)]"
                   >
                     Explore Properties
                     <span aria-hidden="true">→</span>
@@ -211,13 +211,13 @@ export default function HeroBlueprint() {
         <motion.div className="absolute inset-0 pointer-events-none hidden sm:block" style={{ opacity: reduce ? 0 : annotOpacity }} aria-hidden="true">
           <div className="absolute top-6 right-6 lg:right-10 text-right font-mono text-[10px] tracking-[0.3em] uppercase text-[#8BAFD0]/80 space-y-1">
             <p>Structure 001</p>
-            <p className="text-[#F5F3EE]/50">Architectural form</p>
+            <p className="text-[#F4F4F4]/50">Architectural form</p>
           </div>
           <div className="absolute bottom-24 right-6 lg:right-10 text-right font-mono text-[10px] tracking-[0.3em] uppercase text-[#8BAFD0]/80 space-y-1">
             <p>Location / USA</p>
-            <p className="text-[#F5F3EE]/50">N 39.8283° · W 98.5795°</p>
+            <p className="text-[#F4F4F4]/50">N 39.8283° · W 98.5795°</p>
           </div>
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] uppercase text-[#F5F3EE]/45">
+          <div className="absolute top-6 left-1/2 -translate-x-1/2 flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] uppercase text-[#F4F4F4]/45">
             <span className="w-8 h-px bg-[#8BAFD0]/50" />
             Blueprint to reality
             <span className="w-8 h-px bg-[#8BAFD0]/50" />
@@ -227,11 +227,11 @@ export default function HeroBlueprint() {
         {/* ---------- Reveal annotations (Phase C) ---------- */}
         <motion.div className="absolute inset-0 pointer-events-none" style={{ opacity: reduce ? 1 : revealOpacity }}>
           <div className="absolute bottom-24 left-4 sm:left-6 lg:left-10 max-w-sm">
-            <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#BFA668] font-bold">Architectural reveal</p>
-            <p className="mt-2 text-xl sm:text-2xl font-extrabold font-editorial text-[#F5F3EE] leading-tight">
+            <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-[#B4B4B4] font-bold">Architectural reveal</p>
+            <p className="mt-2 text-xl sm:text-2xl font-extrabold font-editorial text-[#F4F4F4] leading-tight">
               Verified ownership. <span className="text-champagne">Engineered living.</span>
             </p>
-            <p className="mt-2 text-xs text-[#F5F3EE]/60 font-medium">
+            <p className="mt-2 text-xs text-[#F4F4F4]/60 font-medium">
               Every listing is vetted against deeds, tax records and surveys before it reaches the marketplace.
             </p>
           </div>
@@ -244,13 +244,13 @@ export default function HeroBlueprint() {
             style={{ opacity: readoutOpacity }}
             aria-hidden="true"
           >
-            <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] uppercase text-[#F5F3EE]/55">
-              <span className="text-[#BFA668] font-bold">Phase {phase.n}</span>
-              <span className="w-4 h-px bg-[#F5F3EE]/30" />
+            <div className="flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] uppercase text-[#F4F4F4]/55">
+              <span className="text-[#B4B4B4] font-bold">Phase {phase.n}</span>
+              <span className="w-4 h-px bg-[#F4F4F4]/30" />
               <span>{phase.name}</span>
             </div>
-            <div className="hidden sm:block w-40 h-px bg-[#F5F3EE]/15 relative overflow-hidden">
-              <motion.div className="absolute inset-y-0 left-0 bg-[#BFA668]" style={{ width: progressBar }} />
+            <div className="hidden sm:block w-40 h-px bg-[#F4F4F4]/15 relative overflow-hidden">
+              <motion.div className="absolute inset-y-0 left-0 bg-[#B4B4B4]" style={{ width: progressBar }} />
             </div>
           </motion.div>
         )}
@@ -264,9 +264,9 @@ export default function HeroBlueprint() {
         {!reduce && (
           <motion.div className="absolute bottom-6 left-1/2 z-10" style={{ x: '-50%', opacity: cueOpacity }}>
             <motion.div {...enter(1.4)} className="flex flex-col items-center gap-2">
-              <span className="text-[9px] tracking-[0.3em] uppercase font-mono text-[#F5F3EE]/50">Scroll to build</span>
+              <span className="text-[9px] tracking-[0.3em] uppercase font-mono text-[#F4F4F4]/50">Scroll to build</span>
               <span className="relative block w-px h-10 bg-white/15 overflow-hidden">
-                <span className="absolute inset-0 bg-[#BFA668] scroll-cue-line" />
+                <span className="absolute inset-0 bg-[#B4B4B4] scroll-cue-line" />
               </span>
             </motion.div>
           </motion.div>

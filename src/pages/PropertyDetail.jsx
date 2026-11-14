@@ -26,9 +26,9 @@ const fmtUSD = (n) => `$${Number(n).toLocaleString()}`;
 function InfoSection({ id, title, sub, children }) {
   return (
     <ScrollReveal direction="up" distance={20} duration={600}>
-      <section id={id} className="scroll-mt-40 bg-white rounded-2xl border border-[#3E4E31]/12 shadow-sm p-5 sm:p-7">
-        <h2 className="text-lg sm:text-xl font-extrabold text-[#1A2315] font-editorial">{title}</h2>
-        {sub && <p className="text-xs text-[#596638] mt-1 font-medium">{sub}</p>}
+      <section id={id} className="scroll-mt-40 bg-white rounded-2xl border border-[#2B2B2B]/12 shadow-sm p-5 sm:p-7">
+        <h2 className="text-lg sm:text-xl font-extrabold text-[#111111] font-editorial">{title}</h2>
+        {sub && <p className="text-xs text-[#555555] mt-1 font-medium">{sub}</p>}
         <div className="mt-5">{children}</div>
       </section>
     </ScrollReveal>
@@ -37,9 +37,9 @@ function InfoSection({ id, title, sub, children }) {
 
 function FactRow({ label, value }) {
   return (
-    <div className="flex items-start justify-between gap-4 py-2.5 border-b border-[#3E4E31]/10 last:border-0 text-xs">
-      <dt className="text-[#596638] font-semibold">{label}</dt>
-      <dd className="text-[#1A2315] font-bold text-right">{value}</dd>
+    <div className="flex items-start justify-between gap-4 py-2.5 border-b border-[#2B2B2B]/10 last:border-0 text-xs">
+      <dt className="text-[#555555] font-semibold">{label}</dt>
+      <dd className="text-[#111111] font-bold text-right">{value}</dd>
     </div>
   );
 }
@@ -109,20 +109,20 @@ function ListingPage({ property }) {
   ].filter(Boolean);
 
   const inputCls =
-    'input-luxury w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-xl px-3.5 py-2.5 placeholder:text-[#838961] focus:outline-none shadow-sm';
+    'input-luxury w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/20 rounded-xl px-3.5 py-2.5 placeholder:text-[#8A8A8A] focus:outline-none shadow-sm';
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
 
       {/* 1. Breadcrumb */}
-      <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-[#596638] font-semibold">
-        <Link to="/" className="hover:text-[#9E8547]">Home</Link>
+      <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs text-[#555555] font-semibold">
+        <Link to="/" className="hover:text-[#6E6E6E]">Home</Link>
         <span aria-hidden="true">/</span>
-        <Link to="/search" className="hover:text-[#9E8547]">Properties</Link>
+        <Link to="/search" className="hover:text-[#6E6E6E]">Properties</Link>
         <span aria-hidden="true">/</span>
-        <Link to={`/search?st=${property.stateCode}`} className="hover:text-[#9E8547]">{property.state}</Link>
+        <Link to={`/search?st=${property.stateCode}`} className="hover:text-[#6E6E6E]">{property.state}</Link>
         <span aria-hidden="true">/</span>
-        <span className="text-[#1A2315] font-bold truncate max-w-[60vw]">{property.title}</span>
+        <span className="text-[#111111] font-bold truncate max-w-[60vw]">{property.title}</span>
       </nav>
 
       {/* 2. Title, location, price & acreage */}
@@ -134,19 +134,19 @@ function ListingPage({ property }) {
       >
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-3">
-            <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#3E4E31] text-white">{info.status}</span>
-            <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#F4EDDA] text-[#3E4E31] border border-[#BFA668]/40">For {property.type}</span>
-            <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-white text-[#1A2315] border border-[#3E4E31]/15">{property.category}</span>
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#2B2B2B] text-white">{info.status}</span>
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-[#EFEFEF] text-[#2B2B2B] border border-[#B4B4B4]/40">For {property.type}</span>
+            <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-white text-[#111111] border border-[#2B2B2B]/15">{property.category}</span>
             {property.verified && (
-              <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-white text-[#1A2315] border border-[#3E4E31]/15 inline-flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#BFA668]" /> Verified Deed
+              <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-white text-[#111111] border border-[#2B2B2B]/15 inline-flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#B4B4B4]" /> Verified Deed
               </span>
             )}
-            <span className="text-[10px] font-mono font-bold text-[#596638] tracking-widest">ID {property.id.toUpperCase()}</span>
+            <span className="text-[10px] font-mono font-bold text-[#555555] tracking-widest">ID {property.id.toUpperCase()}</span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#1A2315] font-editorial tracking-tight text-balance">{property.title}</h1>
-          <p className="mt-2 text-sm text-[#3E4E31] font-semibold flex items-center gap-1.5">
-            <svg className="w-4 h-4 text-[#BFA668] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-[#111111] font-editorial tracking-tight text-balance">{property.title}</h1>
+          <p className="mt-2 text-sm text-[#2B2B2B] font-semibold flex items-center gap-1.5">
+            <svg className="w-4 h-4 text-[#B4B4B4] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
@@ -155,11 +155,11 @@ function ListingPage({ property }) {
         </div>
 
         <div className="lg:text-right shrink-0">
-          <p className="text-3xl sm:text-4xl font-extrabold text-[#1A2315] font-editorial">
+          <p className="text-3xl sm:text-4xl font-extrabold text-[#111111] font-editorial">
             {fmtUSD(property.price)}
-            {property.pricePeriod && <span className="text-sm font-semibold text-[#596638] ml-1">{property.pricePeriod}</span>}
+            {property.pricePeriod && <span className="text-sm font-semibold text-[#555555] ml-1">{property.pricePeriod}</span>}
           </p>
-          <p className="text-xs text-[#596638] font-bold mt-1">
+          <p className="text-xs text-[#555555] font-bold mt-1">
             {property.acreage > 0 && <span>{property.acreage} Acres</span>}
             {pricePerAcre && <span> · {fmtUSD(pricePerAcre)} / acre</span>}
           </p>
@@ -168,14 +168,14 @@ function ListingPage({ property }) {
               type="button"
               onClick={() => toggleFavorite(property)}
               aria-pressed={favorited}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${favorited ? 'bg-red-500 text-white border-red-500' : 'bg-white text-[#1A2315] border-[#3E4E31]/20 hover:border-[#BFA668]'}`}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${favorited ? 'bg-red-500 text-white border-red-500' : 'bg-white text-[#111111] border-[#2B2B2B]/20 hover:border-[#B4B4B4]'}`}
             >
               {favorited ? '♥ Saved' : '♡ Save'}
             </button>
-            <button type="button" onClick={handleShare} className="px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-[#1A2315] border border-[#3E4E31]/20 hover:border-[#BFA668] cursor-pointer">
+            <button type="button" onClick={handleShare} className="px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-[#111111] border border-[#2B2B2B]/20 hover:border-[#B4B4B4] cursor-pointer">
               {shareMsg || 'Share'}
             </button>
-            <button type="button" onClick={() => window.print()} className="hidden sm:inline-block px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-[#1A2315] border border-[#3E4E31]/20 hover:border-[#BFA668] cursor-pointer">
+            <button type="button" onClick={() => window.print()} className="hidden sm:inline-block px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-[#111111] border border-[#2B2B2B]/20 hover:border-[#B4B4B4] cursor-pointer">
               Print
             </button>
             <a href="#contact" className="px-4 py-2 rounded-xl text-xs font-bold btn-luxury">Contact Agent</a>
@@ -190,7 +190,7 @@ function ListingPage({ property }) {
             key={src}
             type="button"
             onClick={() => setLightbox(i)}
-            className={`relative overflow-hidden bg-[#EDE6D6] group cursor-zoom-in ${i === 0 ? 'md:col-span-2 md:row-span-2' : 'hidden md:block'}`}
+            className={`relative overflow-hidden bg-[#E8E8E8] group cursor-zoom-in ${i === 0 ? 'md:col-span-2 md:row-span-2' : 'hidden md:block'}`}
             aria-label={`Open photo ${i + 1} of ${info.photos.length}`}
           >
             <img
@@ -200,12 +200,12 @@ function ListingPage({ property }) {
               className="w-full h-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
             />
             {i === 0 && (
-              <span className="md:hidden absolute bottom-3 left-3 px-3 py-1.5 rounded-lg bg-[#1A2315]/85 text-white text-[11px] font-bold">
+              <span className="md:hidden absolute bottom-3 left-3 px-3 py-1.5 rounded-lg bg-[#111111]/85 text-white text-[11px] font-bold">
                 {info.photos.length} photos · tap to view
               </span>
             )}
             {i === Math.min(4, info.photos.length - 1) && (
-              <span className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-[#1A2315]/85 text-white text-[11px] font-bold backdrop-blur">
+              <span className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-[#111111]/85 text-white text-[11px] font-bold backdrop-blur">
                 View all {info.photos.length} photos
               </span>
             )}
@@ -215,20 +215,20 @@ function ListingPage({ property }) {
 
       {/* 4. Quick facts */}
       <ScrollReveal direction="up" distance={16} duration={600}>
-        <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 bg-white rounded-2xl border border-[#3E4E31]/12 shadow-sm divide-x divide-y lg:divide-y-0 divide-[#3E4E31]/10 overflow-hidden">
+        <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 bg-white rounded-2xl border border-[#2B2B2B]/12 shadow-sm divide-x divide-y lg:divide-y-0 divide-[#2B2B2B]/10 overflow-hidden">
           {quickFacts.map((f) => (
             <div key={f.label} className="p-4 text-center">
-              <dt className="text-[10px] uppercase tracking-wider font-bold text-[#596638]">{f.label}</dt>
-              <dd className="mt-1 text-sm sm:text-base font-extrabold text-[#1A2315] font-editorial">{f.value}</dd>
+              <dt className="text-[10px] uppercase tracking-wider font-bold text-[#555555]">{f.label}</dt>
+              <dd className="mt-1 text-sm sm:text-base font-extrabold text-[#111111] font-editorial">{f.value}</dd>
             </div>
           ))}
         </dl>
       </ScrollReveal>
 
       {/* In-page section navigation */}
-      <nav aria-label="Listing sections" className="sticky top-24 z-30 -mx-4 sm:mx-0 px-4 sm:px-2 py-2 bg-[#FBF8F2]/95 backdrop-blur border-y sm:border sm:rounded-xl border-[#3E4E31]/10 flex gap-1 overflow-x-auto no-scrollbar">
+      <nav aria-label="Listing sections" className="sticky top-24 z-30 -mx-4 sm:mx-0 px-4 sm:px-2 py-2 bg-[#FAFAFA]/95 backdrop-blur border-y sm:border sm:rounded-xl border-[#2B2B2B]/10 flex gap-1 overflow-x-auto no-scrollbar">
         {SECTIONS.map((s) => (
-          <a key={s.id} href={`#${s.id}`} className="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-[#3E4E31] hover:bg-[#F4EDDA] hover:text-[#1A2315] transition-colors">
+          <a key={s.id} href={`#${s.id}`} className="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold text-[#2B2B2B] hover:bg-[#EFEFEF] hover:text-[#111111] transition-colors">
             {s.label}
           </a>
         ))}
@@ -239,15 +239,15 @@ function ListingPage({ property }) {
         <div className="lg:col-span-8 space-y-6">
 
           <InfoSection id="overview" title="Property Overview" sub="A summary of the property written by the listing agent.">
-            <p className="text-sm text-[#3E4E31] leading-relaxed">{property.description}</p>
+            <p className="text-sm text-[#2B2B2B] leading-relaxed">{property.description}</p>
           </InfoSection>
 
           {info.features.length > 0 && (
             <InfoSection id="features" title="Property Features" sub="Key amenities and improvements included with this listing.">
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {info.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2.5 text-xs font-semibold text-[#1A2315] p-2.5 rounded-xl bg-[#F4EDDA]/50 border border-[#BFA668]/20">
-                    <svg className="w-4 h-4 text-[#9E8547] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <li key={f} className="flex items-center gap-2.5 text-xs font-semibold text-[#111111] p-2.5 rounded-xl bg-[#EFEFEF]/50 border border-[#B4B4B4]/20">
+                    <svg className="w-4 h-4 text-[#6E6E6E] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
                     </svg>
                     {f}
@@ -291,7 +291,7 @@ function ListingPage({ property }) {
                 <FactRow label="Terrain" value={info.topography} />
               </div>
             </dl>
-            <div className="rounded-xl overflow-hidden border border-[#3E4E31]/15 h-64 sm:h-80 bg-[#EDE6D6]">
+            <div className="rounded-xl overflow-hidden border border-[#2B2B2B]/15 h-64 sm:h-80 bg-[#E8E8E8]">
               <iframe
                 title={`Map of ${property.title}`}
                 src={`https://maps.google.com/maps?q=${encodeURIComponent(`${property.address}, ${property.city}, ${property.stateCode} ${property.zip}`)}&z=12&output=embed`}
@@ -306,9 +306,9 @@ function ListingPage({ property }) {
             <InfoSection id="utilities" title="Utilities & Access" sub="Power, water, sewer, internet and road access available on site.">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {Object.entries(info.utilities).map(([k, v]) => (
-                  <div key={k} className="p-3.5 rounded-xl bg-[#FBF8F2] border border-[#3E4E31]/12">
-                    <span className="block text-[10px] uppercase tracking-wider font-bold text-[#596638]">{k}</span>
-                    <span className="block mt-0.5 text-xs font-bold text-[#1A2315]">{v}</span>
+                  <div key={k} className="p-3.5 rounded-xl bg-[#FAFAFA] border border-[#2B2B2B]/12">
+                    <span className="block text-[10px] uppercase tracking-wider font-bold text-[#555555]">{k}</span>
+                    <span className="block mt-0.5 text-xs font-bold text-[#111111]">{v}</span>
                   </div>
                 ))}
               </div>
@@ -322,16 +322,16 @@ function ListingPage({ property }) {
                   <a
                     key={v.title}
                     href="#contact"
-                    className="group relative block aspect-video rounded-xl overflow-hidden bg-[#1A2315]"
+                    className="group relative block aspect-video rounded-xl overflow-hidden bg-[#111111]"
                     aria-label={`${v.title}: request this video tour`}
                   >
                     <img src={v.poster} alt="" loading="lazy" className="w-full h-full object-cover opacity-80 group-hover:opacity-95 group-hover:scale-105 transition-[transform,opacity] duration-700" />
                     <span className="absolute inset-0 flex items-center justify-center">
-                      <span className="w-14 h-14 rounded-full bg-[#BFA668] text-[#1A2315] flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                      <span className="w-14 h-14 rounded-full bg-[#B4B4B4] text-[#111111] flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
                         <svg className="w-6 h-6 ml-0.5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
                       </span>
                     </span>
-                    <span className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-[#0F140C]/90 to-transparent text-white text-xs font-bold">{v.title}</span>
+                    <span className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-[#0A0A0A]/90 to-transparent text-white text-xs font-bold">{v.title}</span>
                   </a>
                 ))}
               </div>
@@ -339,8 +339,8 @@ function ListingPage({ property }) {
           )}
 
           <InfoSection id="verification" title="Legal Verification" sub="Documents our review desk checked before this listing went live.">
-            <div className="p-4 rounded-xl bg-[#F4EDDA]/60 border border-[#BFA668]/30 text-[#1A2315] text-xs mb-3">
-              <span className="font-bold text-[#3E4E31]">✓ Administrative Compliance Passed:</span> All ownership deeds, property tax receipts, and boundary surveys have been filed and vetted.
+            <div className="p-4 rounded-xl bg-[#EFEFEF]/60 border border-[#B4B4B4]/30 text-[#111111] text-xs mb-3">
+              <span className="font-bold text-[#2B2B2B]">✓ Administrative Compliance Passed:</span> All ownership deeds, property tax receipts, and boundary surveys have been filed and vetted.
             </div>
             <div className="space-y-2 text-xs">
               {[
@@ -348,25 +348,25 @@ function ListingPage({ property }) {
                 ['County Property Tax Assessment', 'CURRENT ✓'],
                 ['Boundary & Topographic Survey', 'ON FILE ✓'],
               ].map(([doc, st]) => (
-                <div key={doc} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#FBF8F2] border border-[#3E4E31]/10">
-                  <span className="text-[#1A2315] font-bold">{doc}</span>
-                  <span className="text-[#3E4E31] font-mono text-[11px] font-extrabold shrink-0">{st}</span>
+                <div key={doc} className="flex items-center justify-between gap-3 p-3 rounded-xl bg-[#FAFAFA] border border-[#2B2B2B]/10">
+                  <span className="text-[#111111] font-bold">{doc}</span>
+                  <span className="text-[#2B2B2B] font-mono text-[11px] font-extrabold shrink-0">{st}</span>
                 </div>
               ))}
-              <p className="pt-1 text-[11px] text-[#596638] font-medium">Syndication tier: <span className="font-bold text-[#9E8547]">{property.plan}</span></p>
+              <p className="pt-1 text-[11px] text-[#555555] font-medium">Syndication tier: <span className="font-bold text-[#6E6E6E]">{property.plan}</span></p>
             </div>
           </InfoSection>
         </div>
 
         {/* Right column: agent + inquiry (sticky on desktop) */}
         <aside id="contact" className="lg:col-span-4 scroll-mt-40 lg:sticky lg:top-40">
-          <div className="bg-white rounded-2xl border border-[#3E4E31]/12 shadow-xl overflow-hidden">
-            <div className="p-5 bg-[#1F2A17] text-white flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-[#BFA668] text-[#1A2315] flex items-center justify-center font-editorial font-extrabold text-xl shrink-0">
+          <div className="bg-white rounded-2xl border border-[#2B2B2B]/12 shadow-xl overflow-hidden">
+            <div className="p-5 bg-[#1C1C1C] text-white flex items-center gap-4">
+              <div className="w-14 h-14 rounded-full bg-[#B4B4B4] text-[#111111] flex items-center justify-center font-editorial font-extrabold text-xl shrink-0">
                 {property.agent.name[0]}
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] uppercase tracking-widest font-bold text-[#D4C28E]">Listing Agent</p>
+                <p className="text-[10px] uppercase tracking-widest font-bold text-[#D0D0D0]">Listing Agent</p>
                 <h3 className="text-base font-extrabold font-editorial truncate">{property.agent.name}</h3>
                 <p className="text-xs text-white/70 font-medium truncate">{property.agent.agency}</p>
               </div>
@@ -374,37 +374,37 @@ function ListingPage({ property }) {
             <div className="px-5 pt-4 grid grid-cols-2 gap-2 text-xs">
               <a href={`tel:${property.agent.phone.replace(/[^+\d]/g, '')}`} className="py-2.5 rounded-xl text-center font-bold btn-luxury-outline">Call</a>
               <a href={`mailto:${property.agent.email}?subject=${encodeURIComponent(`Inquiry: ${property.title} (${property.id.toUpperCase()})`)}`} className="py-2.5 rounded-xl text-center font-bold btn-luxury-outline">Email</a>
-              <p className="col-span-2 text-[11px] text-[#596638] font-semibold text-center">{property.agent.phone} · {property.agent.email}</p>
+              <p className="col-span-2 text-[11px] text-[#555555] font-semibold text-center">{property.agent.phone} · {property.agent.email}</p>
             </div>
 
             <div className="p-5 space-y-4">
               <div>
-                <h4 className="text-base font-extrabold text-[#1A2315] font-editorial">Request Information</h4>
-                <p className="text-xs text-[#596638] font-medium">Ask a question or schedule a showing with the agent.</p>
+                <h4 className="text-base font-extrabold text-[#111111] font-editorial">Request Information</h4>
+                <p className="text-xs text-[#555555] font-medium">Ask a question or schedule a showing with the agent.</p>
               </div>
               <AnimatePresence mode="wait" initial={false}>
                 {inquirySent ? (
-                  <motion.div key="sent" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="p-5 rounded-xl bg-[#F4EDDA] border border-[#BFA668]/40 text-center space-y-2">
-                    <p className="font-bold text-sm text-[#3E4E31]">Inquiry Sent Successfully!</p>
-                    <p className="text-[#596638] text-[11px] font-medium">The agent will reach out via email or WhatsApp within 2 hours.</p>
-                    <button onClick={() => setInquirySent(false)} className="mt-2 text-[#9E8547] underline text-xs font-bold cursor-pointer">Send Another Inquiry</button>
+                  <motion.div key="sent" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="p-5 rounded-xl bg-[#EFEFEF] border border-[#B4B4B4]/40 text-center space-y-2">
+                    <p className="font-bold text-sm text-[#2B2B2B]">Inquiry Sent Successfully!</p>
+                    <p className="text-[#555555] text-[11px] font-medium">The agent will reach out via email or WhatsApp within 2 hours.</p>
+                    <button onClick={() => setInquirySent(false)} className="mt-2 text-[#6E6E6E] underline text-xs font-bold cursor-pointer">Send Another Inquiry</button>
                   </motion.div>
                 ) : (
                   <motion.form key="form" initial={false} exit={{ opacity: 0 }} onSubmit={(e) => { e.preventDefault(); setInquirySent(true); }} className="space-y-3">
                     <label className="block">
-                      <span className="block text-[11px] text-[#1A2315] uppercase mb-1 font-bold">Full Name</span>
+                      <span className="block text-[11px] text-[#111111] uppercase mb-1 font-bold">Full Name</span>
                       <input type="text" required placeholder="e.g. John Doe" className={inputCls} />
                     </label>
                     <label className="block">
-                      <span className="block text-[11px] text-[#1A2315] uppercase mb-1 font-bold">Email</span>
+                      <span className="block text-[11px] text-[#111111] uppercase mb-1 font-bold">Email</span>
                       <input type="email" required placeholder="you@domain.com" className={inputCls} />
                     </label>
                     <label className="block">
-                      <span className="block text-[11px] text-[#1A2315] uppercase mb-1 font-bold">Phone / WhatsApp</span>
+                      <span className="block text-[11px] text-[#111111] uppercase mb-1 font-bold">Phone / WhatsApp</span>
                       <input type="tel" placeholder="+1 (555) 000-0000" className={inputCls} />
                     </label>
                     <label className="block">
-                      <span className="block text-[11px] text-[#1A2315] uppercase mb-1 font-bold">Message</span>
+                      <span className="block text-[11px] text-[#111111] uppercase mb-1 font-bold">Message</span>
                       <textarea rows={3} defaultValue={`I'm interested in ${property.title} (${property.id.toUpperCase()}). Please send more information.`} className={inputCls} />
                     </label>
                     <button type="submit" className="w-full py-3 px-4 rounded-xl text-xs font-bold btn-luxury">Send Inquiry →</button>
@@ -426,8 +426,8 @@ function ListingPage({ property }) {
 
       {/* Similar listings */}
       <section className="pt-6">
-        <h2 className="text-xl sm:text-2xl font-extrabold text-[#1A2315] font-editorial">Similar Properties</h2>
-        <p className="text-xs text-[#596638] mt-1 font-medium mb-5">Other listings in the same category or state you may want to compare.</p>
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#111111] font-editorial">Similar Properties</h2>
+        <p className="text-xs text-[#555555] mt-1 font-medium mb-5">Other listings in the same category or state you may want to compare.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {similarList.map((p) => (
             <PropertyCard key={p.id} property={p} />
@@ -439,7 +439,7 @@ function ListingPage({ property }) {
       <AnimatePresence>
         {lightbox !== null && (
           <motion.div
-            className="fixed inset-0 z-[100] bg-[#0F140C]/95 flex flex-col"
+            className="fixed inset-0 z-[100] bg-[#0A0A0A]/95 flex flex-col"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -469,7 +469,7 @@ function ListingPage({ property }) {
             </div>
             <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 pb-4">
               {info.photos.map((src, i) => (
-                <button key={src} onClick={() => setLightbox(i)} className={`shrink-0 w-20 h-14 rounded-md overflow-hidden border-2 cursor-pointer ${i === lightbox ? 'border-[#BFA668]' : 'border-transparent opacity-60 hover:opacity-100'}`} aria-label={`Show photo ${i + 1}`}>
+                <button key={src} onClick={() => setLightbox(i)} className={`shrink-0 w-20 h-14 rounded-md overflow-hidden border-2 cursor-pointer ${i === lightbox ? 'border-[#B4B4B4]' : 'border-transparent opacity-60 hover:opacity-100'}`} aria-label={`Show photo ${i + 1}`}>
                   <img src={src} alt="" className="w-full h-full object-cover" />
                 </button>
               ))}

@@ -113,14 +113,14 @@ export default function AIAssistantWidget() {
             exit={{ opacity: 0, scale: 0.85, y: 8, transition: { duration: 0.18 } }}
             whileHover={reduce ? undefined : { y: -2 }}
             whileTap={reduce ? undefined : { scale: 0.96 }}
-            className="relative flex items-center gap-2.5 px-5 py-3 rounded-full bg-[#1A2315] text-[#FBF8F2] hover:bg-[#3E4E31] transition-colors duration-300 shadow-[0_18px_40px_-14px_rgba(15,20,12,0.7)] border border-white/15 group cursor-pointer"
+            className="relative flex items-center gap-2.5 px-5 py-3 rounded-full bg-[#111111] text-[#FAFAFA] hover:bg-[#2B2B2B] transition-colors duration-300 shadow-[0_18px_40px_-14px_rgba(10, 10, 10,0.7)] border border-white/15 group cursor-pointer"
             aria-label="Open TwistMS AI Assistant"
           >
             <span className="relative flex h-2.5 w-2.5 ring-expand">
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#BFA668]" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#B4B4B4]" />
             </span>
             <span className="text-xs font-semibold tracking-wide">TwistMS AI Assistant</span>
-            <span className="absolute inset-0 rounded-full bg-[#BFA668]/0 group-hover:bg-[#BFA668]/10 transition-colors duration-500 pointer-events-none" />
+            <span className="absolute inset-0 rounded-full bg-[#B4B4B4]/0 group-hover:bg-[#B4B4B4]/10 transition-colors duration-500 pointer-events-none" />
           </motion.button>
         ) : (
           /* ---------- Chat Window ---------- */
@@ -130,17 +130,17 @@ export default function AIAssistantWidget() {
             animate={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 280, damping: 28, mass: 0.9 } }}
             exit={{ opacity: 0, scale: 0.94, y: 16, transition: { duration: 0.2, ease: 'easeIn' } }}
             style={{ transformOrigin: 'bottom right' }}
-            className="w-[min(400px,calc(100vw-2.5rem))] h-[min(560px,calc(100vh-7rem))] rounded-3xl glass-panel-luxury border border-[#3E4E31]/15 shadow-[0_30px_80px_-24px_rgba(15,20,12,0.55)] flex flex-col overflow-hidden bg-white/95"
+            className="w-[min(400px,calc(100vw-2.5rem))] h-[min(560px,calc(100vh-7rem))] rounded-3xl glass-panel-luxury border border-[#2B2B2B]/15 shadow-[0_30px_80px_-24px_rgba(10, 10, 10,0.55)] flex flex-col overflow-hidden bg-white/95"
             role="dialog"
             aria-label="TwistMS AI Assistant"
           >
             {/* Header: smoked glass with fine grid */}
-            <div className="relative p-4 bg-gradient-to-br from-[#1A2315] via-[#2C3A24] to-[#3E4E31] text-white flex items-center justify-between overflow-hidden">
+            <div className="relative p-4 bg-gradient-to-br from-[#111111] via-[#2A2A2A] to-[#2B2B2B] text-white flex items-center justify-between overflow-hidden">
               <div className="absolute inset-0 grid-fine-light opacity-60 pointer-events-none" />
-              <div className="absolute -top-10 right-10 w-40 h-40 rounded-full bg-[#BFA668]/20 blur-[50px] ambient-pulse pointer-events-none" />
+              <div className="absolute -top-10 right-10 w-40 h-40 rounded-full bg-[#B4B4B4]/20 blur-[50px] ambient-pulse pointer-events-none" />
               <div className="relative flex items-center gap-3">
                 <motion.img
-                  src="/logos/new-logo-white-removebg-preview.png"
+                  src="/logos/white-logo-removebg-preview.png"
                   alt="TwistMS AI"
                   initial={reduce ? false : { opacity: 0, x: -8 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -149,7 +149,7 @@ export default function AIAssistantWidget() {
                 />
                 <div>
                   <h3 className="text-sm font-bold font-editorial">TwistMS Real Estate Assistant</h3>
-                  <p className="text-[10px] text-[#D4C28E] font-mono flex items-center gap-1.5">
+                  <p className="text-[10px] text-[#D0D0D0] font-mono flex items-center gap-1.5">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70 animate-ping" />
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
@@ -160,7 +160,7 @@ export default function AIAssistantWidget() {
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="relative text-[#BFA668]/80 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+                className="relative text-[#B4B4B4]/80 hover:text-white p-1.5 rounded-lg hover:bg-white/10 transition-colors"
                 aria-label="Close assistant"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -170,7 +170,7 @@ export default function AIAssistantWidget() {
             </div>
 
             {/* Messages Body */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-3 text-xs bg-[#FBF8F2]/70" aria-live="polite">
+            <div className="flex-1 p-4 overflow-y-auto space-y-3 text-xs bg-[#FAFAFA]/70" aria-live="polite">
               {messages.map((m, idx) => (
                 <motion.div
                   key={idx}
@@ -182,13 +182,13 @@ export default function AIAssistantWidget() {
                   <div
                     className={`max-w-[85%] p-3.5 rounded-2xl ${
                       m.sender === 'user'
-                        ? 'bg-[#3E4E31] text-[#FBF8F2] rounded-br-md shadow-md shadow-[#3E4E31]/20'
-                        : 'bg-white border border-[#3E4E31]/10 text-[#1A2315] shadow-sm rounded-bl-md'
+                        ? 'bg-[#2B2B2B] text-[#FAFAFA] rounded-br-md shadow-md shadow-[#2B2B2B]/20'
+                        : 'bg-white border border-[#2B2B2B]/10 text-[#111111] shadow-sm rounded-bl-md'
                     }`}
                   >
                     <p className="leading-relaxed">{m.text}</p>
                   </div>
-                  <span className="text-[10px] text-[#596638] mt-1 font-mono px-1 font-semibold">{m.time}</span>
+                  <span className="text-[10px] text-[#555555] mt-1 font-mono px-1 font-semibold">{m.time}</span>
                 </motion.div>
               ))}
 
@@ -199,12 +199,12 @@ export default function AIAssistantWidget() {
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 4, transition: { duration: 0.15 } }}
-                    className="flex items-center gap-1.5 bg-white border border-[#3E4E31]/15 px-3.5 py-2.5 rounded-2xl rounded-bl-md w-fit shadow-sm"
+                    className="flex items-center gap-1.5 bg-white border border-[#2B2B2B]/15 px-3.5 py-2.5 rounded-2xl rounded-bl-md w-fit shadow-sm"
                     aria-label="Assistant is typing"
                   >
-                    <span className="typing-dot w-1.5 h-1.5 bg-[#BFA668] rounded-full" />
-                    <span className="typing-dot w-1.5 h-1.5 bg-[#BFA668] rounded-full" />
-                    <span className="typing-dot w-1.5 h-1.5 bg-[#BFA668] rounded-full" />
+                    <span className="typing-dot w-1.5 h-1.5 bg-[#B4B4B4] rounded-full" />
+                    <span className="typing-dot w-1.5 h-1.5 bg-[#B4B4B4] rounded-full" />
+                    <span className="typing-dot w-1.5 h-1.5 bg-[#B4B4B4] rounded-full" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -212,7 +212,7 @@ export default function AIAssistantWidget() {
             </div>
 
             {/* Quick Prompts */}
-            <div className="p-2.5 bg-white border-t border-[#3E4E31]/10 flex gap-1.5 overflow-x-auto no-scrollbar">
+            <div className="p-2.5 bg-white border-t border-[#2B2B2B]/10 flex gap-1.5 overflow-x-auto no-scrollbar">
               {predefinedPrompts.map((p, i) => (
                 <motion.button
                   key={i}
@@ -221,7 +221,7 @@ export default function AIAssistantWidget() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + i * 0.05, duration: 0.35, ease: EASE }}
                   whileTap={reduce ? undefined : { scale: 0.96 }}
-                  className="whitespace-nowrap px-3 py-1.5 rounded-full bg-[#F4EDDA] border border-[#BFA668]/30 text-[11px] font-bold text-[#1A2315] hover:bg-[#EAE0CA] hover:border-[#BFA668] transition-colors shrink-0"
+                  className="whitespace-nowrap px-3 py-1.5 rounded-full bg-[#EFEFEF] border border-[#B4B4B4]/30 text-[11px] font-bold text-[#111111] hover:bg-[#E6E6E6] hover:border-[#B4B4B4] transition-colors shrink-0"
                 >
                   {p}
                 </motion.button>
@@ -229,7 +229,7 @@ export default function AIAssistantWidget() {
             </div>
 
             {/* Input Footer */}
-            <div className="p-3 bg-white border-t border-[#3E4E31]/10 flex items-center gap-2">
+            <div className="p-3 bg-white border-t border-[#2B2B2B]/10 flex items-center gap-2">
               <input
                 ref={inputRef}
                 type="text"
@@ -238,13 +238,13 @@ export default function AIAssistantWidget() {
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Ask about properties, deeds, plans..."
                 aria-label="Message the assistant"
-                className="input-luxury flex-1 bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/20 rounded-xl px-3 py-2.5 placeholder:text-[#838961] focus:outline-none shadow-sm"
+                className="input-luxury flex-1 bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/20 rounded-xl px-3 py-2.5 placeholder:text-[#8A8A8A] focus:outline-none shadow-sm"
               />
               <motion.button
                 onClick={() => handleSend()}
                 whileHover={reduce ? undefined : { scale: 1.05 }}
                 whileTap={reduce ? undefined : { scale: 0.92 }}
-                className="p-2.5 rounded-xl bg-[#3E4E31] text-white hover:bg-[#BFA668] hover:text-[#1A2315] transition-colors duration-300 shadow-sm"
+                className="p-2.5 rounded-xl bg-[#2B2B2B] text-white hover:bg-[#B4B4B4] hover:text-[#111111] transition-colors duration-300 shadow-sm"
                 aria-label="Send message"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

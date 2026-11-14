@@ -13,7 +13,7 @@ const SOCIAL_ICONS = {
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[#3E4E31]/15 bg-[#FFFFFF] relative overflow-hidden text-[#596638] text-xs">
+    <footer className="border-t border-[#2B2B2B]/15 bg-[#FFFFFF] relative overflow-hidden text-[#555555] text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           
@@ -26,15 +26,15 @@ export default function Footer() {
                 className="h-16 w-16 object-contain"
               />
               <span className="flex flex-col leading-none">
-                <span className="text-xl font-extrabold text-[#1A2315] font-editorial">{BRAND.name}</span>
-                <span className="mt-1 text-[10px] tracking-[0.32em] uppercase font-bold text-[#9E8547]">Properties · {BRAND.market}</span>
+                <span className="text-xl font-extrabold text-[#111111] font-editorial">{BRAND.name}</span>
+                <span className="mt-1 text-[10px] tracking-[0.32em] uppercase font-bold text-[#6E6E6E]">Properties · {BRAND.market}</span>
               </span>
             </Link>
-            <p className="text-[#596638] leading-relaxed text-xs font-normal">
+            <p className="text-[#555555] leading-relaxed text-xs font-normal">
               USA-wide luxury and commercial real estate platform connecting discerning buyers, verified property sellers, and licensed brokerage agents.
             </p>
-            <div className="text-[11px] font-mono text-[#BFA668] flex items-center gap-2 font-bold">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#BFA668]"></span>
+            <div className="text-[11px] font-mono text-[#B4B4B4] flex items-center gap-2 font-bold">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#B4B4B4]"></span>
               Verified MLS/IDX & Certified Deeds
             </div>
             <div className="flex items-center gap-2 pt-1" aria-label="Official US social channels">
@@ -46,7 +46,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={sc.label}
                   title={sc.label}
-                  className="w-9 h-9 rounded-full flex items-center justify-center bg-[#1F2A17] text-[#FBF8F2] hover:bg-[#BFA668] hover:text-[#1A2315] transition-colors duration-300 shadow-sm"
+                  className="w-9 h-9 rounded-full flex items-center justify-center bg-[#1C1C1C] text-[#FAFAFA] hover:bg-[#B4B4B4] hover:text-[#111111] transition-colors duration-300 shadow-sm"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">{SOCIAL_ICONS[sc.key]}</svg>
                 </a>
@@ -56,38 +56,38 @@ export default function Footer() {
 
           {/* Categories */}
           <div>
-            <h4 className="text-[#1A2315] font-bold text-xs tracking-widest uppercase font-mono mb-4">
+            <h4 className="text-[#111111] font-bold text-xs tracking-widest uppercase font-mono mb-4">
               Acquisitions
             </h4>
-            <ul className="space-y-2.5 font-medium text-[#596638]">
-              <li><Link to="/search" className="hover:text-[#BFA668] transition-colors">Residential Homes & Estates</Link></li>
-              <li><Link to="/search" className="hover:text-[#BFA668] transition-colors">Timberland & Agricultural Land</Link></li>
-              <li><Link to="/search" className="hover:text-[#BFA668] transition-colors">Commercial & Industrial Parks</Link></li>
-              <li><Link to="/agents" className="hover:text-[#BFA668] transition-colors font-bold text-[#1A2315]">Find an Agent Directory →</Link></li>
-              <li><Link to="/submit" className="hover:text-[#BFA668] transition-colors font-bold text-[#1A2315]">Submit Property Deed →</Link></li>
+            <ul className="space-y-2.5 font-medium text-[#555555]">
+              <li><Link to="/search" className="hover:text-[#B4B4B4] transition-colors">Residential Homes & Estates</Link></li>
+              <li><Link to="/search" className="hover:text-[#B4B4B4] transition-colors">Timberland & Agricultural Land</Link></li>
+              <li><Link to="/search" className="hover:text-[#B4B4B4] transition-colors">Commercial & Industrial Parks</Link></li>
+              <li><Link to="/agents" className="hover:text-[#B4B4B4] transition-colors font-bold text-[#111111]">Find an Agent Directory →</Link></li>
+              <li><Link to="/submit" className="hover:text-[#B4B4B4] transition-colors font-bold text-[#111111]">Submit Property Deed →</Link></li>
             </ul>
           </div>
 
           {/* Compliance */}
           <div>
-            <h4 className="text-[#1A2315] font-bold text-xs tracking-widest uppercase font-mono mb-4">
+            <h4 className="text-[#111111] font-bold text-xs tracking-widest uppercase font-mono mb-4">
               Governance
             </h4>
-            <ul className="space-y-2.5 font-medium text-[#596638]">
-              <li><span className="text-[#1A2315] font-semibold">Fair Housing Act Compliant</span></li>
-              <li><span className="text-[#1A2315] font-semibold">CCPA / CPRA Consumer Privacy</span></li>
-              <li><span className="text-[#1A2315] font-semibold">Verified Deed Escrow Intake</span></li>
-              <li><span className="text-[#1A2315] font-semibold">Document Authenticity Reviews</span></li>
-              <li><Link to="/contact" className="hover:text-[#BFA668] transition-colors">Report Suspicious Property</Link></li>
+            <ul className="space-y-2.5 font-medium text-[#555555]">
+              <li><span className="text-[#111111] font-semibold">Fair Housing Act Compliant</span></li>
+              <li><span className="text-[#111111] font-semibold">CCPA / CPRA Consumer Privacy</span></li>
+              <li><span className="text-[#111111] font-semibold">Verified Deed Escrow Intake</span></li>
+              <li><span className="text-[#111111] font-semibold">Document Authenticity Reviews</span></li>
+              <li><Link to="/contact" className="hover:text-[#B4B4B4] transition-colors">Report Suspicious Property</Link></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="text-[#1A2315] font-bold text-xs tracking-widest uppercase font-mono mb-4">
+            <h4 className="text-[#111111] font-bold text-xs tracking-widest uppercase font-mono mb-4">
               Concierge Desk
             </h4>
-            <p className="text-xs text-[#596638] mb-3 font-medium">
+            <p className="text-xs text-[#555555] mb-3 font-medium">
               Direct connection with our USA listing coordinator for rapid deed verification.
             </p>
             <div className="space-y-2">
@@ -95,12 +95,12 @@ export default function Footer() {
                 href={whatsappLink()}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#F4EDDA] text-[#1A2315] border border-[#BFA668]/40 hover:border-[#BFA668] transition-all font-bold"
+                className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#EFEFEF] text-[#111111] border border-[#B4B4B4]/40 hover:border-[#B4B4B4] transition-all font-bold"
               >
                 <span>WhatsApp Priority Desk</span>
               </a>
-              <p className="text-[11px] font-mono text-[#596638] pt-2 font-semibold">
-                Official: <a href={`mailto:${BRAND.supportEmail}`} className="hover:text-[#9E8547]">{BRAND.supportEmail}</a>
+              <p className="text-[11px] font-mono text-[#555555] pt-2 font-semibold">
+                Official: <a href={`mailto:${BRAND.supportEmail}`} className="hover:text-[#6E6E6E]">{BRAND.supportEmail}</a>
               </p>
             </div>
           </div>
@@ -108,9 +108,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-[#3E4E31]/15 flex flex-col md:flex-row items-center justify-between gap-4 text-[#596638] font-medium">
+        <div className="mt-12 pt-8 border-t border-[#2B2B2B]/15 flex flex-col md:flex-row items-center justify-between gap-4 text-[#555555] font-medium">
           <p>© {new Date().getFullYear()} {BRAND.fullName} Inc. {BRAND.market}. All rights reserved.</p>
-          <div className="flex gap-6 text-[11px] font-semibold text-[#596638]">
+          <div className="flex gap-6 text-[11px] font-semibold text-[#555555]">
             <span>Privacy Policy</span>
             <span>Terms of Service</span>
             <span>Equal Housing Opportunity</span>

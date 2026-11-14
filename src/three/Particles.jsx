@@ -38,9 +38,9 @@ const fragment = /* glsl */ `
 `;
 
 const PALETTE = [
-  new THREE.Color('#F5F3EE'),
-  new THREE.Color('#E8DCB4'),
-  new THREE.Color('#BFA668'),
+  new THREE.Color('#F4F4F4'),
+  new THREE.Color('#E2E2E2'),
+  new THREE.Color('#B4B4B4'),
   new THREE.Color('#8BAFD0'),
 ];
 

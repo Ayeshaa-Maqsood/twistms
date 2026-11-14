@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 
 export const COLORS = {
-  ivory: '#F5F3EE',
+  ivory: '#F4F4F4',
   charcoal: '#171A1D',
   navy: '#172331',
   stage: '#0E141B',
-  gold: '#BFA668',
-  goldLight: '#E8DCB4',
+  gold: '#B4B4B4',
+  goldLight: '#E2E2E2',
   blueprint: '#8BAFD0',
   grey: '#D9D8D3',
 };

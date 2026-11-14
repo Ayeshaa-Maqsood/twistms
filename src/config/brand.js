@@ -17,8 +17,8 @@ export const BRAND = {
   whatsapp: '15550199000',
 
   logo: {
-    color: '/logos/new-logo-removebg-preview.png',
-    white: '/logos/new-logo-white-removebg-preview.png',
+    color: '/logos/final-logo-removebg-preview.png',
+    white: '/logos/white-logo-removebg-preview.png',
   },
 
   // US-only channels. Other regional pages are intentionally not linked.

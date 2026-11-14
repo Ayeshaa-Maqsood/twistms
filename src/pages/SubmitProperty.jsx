@@ -70,13 +70,13 @@ export default function SubmitProperty() {
       {/* Page Header */}
       <ScrollReveal direction="down">
         <div className="text-center space-y-2">
-          <span className="text-[11px] font-mono uppercase tracking-widest text-[#9E8547] font-extrabold">
+          <span className="text-[11px] font-mono uppercase tracking-widest text-[#6E6E6E] font-extrabold">
             Administrative Deed Verification Portal
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1A2315] font-editorial">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#111111] font-editorial">
             Submit Property & Deed for Review
           </h1>
-          <p className="text-sm text-[#3E4E31] max-w-xl mx-auto font-medium leading-relaxed">
+          <p className="text-sm text-[#2B2B2B] max-w-xl mx-auto font-medium leading-relaxed">
             All listings undergo administrative verification before entering public syndication. Complete the 3-step submission to obtain your Verified Deed badge.
           </p>
         </div>
@@ -85,15 +85,15 @@ export default function SubmitProperty() {
       {/* Step Progress Tracker */}
       <ScrollReveal direction="up" delay={50}>
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-[11px] sm:text-xs font-mono">
-          <div className={`px-4 py-2 rounded-full border transition-all ${step === 1 ? 'bg-[#1A2315] text-white border-[#1A2315] font-bold shadow-md' : 'bg-white text-[#3E4E31] border-[#3E4E31]/25 font-semibold'}`}>
+          <div className={`px-4 py-2 rounded-full border transition-all ${step === 1 ? 'bg-[#111111] text-white border-[#111111] font-bold shadow-md' : 'bg-white text-[#2B2B2B] border-[#2B2B2B]/25 font-semibold'}`}>
             01. Specs & Location
           </div>
-          <span className="text-[#9E8547] font-bold">→</span>
-          <div className={`px-4 py-2 rounded-full border transition-all ${step === 2 ? 'bg-[#1A2315] text-white border-[#1A2315] font-bold shadow-md' : 'bg-white text-[#3E4E31] border-[#3E4E31]/25 font-semibold'}`}>
+          <span className="text-[#6E6E6E] font-bold">→</span>
+          <div className={`px-4 py-2 rounded-full border transition-all ${step === 2 ? 'bg-[#111111] text-white border-[#111111] font-bold shadow-md' : 'bg-white text-[#2B2B2B] border-[#2B2B2B]/25 font-semibold'}`}>
             02. Media & Deed Compliance
           </div>
-          <span className="text-[#9E8547] font-bold">→</span>
-          <div className={`px-4 py-2 rounded-full border transition-all ${step === 3 ? 'bg-[#1A2315] text-white border-[#1A2315] font-bold shadow-md' : 'bg-white text-[#3E4E31] border-[#3E4E31]/25 font-semibold'}`}>
+          <span className="text-[#6E6E6E] font-bold">→</span>
+          <div className={`px-4 py-2 rounded-full border transition-all ${step === 3 ? 'bg-[#111111] text-white border-[#111111] font-bold shadow-md' : 'bg-white text-[#2B2B2B] border-[#2B2B2B]/25 font-semibold'}`}>
             03. Syndication Tier
           </div>
         </div>
@@ -101,18 +101,18 @@ export default function SubmitProperty() {
 
       {/* Main Glass Card Form */}
       <ScrollReveal direction="up" delay={100}>
-        <div className="glass-panel-luxury p-8 sm:p-12 rounded-3xl border border-[#3E4E31]/15 shadow-2xl bg-white">
+        <div className="glass-panel-luxury p-8 sm:p-12 rounded-3xl border border-[#2B2B2B]/15 shadow-2xl bg-white">
           
           {submitted ? (
             <div className="text-center py-12 space-y-5">
-              <div className="w-16 h-16 rounded-full bg-[#E6EBD8] text-[#3E4E31] flex items-center justify-center mx-auto text-2xl font-bold font-editorial">
+              <div className="w-16 h-16 rounded-full bg-[#EAEAEA] text-[#2B2B2B] flex items-center justify-center mx-auto text-2xl font-bold font-editorial">
                 ✓
               </div>
-              <h2 className="text-3xl font-extrabold text-[#1A2315] font-editorial">
+              <h2 className="text-3xl font-extrabold text-[#111111] font-editorial">
                 Property Submitted for Administrative Review
               </h2>
-              <p className="text-xs text-[#3E4E31] max-w-md mx-auto leading-relaxed font-medium">
-                Your submission for <span className="font-bold text-[#1A2315]">{formData.title || 'the submitted parcel'}</span> has been assigned reference token <span className="font-mono text-[#9E8547] font-bold">#TX-{Math.floor(1000 + Math.random() * 9000)}</span>. Our compliance desk reviews deeds within 24 hours.
+              <p className="text-xs text-[#2B2B2B] max-w-md mx-auto leading-relaxed font-medium">
+                Your submission for <span className="font-bold text-[#111111]">{formData.title || 'the submitted parcel'}</span> has been assigned reference token <span className="font-mono text-[#6E6E6E] font-bold">#TX-{Math.floor(1000 + Math.random() * 9000)}</span>. Our compliance desk reviews deeds within 24 hours.
               </p>
               <div className="pt-4 flex justify-center gap-3">
                 <Link to="/search" className="btn-luxury px-6 py-3 rounded-xl text-xs font-bold">
@@ -126,12 +126,12 @@ export default function SubmitProperty() {
               {/* STEP 1: Specs & Location */}
               {step === 1 && (
                 <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-[#1A2315] font-editorial border-b border-[#3E4E31]/15 pb-3">
+                  <h3 className="text-xl font-bold text-[#111111] font-editorial border-b border-[#2B2B2B]/15 pb-3">
                     Step 1: Property Identity & Physical Specifications
                   </h3>
 
                   <div>
-                    <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Listing Headline / Title</label>
+                    <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Listing Headline / Title</label>
                     <input
                       type="text"
                       name="title"
@@ -139,18 +139,18 @@ export default function SubmitProperty() {
                       value={formData.title}
                       onChange={handleChange}
                       placeholder="e.g. Modern Hill Country Estate with Equestrian Barns"
-                      className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
+                      className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#B4B4B4] shadow-sm"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Category</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Category</label>
                       <select
                         name="category"
                         value={formData.category}
                         onChange={handleChange}
-                        className="w-full bg-white text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/25 rounded-xl px-3.5 py-3 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-semibold border border-[#2B2B2B]/25 rounded-xl px-3.5 py-3 focus:outline-none focus:border-[#B4B4B4] cursor-pointer shadow-sm"
                       >
                         <option value="Residential">Residential</option>
                         <option value="Land">Land / Timber / Farm</option>
@@ -159,19 +159,19 @@ export default function SubmitProperty() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Listing Type</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Listing Type</label>
                       <select
                         name="type"
                         value={formData.type}
                         onChange={handleChange}
-                        className="w-full bg-white text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/25 rounded-xl px-3.5 py-3 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-semibold border border-[#2B2B2B]/25 rounded-xl px-3.5 py-3 focus:outline-none focus:border-[#B4B4B4] cursor-pointer shadow-sm"
                       >
                         <option value="Sale">For Sale</option>
                         <option value="Rent">For Rent</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Asking Price ($ USD)</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Asking Price ($ USD)</label>
                       <input
                         type="number"
                         name="price"
@@ -179,14 +179,14 @@ export default function SubmitProperty() {
                         value={formData.price}
                         onChange={handleChange}
                         placeholder="e.g. 1450000"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#B4B4B4] shadow-sm"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                     <div className="sm:col-span-2">
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Street Address</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Street Address</label>
                       <input
                         type="text"
                         name="address"
@@ -194,11 +194,11 @@ export default function SubmitProperty() {
                         value={formData.address}
                         onChange={handleChange}
                         placeholder="e.g. 1204 Oak Ridge Dr"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#B4B4B4] shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">City</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">City</label>
                       <input
                         type="text"
                         name="city"
@@ -206,16 +206,16 @@ export default function SubmitProperty() {
                         value={formData.city}
                         onChange={handleChange}
                         placeholder="Austin"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#B4B4B4] shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">State</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">State</label>
                       <select
                         name="stateCode"
                         value={formData.stateCode}
                         onChange={handleChange}
-                        className="w-full bg-white text-xs text-[#1A2315] font-semibold border border-[#3E4E31]/25 rounded-xl px-3.5 py-3 focus:outline-none focus:border-[#BFA668] cursor-pointer shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-semibold border border-[#2B2B2B]/25 rounded-xl px-3.5 py-3 focus:outline-none focus:border-[#B4B4B4] cursor-pointer shadow-sm"
                       >
                         <option value="TX">Texas (TX)</option>
                         <option value="CO">Colorado (CO)</option>
@@ -229,18 +229,18 @@ export default function SubmitProperty() {
 
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Bedrooms</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Bedrooms</label>
                       <input
                         type="number"
                         name="bedrooms"
                         value={formData.bedrooms}
                         onChange={handleChange}
                         placeholder="4"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Bathrooms</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Bathrooms</label>
                       <input
                         type="number"
                         step="0.5"
@@ -248,11 +248,11 @@ export default function SubmitProperty() {
                         value={formData.bathrooms}
                         onChange={handleChange}
                         placeholder="3.5"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Acreage</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Acreage</label>
                       <input
                         type="number"
                         step="0.1"
@@ -260,18 +260,18 @@ export default function SubmitProperty() {
                         value={formData.acreage}
                         onChange={handleChange}
                         placeholder="10.5"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Square Feet</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Square Feet</label>
                       <input
                         type="number"
                         name="sqft"
                         value={formData.sqft}
                         onChange={handleChange}
                         placeholder="3800"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 shadow-sm"
                       />
                     </div>
                   </div>
@@ -291,12 +291,12 @@ export default function SubmitProperty() {
               {/* STEP 2: Media & Legal Deed Compliance */}
               {step === 2 && (
                 <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-[#1A2315] font-editorial border-b border-[#3E4E31]/15 pb-3">
+                  <h3 className="text-xl font-bold text-[#111111] font-editorial border-b border-[#2B2B2B]/15 pb-3">
                     Step 2: Legal Verification & Media Files
                   </h3>
 
                   {/* Photos & videos with enforced listing limits */}
-                  <p className="text-xs text-[#596638] font-medium -mt-2">
+                  <p className="text-xs text-[#555555] font-medium -mt-2">
                     Add {PHOTO_LIMIT.min}–{PHOTO_LIMIT.max} photos and {VIDEO_LIMIT.min}–{VIDEO_LIMIT.max} videos. The first photo becomes the listing cover.
                   </p>
                   <MediaUploader kind="photo" files={photos} onChange={(f) => { setPhotos(f); setMediaError(''); }} min={PHOTO_LIMIT.min} max={PHOTO_LIMIT.max} />
@@ -306,27 +306,27 @@ export default function SubmitProperty() {
                   )}
 
                   {/* Required Legal Attestation */}
-                  <div className="p-5 rounded-2xl bg-[#F4EDDA]/60 border border-[#BFA668]/40 space-y-3">
-                    <h4 className="text-xs font-bold text-[#1A2315] uppercase font-mono">
+                  <div className="p-5 rounded-2xl bg-[#EFEFEF]/60 border border-[#B4B4B4]/40 space-y-3">
+                    <h4 className="text-xs font-bold text-[#111111] uppercase font-mono">
                       Administrative Compliance Checklist
                     </h4>
-                    <label className="flex items-start gap-2.5 text-xs text-[#1A2315] cursor-pointer font-medium">
+                    <label className="flex items-start gap-2.5 text-xs text-[#111111] cursor-pointer font-medium">
                       <input
                         type="checkbox"
                         name="hasDeed"
                         checked={formData.hasDeed}
                         onChange={handleChange}
-                        className="mt-0.5 accent-[#3E4E31]"
+                        className="mt-0.5 accent-[#2B2B2B]"
                       />
                       <span>I confirm I possess the recorded Grant Deed, Title Policy, or written representative authority for this parcel.</span>
                     </label>
-                    <label className="flex items-start gap-2.5 text-xs text-[#1A2315] cursor-pointer font-medium">
+                    <label className="flex items-start gap-2.5 text-xs text-[#111111] cursor-pointer font-medium">
                       <input
                         type="checkbox"
                         name="hasTaxReceipt"
                         checked={formData.hasTaxReceipt}
                         onChange={handleChange}
-                        className="mt-0.5 accent-[#3E4E31]"
+                        className="mt-0.5 accent-[#2B2B2B]"
                       />
                       <span>I confirm current county property tax records are current without unresolved ownership liens.</span>
                     </label>
@@ -355,7 +355,7 @@ export default function SubmitProperty() {
               {/* STEP 3: Plan Selection & Submission */}
               {step === 3 && (
                 <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-[#1A2315] font-editorial border-b border-[#3E4E31]/15 pb-3">
+                  <h3 className="text-xl font-bold text-[#111111] font-editorial border-b border-[#2B2B2B]/15 pb-3">
                     Step 3: Select Listing Duration & Promotion Plan
                   </h3>
 
@@ -363,44 +363,44 @@ export default function SubmitProperty() {
                     <div
                       onClick={() => setFormData({ ...formData, plan: 'Free' })}
                       className={`p-5 rounded-2xl border cursor-pointer transition-all ${
-                        formData.plan === 'Free' ? 'border-[#1A2315] bg-[#F4EDDA]/50 shadow-md ring-2 ring-[#1A2315]' : 'border-[#3E4E31]/15 bg-white hover:border-[#3E4E31]/40'
+                        formData.plan === 'Free' ? 'border-[#111111] bg-[#EFEFEF]/50 shadow-md ring-2 ring-[#111111]' : 'border-[#2B2B2B]/15 bg-white hover:border-[#2B2B2B]/40'
                       }`}
                     >
-                      <span className="text-[10px] font-mono text-[#596638] uppercase font-bold">Basic Entry</span>
-                      <h4 className="text-lg font-bold text-[#1A2315] font-editorial">Free Listing</h4>
-                      <p className="text-xl font-extrabold font-editorial mt-1">$0 <span className="text-xs text-[#596638]">/ 45 days</span></p>
-                      <p className="text-[11px] text-[#3E4E31] mt-2 font-medium">Standard public search display without social marketing.</p>
+                      <span className="text-[10px] font-mono text-[#555555] uppercase font-bold">Basic Entry</span>
+                      <h4 className="text-lg font-bold text-[#111111] font-editorial">Free Listing</h4>
+                      <p className="text-xl font-extrabold font-editorial mt-1">$0 <span className="text-xs text-[#555555]">/ 45 days</span></p>
+                      <p className="text-[11px] text-[#2B2B2B] mt-2 font-medium">Standard public search display without social marketing.</p>
                     </div>
 
                     <div
                       onClick={() => setFormData({ ...formData, plan: 'Paid' })}
                       className={`p-5 rounded-2xl border cursor-pointer transition-all relative ${
-                        formData.plan === 'Paid' ? 'border-[#BFA668] bg-[#F4EDDA]/60 shadow-md ring-2 ring-[#BFA668]' : 'border-[#3E4E31]/15 bg-white hover:border-[#3E4E31]/40'
+                        formData.plan === 'Paid' ? 'border-[#B4B4B4] bg-[#EFEFEF]/60 shadow-md ring-2 ring-[#B4B4B4]' : 'border-[#2B2B2B]/15 bg-white hover:border-[#2B2B2B]/40'
                       }`}
                     >
-                      <span className="text-[10px] font-mono text-[#9E8547] uppercase font-extrabold">Most Popular</span>
-                      <h4 className="text-lg font-bold text-[#1A2315] font-editorial">Paid Verified</h4>
-                      <p className="text-xl font-extrabold font-editorial mt-1">$49 <span className="text-xs text-[#596638]">/ 150 days</span></p>
-                      <p className="text-[11px] text-[#3E4E31] mt-2 font-medium">Includes Verified Deed Badge + Official FB & IG Spotlight.</p>
+                      <span className="text-[10px] font-mono text-[#6E6E6E] uppercase font-extrabold">Most Popular</span>
+                      <h4 className="text-lg font-bold text-[#111111] font-editorial">Paid Verified</h4>
+                      <p className="text-xl font-extrabold font-editorial mt-1">$49 <span className="text-xs text-[#555555]">/ 150 days</span></p>
+                      <p className="text-[11px] text-[#2B2B2B] mt-2 font-medium">Includes Verified Deed Badge + Official FB & IG Spotlight.</p>
                     </div>
 
                     <div
                       onClick={() => setFormData({ ...formData, plan: 'Premium' })}
                       className={`p-5 rounded-2xl border cursor-pointer transition-all ${
-                        formData.plan === 'Premium' ? 'border-[#1A2315] bg-[#F4EDDA]/50 shadow-md ring-2 ring-[#1A2315]' : 'border-[#3E4E31]/15 bg-white hover:border-[#3E4E31]/40'
+                        formData.plan === 'Premium' ? 'border-[#111111] bg-[#EFEFEF]/50 shadow-md ring-2 ring-[#111111]' : 'border-[#2B2B2B]/15 bg-white hover:border-[#2B2B2B]/40'
                       }`}
                     >
-                      <span className="text-[10px] font-mono text-[#596638] uppercase font-bold">Full Year</span>
-                      <h4 className="text-lg font-bold text-[#1A2315] font-editorial">Premium Elite</h4>
-                      <p className="text-xl font-extrabold font-editorial mt-1">$129 <span className="text-xs text-[#596638]">/ 365 days</span></p>
-                      <p className="text-[11px] text-[#3E4E31] mt-2 font-medium">Top featured placement + viral TikTok/IG video push.</p>
+                      <span className="text-[10px] font-mono text-[#555555] uppercase font-bold">Full Year</span>
+                      <h4 className="text-lg font-bold text-[#111111] font-editorial">Premium Elite</h4>
+                      <p className="text-xl font-extrabold font-editorial mt-1">$129 <span className="text-xs text-[#555555]">/ 365 days</span></p>
+                      <p className="text-[11px] text-[#2B2B2B] mt-2 font-medium">Top featured placement + viral TikTok/IG video push.</p>
                     </div>
                   </div>
 
                   {/* Submitter Contact */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#3E4E31]/15">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[#2B2B2B]/15">
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Your Name</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Your Name</label>
                       <input
                         type="text"
                         name="ownerName"
@@ -408,11 +408,11 @@ export default function SubmitProperty() {
                         value={formData.ownerName}
                         onChange={handleChange}
                         placeholder="e.g. David Vance"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#B4B4B4] shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Email</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Email</label>
                       <input
                         type="email"
                         name="ownerEmail"
@@ -420,18 +420,18 @@ export default function SubmitProperty() {
                         value={formData.ownerEmail}
                         onChange={handleChange}
                         placeholder="david@domain.com"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#B4B4B4] shadow-sm"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-mono text-[#1A2315] uppercase mb-1.5 font-bold">Phone / WhatsApp</label>
+                      <label className="block text-[11px] font-mono text-[#111111] uppercase mb-1.5 font-bold">Phone / WhatsApp</label>
                       <input
                         type="tel"
                         name="ownerPhone"
                         value={formData.ownerPhone}
                         onChange={handleChange}
                         placeholder="+1 (555) 000-0000"
-                        className="w-full bg-white text-xs text-[#1A2315] font-medium border border-[#3E4E31]/25 rounded-xl px-4 py-3 placeholder:text-[#686E4A] focus:outline-none focus:border-[#BFA668] shadow-sm"
+                        className="w-full bg-white text-xs text-[#111111] font-medium border border-[#2B2B2B]/25 rounded-xl px-4 py-3 placeholder:text-[#6B6B6B] focus:outline-none focus:border-[#B4B4B4] shadow-sm"
                       />
                     </div>
                   </div>

@@ -44,9 +44,9 @@ export default function InteractiveWaveCanvas() {
 
     // Architectural Luxury Particle Palette (Champagne Gold, Warm Greige, Soft Slate, Off-White)
     const luxuryColors = [
-      { r: 197, g: 168, b: 128 }, // Champagne Gold (#C5A880)
+      { r: 197, g: 168, b: 128 }, // Champagne Gold (#B4B4B4)
       { r: 166, g: 136, b: 94 },  // Deep Sand Bronze (#A6885E)
-      { r: 100, g: 116, b: 139 }, // Muted Slate Grey (#686E4A)
+      { r: 100, g: 116, b: 139 }, // Muted Slate Grey (#6B6B6B)
       { r: 160, g: 174, b: 192 }, // Soft Cool Silver Grey
       { r: 216, g: 194, b: 157 }, // Pale Linen Beige
     ];
@@ -111,8 +111,8 @@ export default function InteractiveWaveCanvas() {
 
         if (this.hovered) {
           // Warm champagne glow highlight
-          ctx.fillStyle = `rgba(197, 168, 128, 0.9)`;
-          ctx.shadowColor = `rgba(197, 168, 128, 0.6)`;
+          ctx.fillStyle = `rgba(180, 180, 180, 0.9)`;
+          ctx.shadowColor = `rgba(180, 180, 180, 0.6)`;
           ctx.shadowBlur = 10;
         } else {
           ctx.fillStyle = `rgba(${this.colorObj.r}, ${this.colorObj.g}, ${this.colorObj.b}, ${this.alpha})`;
@@ -143,7 +143,7 @@ export default function InteractiveWaveCanvas() {
           if (dist < 85) {
             const lineAlpha = (1 - dist / 85) * 0.12;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(197, 168, 128, ${lineAlpha})`;
+            ctx.strokeStyle = `rgba(180, 180, 180, ${lineAlpha})`;
             ctx.lineWidth = 0.6;
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);

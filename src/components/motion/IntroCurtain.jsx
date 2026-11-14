@@ -21,7 +21,7 @@ export default function IntroCurtain() {
       {show && (
         <motion.div
           key="intro-curtain"
-          className="fixed inset-0 z-[200] bg-[#0F140C] flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[200] bg-[#0A0A0A] flex items-center justify-center overflow-hidden"
           initial={{ clipPath: 'inset(0 0 0% 0)' }}
           animate={{ clipPath: 'inset(0 0 0% 0)' }}
           exit={{ clipPath: 'inset(0 0 100% 0)', transition: { duration: INTRO_WIPE, ease: EASE_IO } }}
@@ -32,7 +32,7 @@ export default function IntroCurtain() {
 
           <div className="relative flex flex-col items-center gap-5">
             <motion.img
-              src="/logos/new-logo-white-removebg-preview.png"
+              src="/logos/white-logo-removebg-preview.png"
               alt=""
               className="h-20 sm:h-24 w-auto object-contain"
               initial={{ opacity: 0, scale: 0.92, y: 8 }}
@@ -40,13 +40,13 @@ export default function IntroCurtain() {
               exit={{ opacity: 0, y: -14, transition: { duration: 0.3, ease: 'easeIn' } }}
             />
             <motion.div
-              className="h-px w-40 bg-gradient-to-r from-transparent via-[#BFA668] to-transparent"
+              className="h-px w-40 bg-gradient-to-r from-transparent via-[#B4B4B4] to-transparent"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1, transition: { duration: 0.7, ease: EASE, delay: 0.15 } }}
               exit={{ opacity: 0, transition: { duration: 0.2 } }}
             />
             <motion.span
-              className="font-mono text-[10px] tracking-[0.35em] uppercase text-[#D4C28E]/80"
+              className="font-mono text-[10px] tracking-[0.35em] uppercase text-[#D0D0D0]/80"
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE, delay: 0.3 } }}
               exit={{ opacity: 0, transition: { duration: 0.2 } }}

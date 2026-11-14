@@ -54,11 +54,11 @@ export default function HeroHandoff({ progress, mouseX, mouseY }) {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
         <motion.div style={{ x: headX, y: headY }}>
-          <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#9E8547]">From blueprint to your front door</p>
-          <h2 className="mt-2 sm:mt-3 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#1A2315] font-editorial text-balance">
+          <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#6E6E6E]">From blueprint to your front door</p>
+          <h2 className="mt-2 sm:mt-3 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#111111] font-editorial text-balance">
             What are you looking for?
           </h2>
-          <p className="mt-2 sm:mt-3 text-xs sm:text-base text-[#596638] font-medium max-w-xl mx-auto">
+          <p className="mt-2 sm:mt-3 text-xs sm:text-base text-[#555555] font-medium max-w-xl mx-auto">
             Choose a property type to jump straight to matching listings, or keep scrolling to search by city, ZIP or state.
           </p>
         </motion.div>
@@ -68,17 +68,17 @@ export default function HeroHandoff({ progress, mouseX, mouseY }) {
             <motion.div key={t.cat} whileHover={{ y: -8, scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
               <Link
                 to={`/search?cat=${t.cat}`}
-                className="group relative flex flex-col items-center gap-1.5 sm:gap-3 p-3 sm:p-5 lg:p-6 rounded-2xl bg-white border border-[#3E4E31]/12 shadow-[0_14px_34px_-22px_rgba(26,35,21,0.5)] hover:border-[#BFA668] hover:shadow-[0_26px_50px_-22px_rgba(191,166,104,0.75)] transition-[border-color,box-shadow] duration-300 overflow-hidden"
+                className="group relative flex flex-col items-center gap-1.5 sm:gap-3 p-3 sm:p-5 lg:p-6 rounded-2xl bg-white border border-[#2B2B2B]/12 shadow-[0_14px_34px_-22px_rgba(17, 17, 17,0.5)] hover:border-[#B4B4B4] hover:shadow-[0_26px_50px_-22px_rgba(180, 180, 180,0.75)] transition-[border-color,box-shadow] duration-300 overflow-hidden"
               >
-                <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#F4EDDA]/0 to-[#F4EDDA] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-[#1F2A17] text-[#D4C28E] flex items-center justify-center group-hover:bg-[#BFA668] group-hover:text-[#1A2315] group-hover:rotate-[8deg] transition-all duration-300">
+                <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#EFEFEF]/0 to-[#EFEFEF] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <span className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-[#1C1C1C] text-[#D0D0D0] flex items-center justify-center group-hover:bg-[#B4B4B4] group-hover:text-[#111111] group-hover:rotate-[8deg] transition-all duration-300">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden="true">
                     <path d={t.icon} />
                   </svg>
                 </span>
-                <span className="relative text-sm sm:text-base font-extrabold text-[#1A2315] font-editorial">{t.label}</span>
-                <span className="relative hidden sm:block text-[11px] text-[#596638] font-medium">{t.hint}</span>
-                <span className="relative text-[10px] font-bold uppercase tracking-widest text-[#9E8547]">
+                <span className="relative text-sm sm:text-base font-extrabold text-[#111111] font-editorial">{t.label}</span>
+                <span className="relative hidden sm:block text-[11px] text-[#555555] font-medium">{t.hint}</span>
+                <span className="relative text-[10px] font-bold uppercase tracking-widest text-[#6E6E6E]">
                   {count(t.cat)} featured <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
                 </span>
               </Link>
@@ -86,7 +86,7 @@ export default function HeroHandoff({ progress, mouseX, mouseY }) {
           ))}
         </motion.div>
 
-        <p className="hidden sm:block mt-6 lg:mt-8 text-[10px] font-bold uppercase tracking-[0.3em] text-[#838961] animate-bounce">Scroll to search ↓</p>
+        <p className="hidden sm:block mt-6 lg:mt-8 text-[10px] font-bold uppercase tracking-[0.3em] text-[#8A8A8A] animate-bounce">Scroll to search ↓</p>
       </div>
     </motion.div>
   );

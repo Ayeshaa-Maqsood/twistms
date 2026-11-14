@@ -23,7 +23,7 @@ function App() {
     <MotionConfig reducedMotion="user">
       <FavoritesProvider>
         <Router>
-          <div className="min-h-screen bg-[#FBF8F2] text-[#1A2315] flex flex-col architect-grid relative selection:bg-[#BFA668]/20 selection:text-[#1A2315]">
+          <div className="min-h-screen bg-[#FAFAFA] text-[#111111] flex flex-col architect-grid relative selection:bg-[#B4B4B4]/20 selection:text-[#111111]">
             <IntroCurtain />
             <ScrollProgressBar />
             <Header />

@@ -40,7 +40,7 @@ export default function SearchConsole({
 }) {
   const reduce = useReducedMotion();
   const fieldClass =
-    'input-luxury w-full bg-white text-xs text-[#1A2315] font-semibold border border-transparent rounded-2xl px-4 py-3.5 focus:outline-none shadow-sm';
+    'input-luxury w-full bg-white text-xs text-[#111111] font-semibold border border-transparent rounded-2xl px-4 py-3.5 focus:outline-none shadow-sm';
 
   return (
     <section className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-10" aria-label="Property search">
@@ -49,7 +49,7 @@ export default function SearchConsole({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px 0px -5% 0px' }}
         transition={{ duration: 0.9, ease: EASE }}
-        className="relative overflow-hidden rounded-3xl p-4 sm:p-6 text-white bg-gradient-to-br from-[#171A1D] via-[#1A2315] to-[#172331] border border-white/10 shadow-[0_40px_80px_-30px_rgba(15,20,12,0.55)]"
+        className="relative overflow-hidden rounded-3xl p-4 sm:p-6 text-white bg-gradient-to-br from-[#171A1D] via-[#111111] to-[#172331] border border-white/10 shadow-[0_40px_80px_-30px_rgba(10, 10, 10,0.55)]"
       >
         <div className="mb-4">
           <h2 className="text-lg sm:text-xl font-extrabold font-editorial text-white">Search US Properties</h2>
@@ -57,10 +57,10 @@ export default function SearchConsole({
         </div>
 
         {/* Category quick links: real routes into the search page */}
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-4 text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-[#FBF8F2]/60">
-          <span className="text-[#D4C28E]">Browse</span>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-4 text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-[#FAFAFA]/60">
+          <span className="text-[#D0D0D0]">Browse</span>
           {CATEGORY_LINKS.map((c) => (
-            <Link key={c.cat} to={`/search?cat=${c.cat}`} className="link-draw hover:text-[#E8DCB4] transition-colors">
+            <Link key={c.cat} to={`/search?cat=${c.cat}`} className="link-draw hover:text-[#E2E2E2] transition-colors">
               {c.label}
             </Link>
           ))}
@@ -71,7 +71,7 @@ export default function SearchConsole({
             <label className="sr-only" htmlFor="console-category">Category</label>
             <select id="console-category" value={activeCategory} onChange={(e) => setActiveCategory(e.target.value)} className={`${fieldClass} cursor-pointer`}>
               {categories.map((c) => (
-                <option key={c} value={c} className="bg-white text-[#1A2315]">{c === 'All' ? 'All Categories' : c}</option>
+                <option key={c} value={c} className="bg-white text-[#111111]">{c === 'All' ? 'All Categories' : c}</option>
               ))}
             </select>
           </div>
@@ -83,14 +83,14 @@ export default function SearchConsole({
               placeholder="City, ZIP, or landmark (e.g. Austin, Aspen)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className={`${fieldClass} font-medium placeholder:text-[#838961]`}
+              className={`${fieldClass} font-medium placeholder:text-[#8A8A8A]`}
             />
           </div>
           <div className="sm:col-span-3">
             <label className="sr-only" htmlFor="console-state">State</label>
             <select id="console-state" value={selectedState} onChange={(e) => setSelectedState(e.target.value)} className={`${fieldClass} cursor-pointer`}>
               {US_STATES.map((s) => (
-                <option key={s.code} value={s.code} className="bg-white text-[#1A2315]">{s.label}</option>
+                <option key={s.code} value={s.code} className="bg-white text-[#111111]">{s.label}</option>
               ))}
             </select>
           </div>
@@ -109,11 +109,11 @@ export default function SearchConsole({
         {/* Stats strip */}
         <div className="mt-5 pt-5 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-5">
           {stats.map((stat, i) => (
-            <div key={i} className="pl-4 border-l border-[#BFA668]/40">
+            <div key={i} className="pl-4 border-l border-[#B4B4B4]/40">
               <p className="text-xl sm:text-2xl font-extrabold font-editorial text-white tracking-tight">
                 <AnimatedCounter target={stat.value} delay={i * 120} />
               </p>
-              <p className="text-[10px] text-[#D4C28E]/85 mt-1 uppercase tracking-[0.2em] font-mono font-bold">{stat.label}</p>
+              <p className="text-[10px] text-[#D0D0D0]/85 mt-1 uppercase tracking-[0.2em] font-mono font-bold">{stat.label}</p>
             </div>
           ))}
         </div>
