@@ -44,7 +44,7 @@ export default function HeroBlueprint() {
   const [phase, setPhase] = useState(() => phaseLabel(0));
 
   // Long enough that a normal-speed scroll shows every stage of the build
-  const pinVh = reduce ? 100 : quality === 'high' ? 420 : 300;
+  const pinVh = reduce ? 100 : quality === 'high' ? 260 : 200;
 
   /* ---- scroll progress across the pinned section ---- */
   const { scrollYProgress: rawProgress } = useScroll({
@@ -54,7 +54,7 @@ export default function HeroBlueprint() {
 
   // Eased progress: the animation glides after the scrollbar, so even a quick
   // flick plays out over about a second instead of jumping to the end.
-  const scrollYProgress = useSpring(rawProgress, { stiffness: 38, damping: 16, mass: 0.9, restDelta: 0.0005 });
+  const scrollYProgress = useSpring(rawProgress, { stiffness: 90, damping: 22, mass: 0.6, restDelta: 0.0005 });
 
   /* ---- mouse / touch input ---- */
   const rawX = useMotionValue(0);
