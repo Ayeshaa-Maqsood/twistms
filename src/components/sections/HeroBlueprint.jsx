@@ -44,7 +44,7 @@ export default function HeroBlueprint() {
   const [phase, setPhase] = useState(() => phaseLabel(0));
 
   // Long enough that a normal-speed scroll shows every stage of the build
-  const pinVh = reduce ? 100 : quality === 'high' ? 260 : 200;
+  const pinVh = reduce ? 100 : quality === 'high' ? 130 : 110;
 
   /* ---- scroll progress across the pinned section ---- */
   const { scrollYProgress: rawProgress } = useScroll({
