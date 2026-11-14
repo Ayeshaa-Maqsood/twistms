@@ -258,7 +258,7 @@ export default function HeroBlueprint() {
         {/* ---------- Phase D hand-off: linen wipe into the marketplace ---------- */}
         {!reduce && <motion.div className="absolute inset-0 pointer-events-none" style={{ background: wipeBg }} aria-hidden="true" />}
         {/* Interactive category picker shown on the cream hand-off screen */}
-        {!reduce && <HeroHandoff progress={scrollYProgress} mouseX={mouseX} mouseY={mouseY} />}
+        {!reduce && <HeroHandoff progress={scrollYProgress} />}
 
         {/* ---------- Scroll cue ---------- */}
         {!reduce && (

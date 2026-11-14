@@ -34,26 +34,27 @@ const TILES = [
 
 /**
  * Content for the end of the 3D hero, where the cream wipe covers the scene.
- * Fades in with the wipe, follows the cursor slightly, and every tile is a
+ * Fades in with the wipe and stays still; every tile is a
  * real link into search. Clicks only register once the panel is visible.
  */
-export default function HeroHandoff({ progress, mouseX, mouseY }) {
+export default function HeroHandoff({ progress }) {
   const opacity = useTransform(progress, [0.9, 0.97], [0, 1]);
   const y = useTransform(progress, [0.9, 1], [40, 0]);
   const pointerEvents = useTransform(progress, (v) => (v > 0.93 ? 'auto' : 'none'));
-  // Gentle cursor parallax: heading and tiles drift in opposite directions
-  const headX = useTransform(mouseX, [-1, 1], [-10, 10]);
-  const headY = useTransform(mouseY, [-1, 1], [-6, 6]);
-  const tilesX = useTransform(mouseX, [-1, 1], [12, -12]);
-  const tilesY = useTransform(mouseY, [-1, 1], [8, -8]);
 
   return (
     <motion.div
-      className="absolute inset-0 z-20 flex items-center py-4 sm:py-8"
+      className="absolute inset-0 z-20 flex items-center py-4 sm:py-8 overflow-hidden"
       style={{ opacity, y, pointerEvents }}
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
-        <motion.div style={{ x: headX, y: headY }}>
+      {/* Slow-drifting monochrome gradient backdrop */}
+      <div aria-hidden="true" className="handoff-bg absolute inset-0 pointer-events-none">
+        <span className="handoff-blob handoff-blob-1" />
+        <span className="handoff-blob handoff-blob-2" />
+        <span className="handoff-blob handoff-blob-3" />
+      </div>
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+        <div>
           <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-[#6E6E6E]">From blueprint to your front door</p>
           <h2 className="mt-2 sm:mt-3 text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#111111] font-editorial text-balance">
             What are you looking for?
@@ -61,11 +62,11 @@ export default function HeroHandoff({ progress, mouseX, mouseY }) {
           <p className="mt-2 sm:mt-3 text-xs sm:text-base text-[#555555] font-medium max-w-xl mx-auto">
             Choose a property type to jump straight to matching listings, or keep scrolling to search by city, ZIP or state.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div style={{ x: tilesX, y: tilesY }} className="mt-5 sm:mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="mt-5 sm:mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {TILES.map((t) => (
-            <motion.div key={t.cat} whileHover={{ y: -8, scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
+            <motion.div key={t.cat} whileHover={{ y: -4 }} whileTap={{ scale: 0.98 }} transition={{ type: 'spring', stiffness: 300, damping: 20 }}>
               <Link
                 to={`/search?cat=${t.cat}`}
                 className="group relative flex flex-col items-center gap-1.5 sm:gap-3 p-3 sm:p-5 lg:p-6 rounded-2xl bg-white border border-[#2B2B2B]/12 shadow-[0_14px_34px_-22px_rgba(17, 17, 17,0.5)] hover:border-[#B4B4B4] hover:shadow-[0_26px_50px_-22px_rgba(180, 180, 180,0.75)] transition-[border-color,box-shadow] duration-300 overflow-hidden"
@@ -84,7 +85,7 @@ export default function HeroHandoff({ progress, mouseX, mouseY }) {
               </Link>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         <p className="hidden sm:block mt-6 lg:mt-8 text-[10px] font-bold uppercase tracking-[0.3em] text-[#8A8A8A] animate-bounce">Scroll to search ↓</p>
       </div>
