@@ -1,44 +1,69 @@
 import React, { useEffect, useRef } from 'react';
 
 /**
- * Site-wide ambient background: soft dots drifting slowly upward plus a few
- * twinkling four-point sparkles. One fixed canvas, capped particle count and
- * DPR, paused when the tab is hidden, and frozen for reduced-motion users.
+ * Site-wide ambient background: a sparse set of thin-line geometric shapes
+ * (circles, rings, triangles, squares, dots) drifting and rotating slowly.
+ * Monochrome and low-contrast so it reads as texture, not decoration.
+ * One fixed canvas, DPR capped, paused when the tab is hidden, and frozen
+ * for reduced-motion users.
  */
-const TONES = ['70, 72, 80', '110, 140, 180', '140, 120, 190', '90, 90, 95'];
+const KINDS = ['circle', 'ring', 'triangle', 'square', 'dot', 'circle', 'triangle'];
 
-function makeParticle(w, h, sparkle, anywhere = true) {
+function makeShape(w, h) {
+  const kind = KINDS[Math.floor(Math.random() * KINDS.length)];
+  const size = kind === 'dot' ? 3 + Math.random() * 4 : 28 + Math.random() * 110;
+  const speed = 0.06 + Math.random() * 0.12;
+  const dir = Math.random() * Math.PI * 2;
   return {
+    kind,
     x: Math.random() * w,
-    y: anywhere ? Math.random() * h : h + 20,
-    r: sparkle ? 3 + Math.random() * 4 : 0.8 + Math.random() * 2.2,
-    vx: (Math.random() - 0.5) * 0.12,
-    vy: -(0.08 + Math.random() * 0.22),
-    alpha: sparkle ? 0.5 + Math.random() * 0.4 : 0.15 + Math.random() * 0.3,
-    tone: TONES[Math.floor(Math.random() * TONES.length)],
-    phase: Math.random() * Math.PI * 2,
-    twinkle: 0.6 + Math.random() * 1.4,
-    sparkle,
+    y: Math.random() * h,
+    size,
+    vx: Math.cos(dir) * speed,
+    vy: Math.sin(dir) * speed,
+    rot: Math.random() * Math.PI * 2,
+    vr: (Math.random() - 0.5) * 0.0016,
+    alpha: kind === 'dot' ? 0.18 + Math.random() * 0.12 : 0.08 + Math.random() * 0.1,
+    tone: Math.random() < 0.75 ? '43, 43, 48' : '95, 110, 135',
   };
 }
 
-function drawSparkle(ctx, p, a) {
-  const { x, y, r } = p;
+function drawShape(ctx, s) {
+  const r = s.size / 2;
   ctx.save();
-  ctx.translate(x, y);
-  ctx.rotate(p.phase * 0.2);
-  ctx.shadowColor = `rgba(${p.tone}, ${a})`;
-  ctx.shadowBlur = r * 3;
-  ctx.fillStyle = `rgba(${p.tone}, ${a})`;
+  ctx.translate(s.x, s.y);
+  ctx.rotate(s.rot);
+  ctx.strokeStyle = `rgba(${s.tone}, ${s.alpha})`;
+  ctx.fillStyle = `rgba(${s.tone}, ${s.alpha})`;
+  ctx.lineWidth = 1.2;
   ctx.beginPath();
-  // Four-point star: long tips, pinched waist
-  for (let i = 0; i < 8; i++) {
-    const ang = (i * Math.PI) / 4;
-    const len = i % 2 === 0 ? r * 2.2 : r * 0.45;
-    ctx.lineTo(Math.cos(ang) * len, Math.sin(ang) * len);
+  switch (s.kind) {
+    case 'dot':
+      ctx.arc(0, 0, r, 0, Math.PI * 2);
+      ctx.fill();
+      break;
+    case 'circle':
+      ctx.arc(0, 0, r, 0, Math.PI * 2);
+      ctx.stroke();
+      break;
+    case 'ring':
+      ctx.arc(0, 0, r, 0, Math.PI * 2);
+      ctx.moveTo(r * 0.62, 0);
+      ctx.arc(0, 0, r * 0.62, 0, Math.PI * 2);
+      ctx.stroke();
+      break;
+    case 'triangle':
+      for (let i = 0; i < 3; i++) {
+        const a = -Math.PI / 2 + (i * 2 * Math.PI) / 3;
+        ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r);
+      }
+      ctx.closePath();
+      ctx.stroke();
+      break;
+    default:
+      ctx.rect(-r * 0.75, -r * 0.75, r * 1.5, r * 1.5);
+      ctx.stroke();
   }
-  ctx.closePath();
-  ctx.fill();
   ctx.restore();
 }
 
@@ -51,7 +76,7 @@ export default function SparkleField() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let w = 0;
     let h = 0;
-    let particles = [];
+    let shapes = [];
     let raf = 0;
 
     const resize = () => {
@@ -63,34 +88,25 @@ export default function SparkleField() {
       canvas.style.width = `${w}px`;
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const mobile = w < 768;
-      const dots = mobile ? 28 : 60;
-      const sparkles = mobile ? 8 : 16;
-      particles = [
-        ...Array.from({ length: dots }, () => makeParticle(w, h, false)),
-        ...Array.from({ length: sparkles }, () => makeParticle(w, h, true)),
-      ];
+      const count = w < 768 ? 12 : 22;
+      shapes = Array.from({ length: count }, () => makeShape(w, h));
     };
 
-    const draw = (t) => {
+    const draw = () => {
       ctx.clearRect(0, 0, w, h);
-      for (const p of particles) {
+      for (const s of shapes) {
         if (!reduce) {
-          p.x += p.vx;
-          p.y += p.vy;
-          p.phase += 0.01 * p.twinkle;
-          if (p.y < -20 || p.x < -20 || p.x > w + 20) Object.assign(p, makeParticle(w, h, p.sparkle, false));
+          s.x += s.vx;
+          s.y += s.vy;
+          s.rot += s.vr;
+          // Wrap around the edges so the field never empties
+          const m = s.size;
+          if (s.x < -m) s.x = w + m;
+          else if (s.x > w + m) s.x = -m;
+          if (s.y < -m) s.y = h + m;
+          else if (s.y > h + m) s.y = -m;
         }
-        const flicker = 0.55 + 0.45 * Math.sin(p.phase * 2 + t * 0.001 * p.twinkle);
-        const a = p.alpha * (p.sparkle ? flicker : 0.75 + 0.25 * flicker);
-        if (p.sparkle) {
-          drawSparkle(ctx, p, a);
-        } else {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${p.tone}, ${a})`;
-          ctx.fill();
-        }
+        drawShape(ctx, s);
       }
       if (!reduce) raf = requestAnimationFrame(draw);
     };
