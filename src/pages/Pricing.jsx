@@ -26,19 +26,20 @@ export default function Pricing() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {listingPlans.map((plan, idx) => (
           <ScrollReveal key={idx} direction="up" delay={idx * 120} duration={650}>
+            {/* Badge sits outside the blurred card so the card border can never paint over it */}
+            <div className={`relative h-full ${plan.highlight ? 'scale-105' : ''}`}>
+            {plan.highlight && (
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap px-3 py-1 rounded-full bg-[#111111] text-white text-[10px] font-bold uppercase tracking-widest font-mono shadow-md">
+                {plan.badge}
+              </div>
+            )}
             <div
               className={`rounded-3xl p-8 flex flex-col justify-between transition-all duration-300 relative h-full ${
                 plan.highlight
-                  ? 'glass-panel-luxury border-2 border-[#B4B4B4] shadow-2xl scale-105 bg-[#FFFFFF]'
+                  ? 'glass-panel-luxury border-2 border-[#B4B4B4] shadow-2xl bg-[#FFFFFF]'
                   : 'glass-panel-luxury border border-[#2B2B2B]/15 hover:border-[#B4B4B4] shadow-md bg-white'
               }`}
             >
-              {plan.highlight && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#111111] text-white text-[10px] font-bold uppercase tracking-widest font-mono shadow-md">
-                  {plan.badge}
-                </div>
-              )}
-
               <div>
                 <h3 className="text-xl font-bold text-[#111111] font-editorial">{plan.name}</h3>
                 <p className="text-xs text-[#2B2B2B] mt-1 font-medium">{plan.description}</p>
@@ -72,6 +73,7 @@ export default function Pricing() {
                   Choose {plan.name}
                 </Link>
               </div>
+            </div>
             </div>
           </ScrollReveal>
         ))}
