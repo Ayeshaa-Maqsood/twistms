@@ -7,6 +7,7 @@ import AIAssistantWidget from './components/common/AIAssistantWidget';
 import FavoritesDrawer from './components/common/FavoritesDrawer';
 import ScrollProgressBar from './components/common/ScrollProgressBar';
 import IntroCurtain from './components/motion/IntroCurtain';
+import SparkleField from './components/common/SparkleField';
 import PageTransition from './components/motion/PageTransition';
 import Home from './pages/Home';
 import Search from './pages/Search';
@@ -25,6 +26,7 @@ function App() {
         <Router>
           <div className="min-h-screen text-[#111111] flex flex-col site-gradient-bg relative selection:bg-[#B4B4B4]/20 selection:text-[#111111]">
             <div aria-hidden="true" className="site-glass" />
+            <SparkleField />
             <IntroCurtain />
             <ScrollProgressBar />
             <Header />
