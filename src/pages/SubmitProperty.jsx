@@ -2,11 +2,30 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ScrollReveal from '../components/common/ScrollReveal';
 import MediaUploader from '../components/common/MediaUploader';
+import PaymentStep from '../components/common/PaymentStep';
 import { LISTING_RULES } from '../config/listingRules';
+
+// Paid plans go through checkout before the listing is submitted; Free skips it.
+const PAID_PLANS = {
+  Paid: {
+    name: 'Paid Verified',
+    price: 49,
+    days: 150,
+    perks: ['Verified Deed Badge', 'Prioritized search placement', 'Official FB & IG spotlight'],
+  },
+  Premium: {
+    name: 'Premium Elite',
+    price: 129,
+    days: 365,
+    perks: ['Top featured placement', 'Verified Deed Badge', 'TikTok & IG video push'],
+  },
+};
 
 export default function SubmitProperty() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [payment, setPayment] = useState(null);
+  const [refToken] = useState(() => `#TX-${Math.floor(1000 + Math.random() * 9000)}`);
   const [photos, setPhotos] = useState([]);
   const [videos, setVideos] = useState([]);
   const [mediaError, setMediaError] = useState('');
@@ -59,9 +78,22 @@ export default function SubmitProperty() {
     }));
   };
 
+  const paidPlan = PAID_PLANS[formData.plan];
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (paidPlan) {
+      setStep(4);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     setSubmitted(true);
+  };
+
+  const handlePaid = (result) => {
+    setPayment(result);
+    setSubmitted(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -96,6 +128,14 @@ export default function SubmitProperty() {
           <div className={`px-4 py-2 rounded-full border transition-all ${step === 3 ? 'bg-[#111111] text-white border-[#111111] font-bold shadow-md' : 'bg-white text-[#2B2B2B] border-[#2B2B2B]/25 font-semibold'}`}>
             03. Syndication Tier
           </div>
+          {paidPlan && (
+            <>
+              <span className="text-[#6E6E6E] font-bold">→</span>
+              <div className={`px-4 py-2 rounded-full border transition-all ${step === 4 ? 'bg-[#111111] text-white border-[#111111] font-bold shadow-md' : 'bg-white text-[#2B2B2B] border-[#2B2B2B]/25 font-semibold'}`}>
+                04. Payment
+              </div>
+            </>
+          )}
         </div>
       </ScrollReveal>
 
@@ -112,14 +152,34 @@ export default function SubmitProperty() {
                 Property Submitted for Administrative Review
               </h2>
               <p className="text-xs text-[#2B2B2B] max-w-md mx-auto leading-relaxed font-medium">
-                Your submission for <span className="font-bold text-[#111111]">{formData.title || 'the submitted parcel'}</span> has been assigned reference token <span className="font-mono text-[#6E6E6E] font-bold">#TX-{Math.floor(1000 + Math.random() * 9000)}</span>. Our compliance desk reviews deeds within 24 hours.
+                Your submission for <span className="font-bold text-[#111111]">{formData.title || 'the submitted parcel'}</span> has been assigned reference token <span className="font-mono text-[#6E6E6E] font-bold">{refToken}</span>. Our compliance desk reviews deeds within 24 hours.
               </p>
+              {payment && (
+                <div className="max-w-sm mx-auto rounded-2xl border border-[#2B2B2B]/15 bg-[#F6F6F6] p-4 text-left text-xs space-y-1.5">
+                  <p className="font-bold text-[#111111] flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" aria-hidden="true" />
+                    Payment confirmed
+                  </p>
+                  <div className="flex justify-between"><span className="text-[#555555]">Plan</span><span className="font-semibold text-[#111111]">{paidPlan?.name}</span></div>
+                  <div className="flex justify-between"><span className="text-[#555555]">Amount</span><span className="font-semibold text-[#111111]">${payment.amount.toFixed(2)}</span></div>
+                  <div className="flex justify-between"><span className="text-[#555555]">Card</span><span className="font-semibold text-[#111111]">{payment.brand} •••• {payment.last4}</span></div>
+                  <div className="flex justify-between"><span className="text-[#555555]">Receipt</span><span className="font-mono font-semibold text-[#111111]">{payment.receipt}</span></div>
+                </div>
+              )}
               <div className="pt-4 flex justify-center gap-3">
                 <Link to="/search" className="btn-luxury px-6 py-3 rounded-xl text-xs font-bold">
                   Back to Marketplace
                 </Link>
               </div>
             </div>
+          ) : step === 4 && paidPlan ? (
+            <PaymentStep
+              plan={paidPlan}
+              listingTitle={formData.title}
+              email={formData.ownerEmail}
+              onBack={() => setStep(3)}
+              onPaid={handlePaid}
+            />
           ) : (
             <form onSubmit={handleSubmit} className="space-y-8">
               
@@ -448,7 +508,7 @@ export default function SubmitProperty() {
                       type="submit"
                       className="btn-luxury px-8 py-3.5 rounded-xl text-xs font-bold"
                     >
-                      Transmit Dossier for Admin Review →
+                      {paidPlan ? `Continue to Payment · $${paidPlan.price} →` : 'Submit Free Listing →'}
                     </button>
                   </div>
                 </div>
